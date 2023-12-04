@@ -85,16 +85,7 @@ export const Signin = () => {
 					return;
 				})
 				.catch((err) => {
-
-					if (err.code == "ERR_NETWORK") {
-						alert("Internal server error!");
-						return;
-					} else {
-						alert(
-							"Credentials are incorrect.","Please enter valid credentials."
-						);
-						return;
-					}
+					alert("Error", err.message)
 				});
 		}
 	};

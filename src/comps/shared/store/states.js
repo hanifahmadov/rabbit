@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { atom } from "recoil";
+import { io } from "socket.io-client";
 
 export const displayState = atom({
 	key: "displayState",
@@ -13,7 +14,7 @@ export const activeState = atom({
 
 export const darkmodeState = atom({
 	key: "darkmodeState",
-	default: true
+	default: true,
 });
 
 export const deviceState = atom({
@@ -26,17 +27,14 @@ export const deviceState = atom({
 	},
 });
 
-
-export const displayNavbarAccountState= atom({
+export const displayNavbarAccountState = atom({
 	key: "displayNavbarAccountState",
-	default: false
+	default: false,
 });
 
-export const modalState= atom({
+export const modalState = atom({
 	key: "modalState",
-	default: false
+	default: false,
 });
-
-
 
 

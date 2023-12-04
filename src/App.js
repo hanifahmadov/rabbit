@@ -5,6 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 import {
 	Route,
 	RouterProvider,
@@ -51,7 +53,7 @@ const router = createBrowserRouter(
 						<Route index element={<Home />} />
 						<Route path='about' element={<About />} />
 						<Route path='projects' element={<Projects />} />
-						<Route path='contact' element={<Contact/>} />
+						<Route path='contact' element={<Contact />} />
 					</Route>
 				</Route>
 			</Route>
@@ -102,6 +104,8 @@ export const App = () => {
 		setDevice(device);
 	}, [mobile, tablet, laptop, desktop]);
 
+
+
 	return (
 		<ThemeProvider theme={{ device, darkmode }}>
 			<ToastContainer />
@@ -110,17 +114,3 @@ export const App = () => {
 		</ThemeProvider>
 	);
 };
-
-/* 
-
-
- 	<Route path='users' element={<UsersLayout />}> 
-			<Route
-				path=':id'
-				element={<UserDetails />}
-				loader={userDetailsLoader}
-				errorElement={<UserError />}
-			/> 
-	</Route>
-
-*/

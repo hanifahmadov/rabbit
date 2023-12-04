@@ -9,13 +9,13 @@ import { useRefreshAccessApi } from "../../apis/apiCalls";
 import { Outlet, useNavigate } from "react-router-dom";
 
 export const PersistentLayout = () => {
-	console.log("PersistenLayout run now");
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [user, setUser] = useRecoilState(userState);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log("USER INSIDE USEFFECT", user);
+		// console.log("USER INSIDE USEFFECT", user);
 
 		let mounted = true;
 

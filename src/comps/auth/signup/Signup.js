@@ -40,14 +40,20 @@ export const Signup = () => {
 		signUpApi({ email, password: pwd, passwordConfirmation: confirmPwd })
 		.then(response => {
 			if(response?.data?.user._id) {
-				alert('Suceess', "Res")
+				alert('Success', "Great, You have signed up successfully")
 
 			}
 		})
 		.catch(err => {
 			console.log("ERROR")
 			console.log(err)
-			alert('Error', "error happend")
+
+			if(err.response.status == 422) {
+				alert('Error', "This username has already taken!")
+			} else {
+				alert('Error', "Something went wrong, please try again!")
+			}
+			
 		})
 
 

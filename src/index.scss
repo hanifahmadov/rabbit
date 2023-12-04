@@ -1,27 +1,28 @@
-@import "~bootstrap/scss/bootstrap";
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
 
-//: Roboto
+// Roboto
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 
-//: Roboto Slab
+// Roboto Slab
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-//: Roboto Mono
+// Roboto Mono
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
 
-//: Open Sans
+// Open Sans
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
-//: Poppins
+// Poppins
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-//: Unica One
+// Unica One
 @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
 
-//: Montserrat
+// Montserrat
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-//:: Noto Sans
+// Noto Sans
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html {
