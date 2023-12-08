@@ -22,7 +22,21 @@ export const PersistentLayout = () => {
 		const fetchData = async () => {
 			try {
 				let res = await useRefreshAccessApi();
+
+				/* 	cookies refresh token expires in a day
+					if keep login is on, this will return a already signed in user
+					and we can pass the login page.
+
+					if keep login is not selelected, we have to clear cookies
+					for not to use Refresh Token to retrieve user data
+				*/
+
+				console.log("response from useRefreshAccessApi")
+
+				console.log(res)
 				let temp = res?.data?.user;
+
+
 
 				const tempUser = produce(user, (draft) => {
 					draft._id = temp._id;

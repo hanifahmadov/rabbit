@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-//: styles
+// styles
 import { GlobalStyled } from "./comps/shared/styled/global.styled";
 
 //: states
@@ -25,7 +25,7 @@ import {
 	displayNavbarAccountState,
 } from "./comps/shared/store/states";
 
-//: comps
+// comps
 import { Error } from "./comps/shared/error/Error";
 import { RegisterLayout } from "./comps/layouts/RegisterLayout";
 import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";

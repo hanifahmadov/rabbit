@@ -37,4 +37,9 @@ export const modalState = atom({
 	default: false,
 });
 
+export const socketConnectionDefault = atom({
+	key: "socketConnectionDefault",
+	default: false,
+});
+
 
