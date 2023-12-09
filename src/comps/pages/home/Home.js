@@ -2,62 +2,57 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HomeSection } from "./home.styled";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { socket } from "../../../apis/socketApi";
+import { socket, socketApi } from "../../../apis/socketApi";
 import { io } from "socket.io-client";
 import { userState } from "../../auth/authStore/states";
+import { socketConnectionDefault } from "../../shared/store/states";
 
 export const Home = () => {
 	const [message, setMessage] = useState("");
-	const [update, setUpdate] = useState(false);
+	const [socket, setSocket] = useState(false);
+	const [connected, setConnected] = useRecoilState(socketConnectionDefault);
+
 	const user = useRecoilValue(userState);
 	const textArea = useRef();
 	const input = useRef();
 
 	useEffect(() => {
-		if (user?._id) {
-			console.log("Create socketIo-client");
-			const URL =
-				window.location.hostname === "localhost"
-					? process.env.REACT_APP_SERVER_DEV
-					: process.env.REACT_APP_SERVER_PRO;
-
-			const socket = io(URL, {
-				query: { _id: user._id },
-			});
-
-			
-
-			socket.on("connect_error", function (err) {
-				// handle server error here
-				console.log("Error connecting to server");
-			});
-
-			window.socket = socket;
-		}
-	}, []);
-
-	useEffect(() => {
 		input.current.focus();
 	}, []);
 
-	const handleSubmit = (e) => {
-		console.log(window);
+	useEffect(() => {
+		console.log("socket has been created");
+		// const URL =
+		// 	window.location.hostname === "localhost"
+		// 		? process.env.REACT_APP_SERVER_DEV
+		// 		: process.env.REACT_APP_SERVER_PRO;
 
+		// const socket = io(URL, {
+		// 	query: { _id: user._id },
+		// });
+
+		// socket.on("connection", (res) => {
+
+		// });
+
+		// socket.on("disconnected", (res) => {
+		// 	console.log(res);
+		// });
+
+		// socket.on("message", (res) => {
+		// 	console.log(res);
+		// });
+
+		if (!connected) {
+			let socket = socketApi(user);
+			setSocket(socket);
+		}
+	}, []);
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		// let el = document.createElement("li");
-		// el.innerHTML = message;
-		// textArea.current.append(el);
-
-		let socket = window.socket;
-
-		socket.emit("sendMessage", message);
-
-		socket.on("respondMessage", (msg) => {
-			let el = document.createElement("li");
-			el.innerHTML = msg;
-			textArea.current.append(el);
-		});
+		socket.emit("message", message);
 
 		setMessage("");
 		input.current.focus();
