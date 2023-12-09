@@ -39,26 +39,34 @@ import { Projects } from "./comps/pages/projects/Projects";
 import { Home } from "./comps/pages/home/Home";
 import { Contact } from "./comps/pages/contact/Contact";
 
+// const router = createBrowserRouter(
+// 	createRoutesFromElements(
+// 		<Fragment>
+// 			<Route path='/register' element={<RegisterLayout />}>
+// 				<Route index element={<Signin />} />
+// 				<Route path='welcome' element={<Signup />} />
+// 			</Route>
+
+// 			<Route element={<PersistentLayout />}>
+// 				<Route element={<RequireAuthLayout />}>
+// 					<Route path='/' element={<AppLayout />}>
+// 						<Route index element={<Home />} />
+// 						<Route path='about' element={<About />} />
+// 						<Route path='projects' element={<Projects />} />
+// 						<Route path='contact' element={<Contact />} />
+// 					</Route>
+// 				</Route>
+// 			</Route>
+
+// 			<Route path='*' element={<Error />} />
+// 		</Fragment>
+// 	)
+// );
+
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Fragment>
-			<Route path='/register' element={<RegisterLayout />}>
-				<Route index element={<Signin />} />
-				<Route path='welcome' element={<Signup />} />
-			</Route>
-
-			<Route element={<PersistentLayout />}>
-				<Route element={<RequireAuthLayout />}>
-					<Route path='/' element={<AppLayout />}>
-						<Route index element={<Home />} />
-						<Route path='about' element={<About />} />
-						<Route path='projects' element={<Projects />} />
-						<Route path='contact' element={<Contact />} />
-					</Route>
-				</Route>
-			</Route>
-
-			<Route path='*' element={<Error />} />
+			<Route path='/' element={<Home />} />
 		</Fragment>
 	)
 );
