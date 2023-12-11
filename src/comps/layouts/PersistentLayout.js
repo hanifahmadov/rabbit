@@ -70,7 +70,7 @@ export const PersistentLayout = () => {
 			{isLoading ? (
 				<p
 					style={{
-						color: "white",
+						color: "black",
 						fontSize: "5rem",
 						width: "100%",
 						height: "100%",

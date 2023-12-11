@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
-import { clr } from "../../shared/store/design";
+import { clr } from "../shared/store/design";
 
 
 export const HeaderContainer = styled.div`
@@ -10,8 +10,8 @@ export const HeaderContainer = styled.div`
 		align-items: center;
 		flex-direction: row;
 
+		width: 100% ;
 
-		width: 99.8% ;
 		position: relative;
 	
 		z-index: 1;
@@ -19,7 +19,7 @@ export const HeaderContainer = styled.div`
 		padding: 0.75rem 1rem 0.75rem 2rem;
 
 
-		background: rgba(255, 255, 255, 0.05);
+		background: rgba(0, 0, 0, .2);
 		backdrop-filter: blur(5px);
 
 		.navbar-title {
@@ -30,7 +30,7 @@ export const HeaderContainer = styled.div`
 				h3 {
 					padding: 0px;
 					margin: 0px;
-					color: white;
+					color: black;
 				}
 			}
 		}
@@ -59,7 +59,7 @@ export const HeaderContainer = styled.div`
 						padding: 0.3rem 0.5rem;
 						border-radius: 5px;
 						font-size: 0.95rem;
-						color: ${clr.white01};
+						color: black;
 					}
 
 					a.active {

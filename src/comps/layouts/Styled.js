@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 
-export const AppLayoutSection = styled.div`
+export const AppLayoutContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,13 +11,13 @@ export const AppLayoutSection = styled.div`
 	border: 5px solid blue;
 `;
 
-export const AppContentSection = styled.div`
+export const AppLayoutContent = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
 
 	height: 100%;
-	width: 50rem;
+	width: 60rem;
 
 	border: 5px solid yellow;
 

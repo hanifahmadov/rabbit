@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FooterSection } from "./Styled";
+import { FooterSection } from "./authShared.styled";
 
 export const Footer = ({footerContent, footerLinkText, route}) => {
 	return (

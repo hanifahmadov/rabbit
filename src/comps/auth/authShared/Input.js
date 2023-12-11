@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 
-import { InputContainer, StyledInput, StyledLabel } from "./Styled";
+import { InputContainer, StyledInput, StyledLabel } from "./authShared.styled";
 
 // type > | email | pwd | confirmPwd
 // emailRef > will auto focus on email input when page load on register url
@@ -16,7 +16,7 @@ export const Input = React.forwardRef(
 		let labelText = (type) => {
 			if (type === "email") return "Email address";
 			if (type === "pwd") return "Password";
-			if (type === "confirmPwd") return "Password Confirmation";
+			if (type === "confirmPwd") return "Confirm password";
 		};
 
 		let dynamicType = (type, reveal) => {

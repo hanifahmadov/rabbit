@@ -9,7 +9,7 @@ import { produce } from "immer";
 import { userState } from "../authStore/states";
 import { EMAIL_REGEX, PWD_REGEX } from "../authStore/regex";
 import { signInApi } from "../../../apis/apiCalls";
-import { SigninSection } from "./Styled";
+import { SigninSection } from "./Signin.styled.js";
 
 // comps
 import { RememberMe } from "./RememberMe";

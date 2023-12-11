@@ -9,13 +9,13 @@ export const SigninSection = styled.section`
 	justify-content: center;
 	flex-direction: column;
 
-	color: white;
+	color: black;
 
 	width: 100%;
 
 	header {
 		h3 {
-			font-size: 2.5rem;
+			font-size: 2rem;
 			font-weight: 700;
 		}
 	}
@@ -42,7 +42,7 @@ export const SigninSection = styled.section`
 				bottom: 4px;
 				width: 40%;
 				margin-right: 1rem;
-				border: 0.5px solid white;
+				border: 0.5px solid black;
 			}
 
 			&::after {
@@ -52,7 +52,7 @@ export const SigninSection = styled.section`
 				bottom: 4px;
 				width: 40%;
 				margin-left: 1rem;
-				border: 0.5px solid white;
+				border: 0.5px solid black;
 			}
 		}
 	}
@@ -64,6 +64,8 @@ export const RememberMeSection = styled.section`
 	flex-direction row;
 	margin-top: 15px;
 	margin-left: 1px;
+
+	color: black;
 
 
 	.rememberMe_input{
@@ -85,8 +87,11 @@ export const GoogleSection = styled.section`
 	background: rgba(255, 255, 255, 0.1);
 	transition: background 0.2s ease-in-out;
 	padding: 0.5rem 0.75rem;
+	border: 3px solid white;
 	border-radius: 5px;
 	cursor: pointer;
+
+	color: rgba(0, 0, 0, 0.8);
 
 	.googleLogo {
 		width: auto;
@@ -109,10 +114,11 @@ export const GoogleSection = styled.section`
 		text-align: center;
 	}
 
-	&:hover + .google-text {
-	}
-
 	&:hover {
-		background: rgba(255, 255, 255, 0.2);
+		background: rgba(255, 255, 255, 1);
+
+		.googleText {
+			color: rgba(0, 0, 0, 1);
+		}
 	}
 `;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import googleLogo from "../../shared/logos/google-logo.jpeg";
-import { GoogleSection } from "./Styled";
+import { GoogleSection } from "./Signin.styled";
 
 export const Google = () => {
 	return (

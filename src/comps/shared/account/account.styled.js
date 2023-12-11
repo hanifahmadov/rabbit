@@ -60,7 +60,10 @@ export const AccountContainer = styled.div`
             // background-color: ${clr.dark};
             // background: ${clr.rgba.wht02};
 
-            background: #112653;
+            // background: #112653;
+
+            background: #020816;
+
             color: ${clr.white02};
 
 
@@ -75,7 +78,7 @@ export const AccountContainer = styled.div`
                 height: 0;
                 border-left: 15px solid transparent;
                 border-right: 15px solid transparent;
-                border-bottom: 15px solid #112653;
+                border-bottom: 15px solid #020816;
                 z-index: -10;
             }
     

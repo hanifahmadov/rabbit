@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { StyledButton } from "./Styled";
+import { StyledButton } from "./authShared.styled";
 
 export const Button = ({ disabled, val }) => {
 	return (

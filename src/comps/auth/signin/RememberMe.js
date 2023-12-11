@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { RememberMeSection } from "./Styled";
+import { RememberMeSection } from "./Signin.styled";
 
 export const RememberMe = () => {
 	return (

@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { atom } from "recoil";
-import { io } from "socket.io-client";
 
 export const displayState = atom({
 	key: "displayState",
@@ -37,9 +36,38 @@ export const modalState = atom({
 	default: false,
 });
 
-export const socketConnectionDefault = atom({
-	key: "socketConnectionDefault",
+//# SOCKET STATES
+// socket connection state
+export const socketConnectionState = atom({
+	key: "socketConnectionState",
 	default: false,
 });
 
+// rooms state
+export const socketRoomsState = atom({
+	key: "socketRoomsState",
+	default: ["public"],
+});
 
+// users state
+export const socketUsersState = atom({
+	key: "socketUsersState",
+	default: [],
+});
+
+// users state
+export const socketStateDefaults = atom({
+	key: "socketStateDefaults",
+	default: {
+		socket: undefined,
+		connected: false,
+		rooms: [{ name: "general", messages: [] }],
+		currentRoom: "general",
+		users: [],
+	},
+});
+
+export const socketResponseDefault = atom({
+	key: "socketResponseDefault",
+	default: [],
+});

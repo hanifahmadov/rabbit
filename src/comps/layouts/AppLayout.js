@@ -3,10 +3,10 @@ import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 //:style
-import { AppLayoutSection, AppContentSection } from "./Styled";
+import { AppLayoutContainer, AppLayoutContent } from "./Styled";
 
 //: comps
-import { Header } from "../pages/header/Header";
+import { Header } from "../header/Header";
 
 export const AppLayout = () => {
 	// let location = useLocation();
@@ -18,11 +18,11 @@ export const AppLayout = () => {
 	 */
 
 	return (
-		<AppLayoutSection>
-			<AppContentSection>
+		<AppLayoutContainer>
+			<AppLayoutContent>
 				<Header />
 				<Outlet />
-			</AppContentSection>
-		</AppLayoutSection>
+			</AppLayoutContent>
+		</AppLayoutContainer>
 	);
 };
