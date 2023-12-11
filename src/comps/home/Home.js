@@ -23,20 +23,47 @@ import {
 } from "../shared/store/states";
 
 import { socketConnect } from "../../apis/socketConnect";
+import { userState } from "../auth/authStore/states";
 
 export const Home = () => {
 	const [socket, setSocket] = useRecoilState(socketStateDefaults);
 	const [msg, setMsg] = useState("");
 	const [res, setRes] = useState([]);
 	const [submitted, setSubmitted] = useState(false);
+	const [user, setUser] = useRecoilState(userState)
 
 	let socketRef = useRef();
+
+	console.log(socket)
 
 	useEffect(() => {
 		if (!socket.connected) {
 			console.log("connect just run");
-			socketRef.current = socketConnect();
+
+			socketRef.current = socketConnect(user);
+
+			socketRef.current.on("new_connection", (response) => {
+				console.log(response)
+			})
+
+			socketRef.current.on("new_disconnection", (response) => {
+				console.log(response)
+			})
+
+			const newSocket = produce(socket, draft=> {
+				draft.this = socketRef
+			})
+
+			setSocket(newSocket)
 		}
+
+		return () => {
+			// before the component is destroyed
+			// unbind all event handlers used in this component
+			socketRef.current.removeAllListeners("new_connection");
+			socketRef.current.removeAllListeners("new_disconnection");
+		};
+
 	}, []);
 
 	useEffect(() => {
@@ -53,6 +80,8 @@ export const Home = () => {
 			setRes(newRes);
 			setMsg("");
 		});
+
+		
 
 		return () => {
 			// before the component is destroyed

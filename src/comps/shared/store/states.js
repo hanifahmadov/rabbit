@@ -59,7 +59,7 @@ export const socketUsersState = atom({
 export const socketStateDefaults = atom({
 	key: "socketStateDefaults",
 	default: {
-		socket: undefined,
+		this: undefined,
 		connected: false,
 		rooms: [{ name: "general", messages: [] }],
 		currentRoom: "general",

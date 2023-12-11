@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { animate, motion } from "framer-motion";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { NavLink, useNavigate } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
 
@@ -9,7 +9,10 @@ import OutsideClickHandler from "react-outside-click-handler";
 import logo from "../logos/astr.png";
 
 //: state & apis & styled
-import { displayNavbarAccountState } from "../store/states";
+import {
+	displayNavbarAccountState,
+	socketStateDefaults,
+} from "../store/states";
 import { AccountContainer } from "./account.styled";
 import { signOutApi } from "../../../apis/apiCalls";
 import { userState } from "../../auth/authStore/states";
@@ -17,6 +20,7 @@ import { userState } from "../../auth/authStore/states";
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const resetUser = useResetRecoilState(userState);
+	const socket = useRecoilValue(socketStateDefaults);
 
 	const [dis, setDis] = useRecoilState(displayNavbarAccountState);
 	const navigate = useNavigate();
@@ -53,9 +57,14 @@ export const Account = () => {
 
 	const handleSignOut = async () => {
 		signOutApi(user)
-			.then(res => {
+			.then((res) => {
 				console.log("sign out result");
 				console.log(res);
+
+				let a = socket.this.current.disconnect()
+
+				console.log(a)
+				console.log('disconnectedddddd')
 				resetUser();
 				navigate("/");
 			})
