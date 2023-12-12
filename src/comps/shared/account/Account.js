@@ -20,7 +20,7 @@ import { userState } from "../../auth/authStore/states";
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const resetUser = useResetRecoilState(userState);
-	const socket = useRecoilValue(socketStateDefaults);
+	// const socket = useRecoilValue(socketStateDefaults);
 
 	const [dis, setDis] = useRecoilState(displayNavbarAccountState);
 	const navigate = useNavigate();
@@ -61,9 +61,12 @@ export const Account = () => {
 				console.log("sign out result");
 				console.log(res);
 
-				let a = socket.this.current.disconnect()
+				// let a = socket.this.current.disconnect()
 
-				console.log(a)
+				window.socket.disconnect()
+
+				
+
 				console.log('disconnectedddddd')
 				resetUser();
 				navigate("/");

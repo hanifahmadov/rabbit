@@ -6,16 +6,17 @@ import chalk from "chalk";
 export const socketConnect = (user) => {
 	const socket = io(apiUrl, {
 		reconnection: true,
-		// query: { _id: user._id },
-		query: { token: user.accessToken, _id: user._id },
-		
+		// Disable autoConnect to have more control over headers
+		extraHeaders: {
+			Authorization: `Bearer ${user.accessToken}`
+		},
 	});
 
 	socket.on("connect", (res) => console.log("connected"));
 
 	socket.on("connect_error", (err) => {
 		console.log(chalk.red("connect_error"));
-		// console.log(err)
+		console.log(err)
 	});
 
 	socket.on("connect_failed", (err) => {

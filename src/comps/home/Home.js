@@ -34,8 +34,6 @@ export const Home = () => {
 
 	let socketRef = useRef();
 
-	console.log(socket)
-
 	useEffect(() => {
 		if (!socket.connected) {
 			console.log("connect just run");
@@ -50,11 +48,12 @@ export const Home = () => {
 				console.log(response)
 			})
 
-			const newSocket = produce(socket, draft=> {
-				draft.this = socketRef
-			})
+			// const newSocket = produce(socket, draft=> {
+			// 	draft.this = socketRef
+			// })
 
-			setSocket(newSocket)
+			// setSocket(newSocket)
+			window.socket = socketRef.current
 		}
 
 		return () => {
