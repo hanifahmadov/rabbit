@@ -67,9 +67,17 @@ export const Home = () => {
 
 	useEffect(() => {
 		socketRef.current.on("new_message", (response) => {
+
+
 			let newRes = produce(res, (draft) => {
 				console.log(response);
-				draft = response;
+				/**
+				 * 	check produce without not returning draft
+				 * 	cause on the doc, it doesnt return draft
+				 * 	when updating, but direct draft = response
+				 * 	is wierd and train this
+				 */
+				draft=response;
 
 				return draft;
 			});
@@ -118,7 +126,12 @@ export const Home = () => {
 			</LeftSection>
 
 			<RightSection>
-				<MessagesSection></MessagesSection>
+				{console.log(res)}
+				<MessagesSection>
+					{res.map((val, i) => (
+						<li key={i}>{val}</li>
+					))}
+				</MessagesSection>
 
 				<MessagesForm onSubmit={handleSubmit} id='form'>
 					<input
