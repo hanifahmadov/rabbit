@@ -10,6 +10,17 @@ export const HomeContainer = styled.div`
 
 	// TODO: remove these lines
 	border: 5px solid red;
+
+	.room_container{
+		background: blue;
+		color: white;
+		font-weight: 700;
+		padding: 2px;
+		margin: 10px 2px;
+		text-align: center;
+		border-radius: 5px;
+		letter-spacing: 1px;
+	}
 `;
 
 export const LeftSection = styled.section`

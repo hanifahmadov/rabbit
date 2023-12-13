@@ -37,37 +37,49 @@ export const modalState = atom({
 });
 
 //# SOCKET STATES
-// socket connection state
-export const socketConnectionState = atom({
-	key: "socketConnectionState",
-	default: false,
-});
-
-// rooms state
-export const socketRoomsState = atom({
-	key: "socketRoomsState",
-	default: ["public"],
-});
 
 // users state
-export const socketUsersState = atom({
-	key: "socketUsersState",
-	default: [],
+export const socketConnectionDefaults = atom({
+	key: "socketConnectionDefaults",
+	default: false
 });
 
-// users state
-export const socketStateDefaults = atom({
-	key: "socketStateDefaults",
+
+export const roomsDefault = atom({
+	key: "roomsDefault",
+	default: [{
+		id: 8080,
+		name: 'general',
+		owner: 'system',
+		joinedusers: [],
+		createdAt: new Date(),
+		messages: [],
+	}],
+});
+
+export const currentRoomDefault = atom({
+	key: "currentRoomDefault",
 	default: {
-		this: undefined,
-		connected: false,
-		rooms: [{ name: "general", messages: [] }],
-		currentRoom: "general",
-		users: [],
+		id: 8080,
+		name: 'general',
+		owner: 'system',
+		joinedusers: [],
+		createdAt: new Date(),
+		messages: [],
+	}
+});
+
+
+export const messageDefault = atom({
+	key: "messageDefault",
+	default: 	{
+		messageId: null,
+		messageText: null,
+		owner: null,
+		createdAt: null,
+		// reaction: { likes: 0, dis: 0, funny: 0 }
 	},
 });
 
-export const socketResponseDefault = atom({
-	key: "socketResponseDefault",
-	default: [],
-});
+
+
