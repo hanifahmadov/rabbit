@@ -7,12 +7,15 @@ import { produce } from "immer";
 import { userState } from "../auth/authStore/states";
 import { useRefreshAccessApi } from "../../apis/apiCalls";
 import { Outlet, useNavigate } from "react-router-dom";
+import { socketConnectionDefaults } from "../shared/store/states";
 
 export const PersistentLayout = () => {
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [user, setUser] = useRecoilState(userState);
 	const navigate = useNavigate();
+
+
 
 	useEffect(() => {
 		// console.log("USER INSIDE USEFFECT", user);
@@ -31,13 +34,8 @@ export const PersistentLayout = () => {
 					for not to use Refresh Token to retrieve user data
 				*/
 
-				console.log("response from useRefreshAccessApi")
-
-				console.log(res)
 				let temp = res?.data?.user;
-
-
-
+				
 				const tempUser = produce(user, (draft) => {
 					draft._id = temp._id;
 					draft.avatar = temp.avatar;

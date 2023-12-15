@@ -10,7 +10,10 @@ import logo from "../logos/astr.png";
 
 //: state & apis & styled
 import {
+	currentRoomDefault,
 	displayNavbarAccountState,
+	roomsDefault,
+	socketConnectionDefaults,
 	socketStateDefaults,
 } from "../store/states";
 import { AccountContainer } from "./account.styled";
@@ -20,6 +23,9 @@ import { userState } from "../../auth/authStore/states";
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const resetUser = useResetRecoilState(userState);
+	const resetRooms = useResetRecoilState(roomsDefault);
+	const resetCurrentRoom = useResetRecoilState(currentRoomDefault)
+	const resetSocketConnection = useResetRecoilState(socketConnectionDefaults)
 	// const socket = useRecoilValue(socketStateDefaults);
 
 	const [dis, setDis] = useRecoilState(displayNavbarAccountState);
@@ -69,6 +75,10 @@ export const Account = () => {
 
 				console.log('disconnectedddddd')
 				resetUser();
+				resetRooms();
+				resetCurrentRoom()
+				resetSocketConnection()
+
 				navigate("/");
 			})
 			.catch((err) => {

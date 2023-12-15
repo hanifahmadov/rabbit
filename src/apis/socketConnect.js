@@ -3,30 +3,39 @@ import { io } from "socket.io-client";
 import apiUrl from "./apiUrl";
 import chalk from "chalk";
 
-export const socketConnect = (user) => {
+export const socketConnect = (user, resetRooms) => {
 	const socket = io(apiUrl, {
-		reconnection: true,
 		// Disable autoConnect to have more control over headers
 		extraHeaders: {
-			Authorization: `Bearer ${user.accessToken}`
+			Authorization: `Bearer ${user.accessToken}`,
 		},
 	});
 
-	socket.on("connect", (res) => console.log("connected"));
-
 	socket.on("connect_error", (err) => {
 		console.log(chalk.red("connect_error"));
-		console.log(err)
+		console.log(err);
+
+		console.log("resetRooms called");
+		resetRooms();
+		// setSocketConnection(false);
 	});
 
 	socket.on("connect_failed", (err) => {
 		console.log(chalk.red("connect_failed"));
 		console.log(err);
+
+		console.log("resetRooms called");
+		resetRooms();
+		// setSocketConnection(false);
 	});
 
 	socket.on("disconnect", (err) => {
 		console.log(chalk.red("disconnect"));
 		console.log(err);
+
+		console.log("resetRooms called");
+		resetRooms();
+		// setSocketConnection(false);
 	});
 
 	socket.on("error", function (err) {

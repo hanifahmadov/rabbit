@@ -10,17 +10,6 @@ export const HomeContainer = styled.div`
 
 	// TODO: remove these lines
 	border: 5px solid red;
-
-	.room_container{
-		background: blue;
-		color: white;
-		font-weight: 700;
-		padding: 2px;
-		margin: 10px 2px;
-		text-align: center;
-		border-radius: 5px;
-		letter-spacing: 1px;
-	}
 `;
 
 export const LeftSection = styled.section`
@@ -35,10 +24,9 @@ export const LeftSection = styled.section`
 	background: red;
 
 	.header {
-		
 		border: 2px solid black;
 
-		h5{
+		h5 {
 			text-align: center;
 			margin: 0;
 			padding: 3px 0;
@@ -46,11 +34,32 @@ export const LeftSection = styled.section`
 	}
 
 	.content {
-		border: 2px solid black;
-		height: calc(100% - 31px);
-	}
+		overflow: scroll;
+		overflow: auto;
+		height: 35.5rem;
+		border-bottom: 20px solid red;
 
+		position: relative;
+
+		.room_container {
+			background: ${(active) => (active ? "#4676e3" : "blue")};
+			color: white;
+			font-weight: 700;
+			padding: 10px;
+			margin: 10px 5px;
+			text-align: center;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 1);
+			border: 6px solid transparent;
 	
+		}
+
+		.active {
+			border: 6px solid red;
+		}
+
+	}
 `;
 export const RightSection = styled.section`
 	display: flex;
@@ -97,11 +106,31 @@ export const MessagesForm = styled.form`
 
 export const RoomsSection = styled.section`
 	background: silver;
-	height: 50%;
+	height: 100%;
 	width: 100%;
+
+	position: relative;
+
+
+	.create_room {
+		background: #3266cb;
+		position: absolute;
+		bottom: 0px;
+		padding: 10px;
+		width: 100%;
+		border: 10px solid white;
+
+
+		input, button {
+			margin: 5px 2px;
+			width: 100%;
+			padding: 5px;
+			border-radius: 5px;
+		}
+	}
 `;
 export const UsersSection = styled.section`
 	background: tomato;
-	height: 50%;
+	flex: 1;
 	width: 100%;
 `;

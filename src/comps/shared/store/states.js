@@ -41,38 +41,40 @@ export const modalState = atom({
 // users state
 export const socketConnectionDefaults = atom({
 	key: "socketConnectionDefaults",
-	default: false
+	default: false,
 });
-
 
 export const roomsDefault = atom({
 	key: "roomsDefault",
-	default: [{
-		id: 8080,
-		name: 'general',
-		owner: 'system',
-		joinedusers: [],
-		createdAt: new Date(),
-		messages: [],
-	}],
+	default: [
+	//: rooms properties
+	// 	{
+	// 		id: 8080,
+	// 		name: "general",
+	// 		owner: "system",
+	// 		joinedusers: [],
+	// 		createdAt: new Date(),
+	// 		messages: [],
+	// 	},
+	],
 });
 
 export const currentRoomDefault = atom({
 	key: "currentRoomDefault",
 	default: {
-		id: 8080,
-		name: 'general',
-		owner: 'system',
-		joinedusers: [],
-		createdAt: new Date(),
-		messages: [],
-	}
+		//: current room properties
+		// id: 8080,
+		// name: 'general',
+		// owner: 'system',
+		// joinedusers: [],
+		// createdAt: new Date(),
+		// messages: [],
+	},
 });
-
 
 export const messageDefault = atom({
 	key: "messageDefault",
-	default: 	{
+	default: {
 		messageId: null,
 		messageText: null,
 		owner: null,
@@ -80,6 +82,3 @@ export const messageDefault = atom({
 		// reaction: { likes: 0, dis: 0, funny: 0 }
 	},
 });
-
-
-
