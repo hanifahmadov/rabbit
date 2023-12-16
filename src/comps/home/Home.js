@@ -43,6 +43,7 @@ export const Home = () => {
 	const [currentRoom, setCurrentRoom] = useRecoilState(currentRoomDefault);
 	const resetRooms = useResetRecoilState(roomsDefault);
 	const [createRoom, setCreateRoom] = useState("");
+	const [roomAccessStrict, setRoomAccessStrict] = useState(false);
 
 	let socketRef = useRef();
 
@@ -97,12 +98,11 @@ export const Home = () => {
 				// setSocketConnection(false);
 			});
 
-
 			// ON JUST CONNECTED
 			socketRef.current.on("just_connected", (response) => {
 				let { justConnected, room } = response;
 
-				console.log('connected: ', justConnected)
+				console.log("connected: ", justConnected);
 
 				/**
 				 *  when user connect, the server will create a general room
@@ -121,7 +121,7 @@ export const Home = () => {
 
 			// ON JUST DISCONNECTED
 			socketRef.current.on("just_disconnected", (res) => {
-				console.log('socketRef.on.just_disconnected: ', res)
+				console.log("socketRef.on.just_disconnected: ", res);
 			});
 
 			window.socket = socketRef.current;
@@ -141,9 +141,7 @@ export const Home = () => {
 	useEffect(() => {
 		// ON NEW MESSAGE
 		socketRef.current.on("new_message", (response) => {
-
-
-			console.log("new_message, response: ", response)
+			console.log("new_message, response: ", response);
 			// let newRes = produce(res, (draft) => {
 			// 	/**
 			// 	 * 	check produce without not returning draft
@@ -172,8 +170,7 @@ export const Home = () => {
 	useEffect(() => {
 		// ON NEW ROOM
 		socketRef.current.on("new_room", (response) => {
-			
-			console.log('new_room ~ response: ', response)
+			console.log("new_room ~ response: ", response);
 
 			const { room } = response;
 
@@ -205,8 +202,11 @@ export const Home = () => {
 	const handleMessageForm = (e) => {
 		e.preventDefault();
 
+		// console.log(currentRoom);
+
 		socketRef.current.emit("send_message", {
-			roomId: currentRoom._id.toString(),
+			roomName: currentRoom.name,
+			roomId: currentRoom._id,
 			msg,
 		});
 
@@ -225,6 +225,20 @@ export const Home = () => {
 		setCreateRoom("");
 		setCreateRoomSubmitted(!createRoomSubmitted);
 	};
+
+	useEffect(() => {
+		console.log(user)
+		let valid = currentRoom?.users?.some( u => u._id === user._id)
+
+		console.log(valid)
+
+		if(!valid){
+			setRoomAccessStrict(true)
+		} else {
+			setRoomAccessStrict(false)
+		}
+
+	}, [currentRoom]);
 
 	return (
 		<HomeContainer id='home'>
@@ -301,8 +315,11 @@ export const Home = () => {
 						value={msg}
 						placeholder='Type something here...'
 						onChange={(e) => setMsg(e.target.value)}
+						disabled={roomAccessStrict}
 					/>
-					<button type='submit'>send</button>
+					<button type='submit' disabled={roomAccessStrict}>
+						send
+					</button>
 				</MessagesForm>
 			</RightSection>
 		</HomeContainer>
