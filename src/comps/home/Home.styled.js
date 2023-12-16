@@ -108,6 +108,7 @@ export const RoomsSection = styled.section`
 	background: silver;
 	height: 100%;
 	width: 100%;
+	
 
 	position: relative;
 
