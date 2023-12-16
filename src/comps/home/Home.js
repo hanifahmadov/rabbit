@@ -54,10 +54,9 @@ export const Home = () => {
 		 */
 
 		if (!socketConnection) {
-			// // console.log("🚀 ~ file: Home.js:63 ~ Connectiong to server...");
 			socketRef.current = io(apiUrl, {
 				// Disable autoConnect to have more control over headers
-				reconnection: false,
+				reconnection: true,
 				extraHeaders: {
 					Authorization: `Bearer ${user.accessToken}`,
 				},
@@ -81,23 +80,29 @@ export const Home = () => {
 				setSocketConnection(false);
 			});
 
-			socketRef.current.on("disconnect", (err) => {
-				console.log(chalk.red("disconnect"));
-				console.log(err);
+			socketRef.current.on("disconnect", (res) => {
+				console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
 
 				console.log("resetRooms called");
 				resetRooms();
 				setSocketConnection(false);
 			});
 
+			socketRef.current.on("custom_error", (err) => {
+				console.log(chalk.red("custom_error"));
+				console.log(err);
+
+				// console.log("resetRooms called");
+				// resetRooms();
+				// setSocketConnection(false);
+			});
+
+
 			// ON JUST CONNECTED
 			socketRef.current.on("just_connected", (response) => {
-				console.log(
-				"socketRef.current.on.just_connected ~ response:",
-				response
-				);
-
 				let { justConnected, room } = response;
+
+				console.log('connected: ', justConnected)
 
 				/**
 				 *  when user connect, the server will create a general room
@@ -111,33 +116,22 @@ export const Home = () => {
 				});
 
 				setRooms(updated);
-				setCurrentRoom(updated.find((room) => room.owner === null ));
-
-				// // console.log(
-				// // "Home.js:87 ~ socketRef.current.on ~ justConnected:",
-				// // justConnected
-				// // );
+				setCurrentRoom(updated.find((room) => room.owner === null));
 			});
 
 			// ON JUST DISCONNECTED
-			socketRef.current.on("just_disconnected", (response) => {
-				console.log(
-				" Home.js:95 ~ socketRef.current.on.just_disconnected ~ response:",
-				response
-				);
+			socketRef.current.on("just_disconnected", (res) => {
+				console.log('socketRef.on.just_disconnected: ', res)
 			});
 
 			window.socket = socketRef.current;
-			// setSocketConnection(true);
+			setSocketConnection(true);
 		}
 
 		// CLEREANCE
 		return () => {
 			// before the component is destroyed
 			// unbind all event handlers used in this component
-			// // console.log(
-			// // "🚀 ~ file: Home.js:97 ~ useEffect return ~ clear functions:"
-			// // );
 			console.log("clear functions");
 			socketRef.current.removeAllListeners("just_connected");
 			socketRef.current.removeAllListeners("just_disconnected");
@@ -147,27 +141,24 @@ export const Home = () => {
 	useEffect(() => {
 		// ON NEW MESSAGE
 		socketRef.current.on("new_message", (response) => {
-			// // console.log(
-			// // "🚀 ~ file: Home.js:101 ~ socketRef.current.on ~ response:",
-			// // response
-			// // );
-			let newRes = produce(res, (draft) => {
-				/**
-				 * 	check produce without not returning draft
-				 * 	cause on the doc, it doesnt return draft
-				 * 	when updating, but direct draft = response
-				 * 	is wierd and train this
-				 */
-				draft = response;
-				// // console.log("🚀 ~ file: Home.js:110 ~ newRes ~ draft:", draft);
 
-				return draft;
-			});
+
+			console.log("new_message, response: ", response)
+			// let newRes = produce(res, (draft) => {
+			// 	/**
+			// 	 * 	check produce without not returning draft
+			// 	 * 	cause on the doc, it doesnt return draft
+			// 	 * 	when updating, but direct draft = response
+			// 	 * 	is wierd and train this
+			// 	 */
+			// 	draft = response;
+			// 	return draft;
+			// });
 
 			// console.log("newRes before setRes", newRes)
 
-			setRes(newRes);
-			setMsg("");
+			// setRes(newRes);
+			// setMsg("");
 		});
 
 		// cleaning function
@@ -181,10 +172,8 @@ export const Home = () => {
 	useEffect(() => {
 		// ON NEW ROOM
 		socketRef.current.on("new_room", (response) => {
-			// // console.log(
-			// // "🚀 ~ file: Home.js:101 ~ socketRef.current.on.new_room ~ response:",
-			// // response
-			// // );
+			
+			console.log('new_room ~ response: ', response)
 
 			const { room } = response;
 
@@ -201,12 +190,11 @@ export const Home = () => {
 			});
 
 			setRooms(updated);
-
-			// console.log("newRes before setRes", newRes)
 		});
 
 		// cleaning function
 		return () => {
+			console.log("newroom = cleaning function");
 			// before the component is destroyed
 			// unbind all event handlers used in this component
 			socketRef.current.removeAllListeners("new_room");
@@ -218,9 +206,10 @@ export const Home = () => {
 		e.preventDefault();
 
 		socketRef.current.emit("send_message", {
-			roodId: currentRoom._id,
+			roomId: currentRoom._id.toString(),
 			msg,
 		});
+
 		setMsgSubmitted(!msgSubmitted);
 	};
 
@@ -248,8 +237,6 @@ export const Home = () => {
 					<div className='content'>
 						{console.log("rooms", rooms)}
 						{rooms.map((room, ind) => (
-
-
 							<div
 								className={
 									"room_container " +
@@ -262,7 +249,17 @@ export const Home = () => {
 							>
 								<span>room: {room.name} </span>
 								<br />
-								<span>owner: {room.owner == null ? <>system</> : room.owner.email}</span>
+								<span>
+									owner:{" "}
+									{room.owner == null ? (
+										<>system</>
+									) : (
+										room.owner.email.substring(
+											0,
+											room.owner.email.indexOf("@")
+										)
+									)}
+								</span>
 							</div>
 						))}
 					</div>
