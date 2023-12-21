@@ -7,7 +7,7 @@ import { clr, ff } from "../store/design";
 export const AccountContainer = styled.div`
 	${({ theme, $displayNavbarAccount }) =>
 		`   
-        margin-left: 0.5rem;
+
         position: relative;
     
         border: 3px solid ${
@@ -16,27 +16,28 @@ export const AccountContainer = styled.div`
         
         transition: all 0.35s ease-in-out;
 
-        border-radius: 50%;
+        border-radius: 10px;
 
         
 
-        
+    
     
         .account-img {
 
 
             cursor: pointer;
-            border-radius: 50%;
+            border-radius: 10px;
             overflow: hidden;
+
+            
     
             img {
-                width: 2.1rem;
-                border-radius: 50%;
+                width: 3.25rem;
+                height: 3.25rem;
+                border-radius: 10px;
                 cursor: pointer;
                 pointer-events: none;
-                transform: ${
-					$displayNavbarAccount ? "rotate(15deg)" : "rotate(0deg);"
-				};
+                
                 transition: all .25s ease-in-out;
 
 
@@ -49,12 +50,19 @@ export const AccountContainer = styled.div`
         .account-dropdown {
             width: 10rem;
             position: absolute;
-            right: -5px;
-            top: 50px;
+            left: 70px;
+            bottom: -5px;
+
             border-radius: 5px;
             z-index: 1;
 
             padding-bottom: 8px;
+
+            border: 4px solid black;
+
+            border-radius: 5px;
+            
+            
             
     
             // background-color: ${clr.dark};
@@ -62,26 +70,16 @@ export const AccountContainer = styled.div`
 
             // background: #112653;
 
-            background: #020816;
+            // background: #020816;
+
+            // background:rgba(0, 0, 0, 1);
 
             color: ${clr.white02};
 
+            background: ${clr.dark01};
+
 
             
-            
-    
-            .triangle {
-                position: absolute;
-                top: -7px;
-                right: 3px;
-                width: 0;
-                height: 0;
-                border-left: 15px solid transparent;
-                border-right: 15px solid transparent;
-                border-bottom: 15px solid #020816;
-                z-index: -10;
-            }
-    
             .account-dropdown-links {
                 height: 100%;
                 display: flex;
@@ -90,6 +88,8 @@ export const AccountContainer = styled.div`
                 justify-content: space-evenly;
     
                 padding: .5rem 0rem 0rem 0rem;
+
+               
 
                 font-size: 0.9rem;
 
@@ -122,7 +122,8 @@ export const AccountContainer = styled.div`
     
                 div {
 
-                    pointer-events: none;                   
+                    pointer-events: none;   
+                    border-radius: 5px;
 
                     a {
                         display: inline-block;
@@ -133,13 +134,16 @@ export const AccountContainer = styled.div`
                         text-decoration: none;
                         color: ${clr.white03}; 
                         pointer-events: auto;
-                        padding: .3rem .4rem;    
+                        padding: .3rem .4rem;  
+
+                        border: 2px solid black; 
+                        border-radius: 5px;
                     }
 
                     width: 60%;
                     text-align: center;
                     margin: .5rem 0rem;
-                    border-radius: 3px;
+                    border-radius: 5px;
                     
 
                     
@@ -165,6 +169,32 @@ export const AccountContainer = styled.div`
                     }
 
                 }
+            }
+
+            &:before {
+                content:"";
+                position: absolute;
+                left: -22px;
+                bottom: 15px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 10px 10px 10px 10px;
+                border-color: transparent rgb(0, 0, 0) transparent transparent;
+                z-index:9998;
+            }
+
+            &:after {
+                content:"";
+                position: absolute;
+                left: -17px;
+                bottom: 15px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 10px 10px 10px 10px;
+                border-color: transparent ${clr.dark01} transparent transparent;
+                z-index:9998;
             }
         }
         

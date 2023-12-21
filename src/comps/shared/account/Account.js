@@ -10,6 +10,7 @@ import logo from "../logos/astr.png";
 
 //: state & apis & styled
 import {
+	allUsersDefault,
 	currentRoomDefault,
 	displayNavbarAccountState,
 	roomsDefault,
@@ -26,6 +27,7 @@ export const Account = () => {
 	const resetRooms = useResetRecoilState(roomsDefault);
 	const resetCurrentRoom = useResetRecoilState(currentRoomDefault)
 	const resetSocketConnection = useResetRecoilState(socketConnectionDefaults)
+	const resetAllUsers = useResetRecoilState(allUsersDefault)
 	// const socket = useRecoilValue(socketStateDefaults);
 
 	const [dis, setDis] = useRecoilState(displayNavbarAccountState);
@@ -67,19 +69,19 @@ export const Account = () => {
 				console.log("sign out result");
 				console.log(res);
 
-				// let a = socket.this.current.disconnect()
 
 				window.socket.disconnect()
 
-				
-
-				console.log('disconnectedddddd')
+			
+				// console.log('disconnectedddddd')
 				resetUser();
 				resetRooms();
 				resetCurrentRoom()
 				resetSocketConnection()
+				resetAllUsers()
 
-				navigate("/");
+
+				navigate("/register");
 			})
 			.catch((err) => {
 				console.log("sign out err");
@@ -93,14 +95,13 @@ export const Account = () => {
 				<img src={logo} alt='logo' className='account-img' />
 			</div>
 
-			<OutsideClickHandler onOutsideClick={handleOutsideClick}>
+			<OutsideClickHandler  onOutsideClick={handleOutsideClick} >
 				<motion.div
 					className='account-dropdown'
 					variants={dropDownVariant}
 					initial='defaults'
 					animate='anime'
 				>
-					<div className='triangle'></div>
 
 					<div className='account-dropdown-links'>
 						<span className='account-dropdown-links-img'>
@@ -108,14 +109,14 @@ export const Account = () => {
 						</span>
 						<div>
 							<NavLink to='#' onClick={handleLinksClick}>
-								Settings
+								Change Logo
 							</NavLink>
 						</div>
-						<div>
+						{/* <div>
 							<NavLink to='#' onClick={handleLinksClick}>
 								Orders
 							</NavLink>
-						</div>
+						</div> */}
 						<div>
 							<NavLink
 								onClick={() => {
@@ -126,6 +127,7 @@ export const Account = () => {
 								Sign Out
 							</NavLink>
 						</div>
+
 					</div>
 				</motion.div>
 			</OutsideClickHandler>

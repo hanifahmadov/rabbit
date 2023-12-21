@@ -1,5 +1,5 @@
 // Import Bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
 // Roboto
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
@@ -53,10 +53,9 @@ body {
 
 	height: 100%;
 
-
 	// TODO: remove these lines
-	border: 5px solid rgba(255, 0, 0, 0.5);
-	padding: 1rem;
+	// border: 5px solid rgba(255, 0, 0, 0.5);
+	// padding: 1rem;
 }
 
 *,
@@ -79,3 +78,35 @@ body {
 		height: 15px !important;
 	}
 }
+
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  
+  /* Handle */
+  /* set the color of the scrollbar and the radius of its corners */
+  
+  ::-webkit-scrollbar-thumb {
+	background: rgb(40, 40, 40);
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+  }
+  
+  
+  /* Handle on hover */
+  /* set the color of the scrollbar when hovered over */
+  
+  ::-webkit-scrollbar-thumb:hover {
+	background: rgb(60, 60, 60);
+  }
+  
+  
+  /* Handle on active */
+  /* set the color of the scrollbar when clicked */
+  
+  ::-webkit-scrollbar-thumb:active {
+	background: rgb(80, 80, 80);
+  }

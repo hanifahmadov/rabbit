@@ -82,3 +82,8 @@ export const messageDefault = atom({
 		// reaction: { likes: 0, dis: 0, funny: 0 }
 	},
 });
+
+export const allUsersDefault = atom({
+	key: "allUsersDefault",
+	default: []
+});

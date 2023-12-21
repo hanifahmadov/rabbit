@@ -5,6 +5,7 @@ export const clr = {
 	white01: "#EBECF0",
 	white02: "#EDF2F0",
 	white03: "#f5f5f5",
+	white04: '#f4f7fa',
 
 	rgba: {
 		wht01: `rgba(255, 255, 255, .1)`,

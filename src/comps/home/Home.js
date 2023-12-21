@@ -1,10 +1,14 @@
 /* eslint-disable */
 import React, { useState, useRef, useEffect } from "react";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import { produce } from "immer";
 import { io } from "socket.io-client";
 import apiUrl from "../../apis/apiUrl";
 import chalk from "chalk";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { formatDistanceToNow } from "date-fns";
+import info from "../shared/logos/info1.png";
 
 // styled
 import {
@@ -17,17 +21,21 @@ import {
 	MessagesSection,
 	Header,
 	Content,
-} from "./Home.styled";
+} from "./Styled.js";
 
 // states
 import {
 	roomsDefault,
 	socketConnectionDefaults,
 	currentRoomDefault,
+	allUsersDefault,
 } from "../shared/store/states";
 
 import { socketConnect } from "../../apis/socketConnect";
 import { userState } from "../auth/authStore/states";
+import { Room } from "./Room.js";
+import { RoomDetails } from "./RoomDetails.js";
+import { Account } from "../shared/account/Account.js";
 
 export const Home = () => {
 	const [socketConnection, setSocketConnection] = useRecoilState(
@@ -35,7 +43,7 @@ export const Home = () => {
 	);
 
 	const [msg, setMsg] = useState("");
-	const [res, setRes] = useState([]);
+	const [messages, setMessages] = useState([]);
 	const [msgSubmitted, setMsgSubmitted] = useState(false);
 	const [createRoomSubmitted, setCreateRoomSubmitted] = useState(false);
 	const [user, setUser] = useRecoilState(userState);
@@ -44,8 +52,12 @@ export const Home = () => {
 	const resetRooms = useResetRecoilState(roomsDefault);
 	const [createRoom, setCreateRoom] = useState("");
 	const [roomAccessStrict, setRoomAccessStrict] = useState(false);
+	// CDR refers to currentRoomDetails section which Home.js 322
+	const [toggleCRDSection, setToggleCRDSection] = useState(false);
+	const [allUsers, setAllUsers] = useRecoilState(allUsersDefault);
 
 	let socketRef = useRef();
+	let emptyDivRef = useRef();
 
 	useEffect(() => {
 		/**
@@ -81,13 +93,13 @@ export const Home = () => {
 				setSocketConnection(false);
 			});
 
-			socketRef.current.on("disconnect", (res) => {
-				console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
+			// socketRef.current.on("disconnect", (res) => {
+			// 	console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
 
-				console.log("resetRooms called");
-				resetRooms();
-				setSocketConnection(false);
-			});
+			// 	console.log("resetRooms called");
+			// 	resetRooms();
+			// 	setSocketConnection(false);
+			// });
 
 			socketRef.current.on("custom_error", (err) => {
 				console.log(chalk.red("custom_error"));
@@ -100,28 +112,73 @@ export const Home = () => {
 
 			// ON JUST CONNECTED
 			socketRef.current.on("just_connected", (response) => {
-				let { justConnected, room } = response;
+				let {
+					justConnected,
+					rooms,
+					allUsers: registeredUsers,
+				} = response;
 
-				console.log("connected: ", justConnected);
+				console.log("just connected: ", justConnected.email);
 
 				/**
+				 * 	# Setting up rooms
 				 *  when user connect, the server will create a general room
 				 * 	auto if its not exist, then will send the whole rooms
 				 * 	on the client side, rooms stats will get whole replacement
 				 * 	like romms = response.rooms
 				 */
 				let updated = produce(rooms, (draft) => {
-					draft = room;
+					draft = rooms;
 					return draft;
 				});
 
+				/**
+				 * 	# Setting up messages
+				 * 	when user connects, it get all rooms
+				 * 	with fully populated owner, users, messages
+				 * 	retrieve messages and make it set Msg for mapping
+				 *
+				 */
+
+				let updatedMessages = produce(messages, (draft) => {
+					for (let room of rooms) {
+						for (let msg of room.messages) {
+							draft.push(msg);
+						}
+					}
+				});
+
+				let updatedAllUsers = produce(allUsers, (draft) => {
+					registeredUsers.forEach((u) => {
+						draft.push(u);
+					});
+				});
+
+				// console.log(
+				// 	"updatedMessages updatedMessages updatedMessages",
+				// 	updatedMessages
+				// );
+
+				setMessages(updatedMessages);
 				setRooms(updated);
 				setCurrentRoom(updated.find((room) => room.owner === null));
+				setAllUsers(updatedAllUsers);
 			});
 
 			// ON JUST DISCONNECTED
 			socketRef.current.on("just_disconnected", (res) => {
 				console.log("socketRef.on.just_disconnected: ", res);
+
+				const { users } = res;
+
+				console.log("all allUsersss", users);
+		
+
+				let updatedOnlineUser = produce(allUsers, draft => {
+					draft = users
+				})
+
+				setAllUsers(users)
 			});
 
 			window.socket = socketRef.current;
@@ -132,31 +189,33 @@ export const Home = () => {
 		return () => {
 			// before the component is destroyed
 			// unbind all event handlers used in this component
-			console.log("clear functions");
-			socketRef.current.removeAllListeners("just_connected");
-			socketRef.current.removeAllListeners("just_disconnected");
+			// console.log("clear functions");
+			// socketRef.current.removeAllListeners("just_connected");
+			// socketRef.current.removeAllListeners("just_disconnected");
 		};
 	}, []);
 
 	useEffect(() => {
 		// ON NEW MESSAGE
 		socketRef.current.on("new_message", (response) => {
-			console.log("new_message, response: ", response);
-			// let newRes = produce(res, (draft) => {
-			// 	/**
-			// 	 * 	check produce without not returning draft
-			// 	 * 	cause on the doc, it doesnt return draft
-			// 	 * 	when updating, but direct draft = response
-			// 	 * 	is wierd and train this
-			// 	 */
-			// 	draft = response;
-			// 	return draft;
+			// console.log("new_message, response: ", response);
+			// console.log("messagessss", messages);
+			// let newMessages = produce(messages, (draft) => {
+			// 	draft.push(response);
 			// });
 
-			// console.log("newRes before setRes", newRes)
+			// console.log(newMessages)
 
-			// setRes(newRes);
-			// setMsg("");
+			// console.log("newMessages before setRes", newMessages);
+
+			// console.log("newMessagesssss", newMessages);
+
+			// setMessages(newMessages);
+
+			setMessages((prevMessages) => [...prevMessages, response]);
+			setMsg("");
+
+			emptyDivRef?.current?.scrollIntoView({ behavior: "smooth" });
 		});
 
 		// cleaning function
@@ -169,31 +228,46 @@ export const Home = () => {
 
 	useEffect(() => {
 		// ON NEW ROOM
+		// socketRef.current.on("new_room", (response) => {
+		// 	console.log("new_room ~ response: ", response);
+
+		// 	const { room } = response;
+
+		// 	const updated = produce(rooms, (draft) => {
+		// 		// check if that room exist in case
+		// 		let check = draft.some((val) => val._id == room._id);
+
+		// 		if (!check) {
+		// 			draft.push(room);
+		// 			return draft;
+		// 		} else {
+		// 			return draft;
+		// 		}
+		// 	});
+
+		// 	setRooms(updated);
+		// });
+
 		socketRef.current.on("new_room", (response) => {
 			console.log("new_room ~ response: ", response);
-
 			const { room } = response;
-
-			const updated = produce(rooms, (draft) => {
-				// check if that room exist in case
-				let check = draft.some((val) => val._id == room._id);
-
-				if (!check) {
-					draft.push(room);
-					return draft;
-				} else {
-					return draft;
+			setRooms((prevRooms) => {
+				// Check if that room exists
+				if (prevRooms.some((val) => val._id === room._id)) {
+					return prevRooms;
 				}
+				// Room doesn't exist, add it to the array
+				return [...prevRooms, room];
 			});
-
-			setRooms(updated);
 		});
 
 		// cleaning function
 		return () => {
-			console.log("newroom = cleaning function");
+			// console.log("newroom = cleaning function");
+
 			// before the component is destroyed
 			// unbind all event handlers used in this component
+
 			socketRef.current.removeAllListeners("new_room");
 		};
 	}, [createRoomSubmitted]);
@@ -227,58 +301,141 @@ export const Home = () => {
 	};
 
 	useEffect(() => {
-		console.log(user)
-		let valid = currentRoom?.users?.some( u => u._id === user._id)
+		let valid = currentRoom?.users?.some((u) => u._id === user._id);
 
-		console.log(valid)
-
-		if(!valid){
-			setRoomAccessStrict(true)
+		if (!valid) {
+			setRoomAccessStrict(true);
 		} else {
-			setRoomAccessStrict(false)
+			setRoomAccessStrict(false);
 		}
-
 	}, [currentRoom]);
+
+	const roomSettingVariants = {
+		initial: {
+			opacity: 0,
+			width: "1rem",
+		},
+
+		animate: {
+			opacity: 1,
+			width: "14rem",
+			transition: {
+				duration: 0.5,
+				opacity: {
+					delay: 0.5,
+				},
+			},
+		},
+
+		exit: {
+			opacity: 0,
+			width: "0rem",
+			transition: {
+				width: {
+					delay: 0.1,
+					duration: 0.5,
+				},
+				opacity: {
+					duration: 0.3,
+				},
+			},
+		},
+	};
 
 	return (
 		<HomeContainer id='home'>
+			{/* {console.log(toggleCRDSection)} */}
 			<LeftSection>
-				<RoomsSection>
-					<div className='header'>
-						<h5>Rooms</h5>
-					</div>
-
-					<div className='content'>
-						{console.log("rooms", rooms)}
-						{rooms.map((room, ind) => (
-							<div
-								className={
-									"room_container " +
-									(room.name === currentRoom.name
-										? "active"
-										: "")
-								}
-								key={ind}
-								onClick={() => setCurrentRoom(room)}
-							>
-								<span>room: {room.name} </span>
-								<br />
-								<span>
-									owner:{" "}
-									{room.owner == null ? (
-										<>system</>
-									) : (
-										room.owner.email.substring(
-											0,
-											room.owner.email.indexOf("@")
-										)
-									)}
-								</span>
-							</div>
+				<section className='side_navbar'>
+					<div className='rooms'>
+						{rooms.map((room, index) => (
+							<Room
+								key={index}
+								room={room}
+								currentRoom={currentRoom}
+								setCurrentRoom={setCurrentRoom}
+							/>
 						))}
 					</div>
 
-					<form
+					<div className='createNewRoom_and_userAccount'>
+						<div
+							className='room_details'
+							onClick={() =>
+								setToggleCRDSection(!toggleCRDSection)
+							}
+						>
+							<span>
+								<img src={info} />
+							</span>
+						</div>
+						<div className='create_new_room'>
+							<span>+</span>
+						</div>
+						<div className='userAccount'>
+							<Account />
+						</div>
+					</div>
+				</section>
+
+				<AnimatePresence>
+					<motion.section
+						className='currentRoomDetailsSection'
+						variants={roomSettingVariants}
+						initial='initial'
+						animate={toggleCRDSection ? "animate" : "exit"}
+					>
+						{currentRoom.name && (
+							<RoomDetails currentRoom={currentRoom} />
+						)}
+					</motion.section>
+				</AnimatePresence>
+			</LeftSection>
+
+			<RightSection>
+				<MessagesSection>
+					{messages.map((val, i) => {
+						if (val.room === currentRoom._id) {
+							return (
+								<div
+									key={i}
+									style={{
+										margin: "10px",
+										border: "1px solid white",
+										color: "white",
+										padding: "10px 20px",
+									}}
+									ref={(e) => (emptyDivRef.current = e)}
+								>
+									typed: {val.text}
+									<br />
+									owner: {val.owner.email}
+								</div>
+							);
+						}
+					})}
+					<div className='spacer' />
+				</MessagesSection>
+
+				<MessagesForm onSubmit={handleMessageForm}>
+					<input
+						type='text'
+						value={msg}
+						placeholder={`You are typing into ~ ${currentRoom?.name?.toUpperCase()}`}
+						onChange={(e) => setMsg(e.target.value)}
+						disabled={roomAccessStrict}
+					/>
+					<button type='submit' disabled={roomAccessStrict}>
+						<span>➤</span>
+					</button>
+				</MessagesForm>
+			</RightSection>
+		</HomeContainer>
+	);
+};
+
+{
+	/* <form
 						className='create_room'
 						onSubmit={handleCreateRoomForm}
 					>
@@ -291,37 +448,5 @@ export const Home = () => {
 						<button disabled={!(createRoom.length >= 2)}>
 							create
 						</button>
-					</form>
-				</RoomsSection>
-				{/* <UsersSection>
-					<div className='header'>
-						<h5>Users</h5>
-					</div>
-
-					<div className='content'></div>
-				</UsersSection> */}
-			</LeftSection>
-
-			<RightSection>
-				<MessagesSection>
-					{res.map((val, i) => (
-						<li key={i}>{val}</li>
-					))}
-				</MessagesSection>
-
-				<MessagesForm onSubmit={handleMessageForm} id='form'>
-					<input
-						type='text'
-						value={msg}
-						placeholder='Type something here...'
-						onChange={(e) => setMsg(e.target.value)}
-						disabled={roomAccessStrict}
-					/>
-					<button type='submit' disabled={roomAccessStrict}>
-						send
-					</button>
-				</MessagesForm>
-			</RightSection>
-		</HomeContainer>
-	);
-};
+					</form> */
+}

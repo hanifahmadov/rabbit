@@ -1,5 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
+import { clr } from "../shared/store/design";
 
 export const AppLayoutContainer = styled.div`
 	display: flex;
@@ -8,7 +9,12 @@ export const AppLayoutContainer = styled.div`
 	height: 100%;
 	width: 100%;
 
-	border: 5px solid blue;
+	// border: 5px solid yellow;
+
+	border: 4px solid black;
+
+	padding: 20px;
+
 `;
 
 export const AppLayoutContent = styled.div`
@@ -17,12 +23,14 @@ export const AppLayoutContent = styled.div`
 	flex-direction: column;
 
 	height: 100%;
-	width: 60rem;
+	width: 70rem;
 
-	border: 5px solid yellow;
+	// border: 5px solid yellow;
 
 	//: this is for modal in Auth Layout
 	position: relative;
+	background: ${clr.dark02}
+	backdrop-filter: blur(10px);
 `;
 
 export const RegisterLayoutContainer = styled.div`

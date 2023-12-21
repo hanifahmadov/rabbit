@@ -2,73 +2,78 @@
 import styled from "styled-components";
 import { clr } from "../shared/store/design";
 
-
 export const HeaderContainer = styled.div`
-	.navbar {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex-direction: row;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
 
-		width: 100% ;
+	width: 100%;
 
-		position: relative;
-	
-		z-index: 1;
+	padding: 0.25rem .5rem;
 
-		padding: 0.75rem 1rem 0.75rem 2rem;
+	border: 4px solid black;
 
+	// background: rgba(0, 0, 0, .2);
+	// backdrop-filter: blur(5px);
 
-		background: rgba(0, 0, 0, .2);
-		backdrop-filter: blur(5px);
+	.navbar-title {
+		a {
+			text-decoration: none;
+			padding: 0px;
 
-		.navbar-title {
-			a {
-				text-decoration: none;
+			h3 {
 				padding: 0px;
+				margin: 0px;
+				color: black;
+			}
+		}
+	}
 
-				h3 {
-					padding: 0px;
-					margin: 0px;
-					color: black;
-				}
+	.active_users {
+		display: flex;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+
+
+		padding: 0.25rem;
+		flex: 1;
+
+		div {
+			border-radius: 10px;
+			border: 3px solid rgba(255, 255, 255, .5);
+			overflow: hidden;
+			cursor: pointer;
+
+			z-index: 10;
+
+			margin: 0 6px;
+
+			img{
+				width: 2.75rem;
+				height: 2.75rem;
+				filter: blur(0px);
+				border-radius: 5px;
+				z-index: -10;
+
 			}
 		}
 
-		.navbar-links {
-			display: flex;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+		.active {
+			border-color: #009aff;
 
-			.links {
-				display: flex;
-				flex-direction: row;
-				height: 100%;
+			img{
+				width: 2.75rem;
+				height: 2.75rem;
+				filter: blur(0px);
+				border-radius: 5px;
+				z-index: -10;
 
-				span {
-					display: inline-block;
-					height: 100%;
-					margin: 0 0.5rem;
-					font-weight: 600;
-
-					a {
-						display: inline-block;
-						text-decoration: none;
-						height: 100%;
-						padding: 0.3rem 0.5rem;
-						border-radius: 5px;
-						font-size: 0.95rem;
-						color: black;
-					}
-
-					a.active {
-						background: rgba(255, 255, 255, 0.1);
-						backdrop-filter: blur(10px);
-						transition: all 0.25s ease-in-out;
-					}
-				}
 			}
 		}
+
+
 	}
 `;
