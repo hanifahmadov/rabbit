@@ -75,6 +75,8 @@ export const Home = () => {
 				},
 			});
 
+
+
 			socketRef.current.on("connect_error", (err) => {
 				console.log(chalk.red("connect_error"));
 				console.log(err);
@@ -148,11 +150,11 @@ export const Home = () => {
 					}
 				});
 
-				let updatedAllUsers = produce(allUsers, (draft) => {
-					registeredUsers.forEach((u) => {
-						draft.push(u);
-					});
-				});
+				// let updatedAllUsers = produce(allUsers, (draft) => {
+				// 	registeredUsers.forEach((u) => {
+				// 		draft.push(u);
+				// 	});
+				// });
 
 				// console.log(
 				// 	"updatedMessages updatedMessages updatedMessages",
@@ -162,7 +164,7 @@ export const Home = () => {
 				setMessages(updatedMessages);
 				setRooms(updated);
 				setCurrentRoom(updated.find((room) => room.owner === null));
-				setAllUsers(updatedAllUsers);
+
 			});
 
 			// ON JUST DISCONNECTED
