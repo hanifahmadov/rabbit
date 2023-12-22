@@ -36,6 +36,7 @@ import { userState } from "../auth/authStore/states";
 import { Room } from "./Room.js";
 import { RoomDetails } from "./RoomDetails.js";
 import { Account } from "../shared/account/Account.js";
+import { CreateRoom } from "./CreateRoom.js";
 
 export const Home = () => {
 	const [socketConnection, setSocketConnection] = useRecoilState(
@@ -69,7 +70,7 @@ export const Home = () => {
 		if (!socketConnection) {
 			socketRef.current = io(apiUrl, {
 				// Disable autoConnect to have more control over headers
-				reconnection: true,
+				reconnection: false,
 				extraHeaders: {
 					Authorization: `Bearer ${user.accessToken}`,
 				},
@@ -81,7 +82,6 @@ export const Home = () => {
 
 				console.log("resetRooms called");
 				resetRooms();
-				setSocketConnection(false);
 			});
 
 			socketRef.current.on("connect_failed", (err) => {
@@ -90,32 +90,25 @@ export const Home = () => {
 
 				console.log("resetRooms called");
 				resetRooms();
-				setSocketConnection(false);
 			});
 
-			// socketRef.current.on("disconnect", (res) => {
-			// 	console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
+			socketRef.current.on("disconnect", (res) => {
+				console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
 
-			// 	console.log("resetRooms called");
-			// 	resetRooms();
-			// 	setSocketConnection(false);
-			// });
+				console.log("resetRooms called");
+				resetRooms();
+			});
 
 			socketRef.current.on("custom_error", (err) => {
 				console.log(chalk.red("custom_error"));
 				console.log(err);
-
-				// console.log("resetRooms called");
-				// resetRooms();
-				// setSocketConnection(false);
 			});
 
-			// ON JUST CONNECTED
+			// SOCKET ON JUST CONNECTED
 			socketRef.current.on("just_connected", (response) => {
 				let {
 					justConnected,
-					rooms,
-					allUsers: registeredUsers,
+					rooms
 				} = response;
 
 				console.log("just connected: ", justConnected.email);
@@ -148,129 +141,60 @@ export const Home = () => {
 					}
 				});
 
-				let updatedAllUsers = produce(allUsers, (draft) => {
-					registeredUsers.forEach((u) => {
-						draft.push(u);
-					});
-				});
 
-				// console.log(
-				// 	"updatedMessages updatedMessages updatedMessages",
-				// 	updatedMessages
-				// );
 
 				setMessages(updatedMessages);
 				setRooms(updated);
 				setCurrentRoom(updated.find((room) => room.owner === null));
-				setAllUsers(updatedAllUsers);
 			});
 
-			// ON JUST DISCONNECTED
+
+			// SOCKET ON JUST DISCONNECTED
 			socketRef.current.on("just_disconnected", (res) => {
-				console.log("socketRef.on.just_disconnected: ", res);
+				console.log("socketRef.on.just_disconnected, and response is: ", res);
+			});
 
-				const { users } = res;
+			// SOCKET ON NEW ROOM
+			socketRef.current.on("new_room", (response) => {
+				console.log("new_room ~ response: ", response);
+				const { room } = response;
 
-				console.log("all allUsersss", users);
-		
+				setRooms((prevRooms) => {
+					// Check if that room exists
+					if (prevRooms.some((val) => val._id === room._id)) {
+						return prevRooms;
+					}
+					// Room doesn't exist, add it to the array
+					return [...prevRooms, room];
+				});
+			});
 
-				let updatedOnlineUser = produce(allUsers, draft => {
-					draft = users
-				})
-
-				setAllUsers(users)
+			// SOCKET ON NEW MESSAGE
+			socketRef.current.on("new_message", (response) => {
+				// console.log("new_message, response: ", response);
+	
+				setMessages((prevMessages) => [...prevMessages, response]);
+				setMsg("");
+	
+				emptyDivRef?.current?.scrollIntoView({ behavior: "smooth" });
 			});
 
 			window.socket = socketRef.current;
 			setSocketConnection(true);
 		}
-
-		// CLEREANCE
-		return () => {
-			// before the component is destroyed
-			// unbind all event handlers used in this component
-			// console.log("clear functions");
-			// socketRef.current.removeAllListeners("just_connected");
-			// socketRef.current.removeAllListeners("just_disconnected");
-		};
 	}, []);
 
-	useEffect(() => {
-		// ON NEW MESSAGE
-		socketRef.current.on("new_message", (response) => {
-			// console.log("new_message, response: ", response);
-			// console.log("messagessss", messages);
-			// let newMessages = produce(messages, (draft) => {
-			// 	draft.push(response);
-			// });
+	// useEffect(() => {
+	// 	// ON NEW MESSAGE
+	
 
-			// console.log(newMessages)
-
-			// console.log("newMessages before setRes", newMessages);
-
-			// console.log("newMessagesssss", newMessages);
-
-			// setMessages(newMessages);
-
-			setMessages((prevMessages) => [...prevMessages, response]);
-			setMsg("");
-
-			emptyDivRef?.current?.scrollIntoView({ behavior: "smooth" });
-		});
-
-		// cleaning function
-		return () => {
-			// before the component is destroyed
-			// unbind all event handlers used in this component
-			socketRef.current.removeAllListeners("new_message");
-		};
-	}, [msgSubmitted]);
-
-	useEffect(() => {
-		// ON NEW ROOM
-		// socketRef.current.on("new_room", (response) => {
-		// 	console.log("new_room ~ response: ", response);
-
-		// 	const { room } = response;
-
-		// 	const updated = produce(rooms, (draft) => {
-		// 		// check if that room exist in case
-		// 		let check = draft.some((val) => val._id == room._id);
-
-		// 		if (!check) {
-		// 			draft.push(room);
-		// 			return draft;
-		// 		} else {
-		// 			return draft;
-		// 		}
-		// 	});
-
-		// 	setRooms(updated);
-		// });
-
-		socketRef.current.on("new_room", (response) => {
-			console.log("new_room ~ response: ", response);
-			const { room } = response;
-			setRooms((prevRooms) => {
-				// Check if that room exists
-				if (prevRooms.some((val) => val._id === room._id)) {
-					return prevRooms;
-				}
-				// Room doesn't exist, add it to the array
-				return [...prevRooms, room];
-			});
-		});
-
-		// cleaning function
-		return () => {
-			// console.log("newroom = cleaning function");
-
-			// before the component is destroyed
-			// unbind all event handlers used in this component
-
-			socketRef.current.removeAllListeners("new_room");
-		};
-	}, [createRoomSubmitted]);
+	// 	// cleaning function
+	// 	return () => {
+	// 		// before the component is destroyed
+	// 		// unbind all event handlers used in this component
+	// 		socketRef.current.removeAllListeners("new_message");
+	// 	};
+	// }, [msgSubmitted]);
 
 	// HANDLE MESSAGE FORM
 	const handleMessageForm = (e) => {
@@ -377,6 +301,8 @@ export const Home = () => {
 						</div>
 					</div>
 				</section>
+
+				{/* <CreateRoom  user={user}/> */}
 
 				<AnimatePresence>
 					<motion.section

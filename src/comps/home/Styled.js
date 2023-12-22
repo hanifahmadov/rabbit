@@ -24,27 +24,40 @@ export const LeftSection = styled.section`
 	height: 100%;
 	background: ${clr.dark02};
 
+
+
 	.side_navbar {
+		
+
+		display: flex;
+		flex-direction: column;
 		position: relative;
 
-		border: 4px solid black;
+		width: 5.5rem; 
 
-		padding: 0.5rem 0px;
+		border: 4px solid black;
+		padding: 0rem 0px 0px 0px;
+
+		.rooms {
+			flex: 1;
+
+			margin-bottom: 0px;
+			overflow: auto;
+			justify-content: center;
+		}
 
 		.createNewRoom_and_userAccount {
-			// background: red;
-
-			position: absolute;
-			bottom: 0;
 			display: flex;
-			justify-content: center;
+			justify-content: space-evenly;
 			align-items: center;
 			flex-direction: column;
 
+			// background: red;
+
 			width: 100%;
+			height: 14rem;
 
 			border-top: 4px solid black;
-			padding-top: 10px;
 
 			.room_details {
 				border: 3px solid rgba(0, 0, 0, 0.3);
@@ -52,14 +65,12 @@ export const LeftSection = styled.section`
 
 				background: rgba(255, 255, 255, 0.4);
 				padding: 5px;
-
-				margin-bottom: 10px;
 				cursor: pointer;
 
 				span {
 					img {
-						width: 1.75rem;
-						height: 1.75rem;
+						width: 2rem;
+						height: 2rem;
 					}
 				}
 
@@ -79,10 +90,9 @@ export const LeftSection = styled.section`
 				cursor: pointer;
 				transition: all 0.25s;
 
-				width: 2.75rem;
-				height: 2.75rem;
+				padding: 5px;
 
-				margin-bottom: 10px;
+				cursor: pointer;
 
 				// overflow: hidden;
 
@@ -91,9 +101,10 @@ export const LeftSection = styled.section`
 					align-items: center;
 					justify-content: center;
 
+				
 
-					width: 100%;
-					height: 100%;
+					width: 2rem;
+					height: 2rem;
 
 					font-size: 2rem;
 					border-radius: 50%;
@@ -113,10 +124,13 @@ export const LeftSection = styled.section`
 			.userAccount {
 				width: 100%;
 				// background: green;
+				
+
 				display: flex;
-				height: 5rem;
 				justify-content: center;
 				align-items: center;
+
+				padding-top: .5rem;
 
 				border-top: 4px solid black;
 			}
@@ -257,7 +271,7 @@ export const RoomContainer = styled.div`
 
 
         img {
-            width: 3.5rem;
+            width: 3.75rem;
          
             box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
             border-top-left-radius: 10%;
@@ -270,7 +284,9 @@ export const RoomContainer = styled.div`
         margin-top: 2px;
         font-family: ${ff.notosans}
         display: inline-block;
-        
+		justify-content: center;
+		align-items: center;
+		
         font-size: .8rem;
         font-weight: 700;
 		background: white;
@@ -280,6 +296,21 @@ export const RoomContainer = styled.div`
 
 		text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
 			0px -4px 10px rgba(255,255,255,0.3);
+
+		overflow: hidden;
+
+		span {
+			display: block;
+			width: 3.5rem;
+			height: 25px;
+			overflow: hidden;
+
+			padding: 0 3px;
+
+			justify-content: center;
+			align-items: center;
+
+		}
     }
 `;
 
@@ -442,3 +473,11 @@ export const RoomDetailsContainer = styled.div`
 		}
 	}
 `;
+
+
+export const CreateRoomContainer = styled.div`
+
+
+
+
+`

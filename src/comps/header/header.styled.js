@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
 
 	padding: 0.25rem .5rem;
 
+	height: 5rem; 
 	border: 4px solid black;
 
 	// background: rgba(0, 0, 0, .2);

@@ -15,6 +15,7 @@ import apiUrl from "../../apis/apiUrl";
 
 export const Header = () => {
 	const allUsers = useRecoilValue(allUsersDefault);
+	
 
 	console.log(allUsers);
 
