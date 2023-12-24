@@ -1,6 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { clr, ff } from "../shared/store/design";
+import { motion } from 'framer-motion'
 
 export const HomeContainer = styled.div`
 	display: flex;
@@ -24,19 +25,15 @@ export const LeftSection = styled.section`
 	height: 100%;
 	background: ${clr.dark02};
 
-
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
 	.side_navbar {
-		
-
 		display: flex;
 		flex-direction: column;
 		position: relative;
 
-		width: 5.5rem; 
-
 		border: 4px solid black;
-		padding: 0rem 0px 0px 0px;
+		padding-top: 5px;
 
 		.rooms {
 			flex: 1;
@@ -53,6 +50,8 @@ export const LeftSection = styled.section`
 			flex-direction: column;
 
 			// background: red;
+
+			box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
 			width: 100%;
 			height: 14rem;
@@ -101,14 +100,11 @@ export const LeftSection = styled.section`
 					align-items: center;
 					justify-content: center;
 
-				
-
 					width: 2rem;
 					height: 2rem;
 
 					font-size: 2rem;
 					border-radius: 50%;
-
 
 					line-height: 0px;
 					font-wight: 700px;
@@ -124,13 +120,12 @@ export const LeftSection = styled.section`
 			.userAccount {
 				width: 100%;
 				// background: green;
-				
 
 				display: flex;
 				justify-content: center;
 				align-items: center;
 
-				padding-top: .5rem;
+				padding-top: 0.5rem;
 
 				border-top: 4px solid black;
 			}
@@ -145,6 +140,8 @@ export const LeftSection = styled.section`
 
 		border: 4px solid black;
 		border-left: none;
+
+		box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 	}
 `;
 
@@ -258,6 +255,9 @@ export const RoomContainer = styled.div`
 
 	
 	height: 4.5rem;
+	width: 4rem;
+
+
 
 
     border-radius: 8px;
@@ -271,7 +271,7 @@ export const RoomContainer = styled.div`
 
 
         img {
-            width: 3.75rem;
+            width: 3.5rem;
          
             box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
             border-top-left-radius: 10%;
@@ -297,16 +297,10 @@ export const RoomContainer = styled.div`
 		text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
 			0px -4px 10px rgba(255,255,255,0.3);
 
-		overflow: hidden;
+
 
 		span {
 			display: block;
-			width: 3.5rem;
-			height: 25px;
-			overflow: hidden;
-
-			padding: 0 3px;
-
 			justify-content: center;
 			align-items: center;
 
@@ -314,12 +308,14 @@ export const RoomContainer = styled.div`
     }
 `;
 
-export const RoomDetailsContainer = styled.div`
+export const RoomDetailsContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+
+
 
 	margin: 0 10px;
 
@@ -474,10 +470,172 @@ export const RoomDetailsContainer = styled.div`
 	}
 `;
 
+export const CreateRoomContainer = styled(motion.div)`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
 
-export const CreateRoomContainer = styled.div`
+	width: 100%;
+
+	padding: 0 10px;
+
+	.header {
+		width: 100%;
+
+		h5 {
+			width: 100%;
+			font-size: 1.2rem;
+			font-weight: 700;
+			text-align: center;
+			padding: 10px;
+			font-family: system-ui;
+
+			border: 4px solid black;
+			margin-bottom: 5px;
+			color: ${clr.white01};
+		}
+	}
+
+	form {
+		width: 100%;
+
+
+		.selected_files {
+			width: 100%;
+			height: 12rem;
+			border: 3px solid black;
+			margin: 5px 0px;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+
+			color: white;
+
+			position: relative;
+
+			.img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.filename {
+				position: absolute;
+
+
+				background: rgba(0, 0, 0, .8);
+				width: 100%;
+
+				color: rgba(255, 255, 255, 1);
+				line-height: 140px;
+
+				font-size: 1rem;
+				font-weight: 700;
+			}
+		}
+
+		.info_about_image {
+
+			margin: 10px 2px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: white;
+
+			img {
+				width: 1.3rem;
+				height: 1.3rem;
+			}
+
+			span {
+				margin: 0 0 0 5px;
+				width: 100%;
+				display: inline-block;
+				padding: 3px 10px ;
+				border-radius: 5px;
+				font-family: ${ff.roboto};
+				letter-spacing: 0px;
+				background:black;
+				font-weight: 700;
+				text-align: left;
+				color: rgba(255, 255, 255, .8);
+			}
+		}
+
+		.select_file {
+			width: 100%;
+			border: 3px solid rgba(255, 255, 255, .1);
+			padding: 5px 10px;
+			border-radius: 5px;
+			color: white;
+			font-size: .9rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all .1s ease-in-out;
+
+			margin-bottom: 2rem;
+
+			background: rgba(4, 145, 255, .5);
+
+			&:hover {
+				border: 3px solid rgba(255, 255, 255, .2);
+			}
+
+			&:active {
+				background: rgba(4, 145, 255, .6);
+				border-color: rgba(255, 255, 255, .1);
+			}
+
+		}
+
+
+		#newroomInput {
+			padding: 1.1rem;
+			width: 100%;
+	
+			height: 1rem;
+			background: ${clr.dark01};
+			color: white;
+			border-radius: 3px;
+			border: 2px solid rgba(255, 255, 255, 0.4);
+
+	
+			&::placeholder {
+				color: rgba(255, 255, 255, 0.2);
+				padding-left: 1px;
+			}
+		}
 
 
 
+		button {
+			width: 100%;
+			border: 3px solid rgba(255, 255, 255, .1);
+			padding: 5px 10px;
+			border-radius: 5px;
+			color: white;
+			font-size: .9rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all .1s ease-in-out;
 
-`
+			margin-top: 5px;
+
+			background: rgba(4, 145, 255, .5);
+
+		
+
+			&:hover {
+				border: 3px solid rgba(255, 255, 255, .2);
+			}
+
+			&:active {
+				background: rgba(4, 145, 255, .6);
+				border-color: rgba(255, 255, 255, .1);
+			}
+		}
+	}
+`;

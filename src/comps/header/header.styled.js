@@ -18,6 +18,8 @@ export const HeaderContainer = styled.div`
 	// background: rgba(0, 0, 0, .2);
 	// backdrop-filter: blur(5px);
 
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
+
 	.navbar-title {
 		a {
 			text-decoration: none;

@@ -29,6 +29,7 @@ import {
 	socketConnectionDefaults,
 	currentRoomDefault,
 	allUsersDefault,
+	activeUsersDefault,
 } from "../shared/store/states";
 
 import { socketConnect } from "../../apis/socketConnect";
@@ -53,9 +54,13 @@ export const Home = () => {
 	const resetRooms = useResetRecoilState(roomsDefault);
 	const [createRoom, setCreateRoom] = useState("");
 	const [roomAccessStrict, setRoomAccessStrict] = useState(false);
-	// CDR refers to currentRoomDetails section which Home.js 322
-	const [toggleCRDSection, setToggleCRDSection] = useState(false);
+
 	const [allUsers, setAllUsers] = useRecoilState(allUsersDefault);
+	const [activeUsers, setActiveUsers] = useRecoilState(activeUsersDefault);
+
+	const [display, setDisplay] = useState(false);
+	const [displayRoomInfo, setDisplayRoomInfo] = useState(false);
+	const [displayCreateRoom, setDisplayCreateRoom] = useState(false);
 
 	let socketRef = useRef();
 	let emptyDivRef = useRef();
@@ -106,10 +111,7 @@ export const Home = () => {
 
 			// SOCKET ON JUST CONNECTED
 			socketRef.current.on("just_connected", (response) => {
-				let {
-					justConnected,
-					rooms
-				} = response;
+				let { justConnected, rooms } = response;
 
 				console.log("just connected: ", justConnected.email);
 
@@ -141,17 +143,25 @@ export const Home = () => {
 					}
 				});
 
-
-
 				setMessages(updatedMessages);
 				setRooms(updated);
 				setCurrentRoom(updated.find((room) => room.owner === null));
 			});
 
+			// SOCKET ON USERS ON CONNECTION
+			socketRef.current.on("usersOnConnection", (res) => {
+				console.log("usersOnConnection: ", res);
 
-			// SOCKET ON JUST DISCONNECTED
-			socketRef.current.on("just_disconnected", (res) => {
-				console.log("socketRef.on.just_disconnected, and response is: ", res);
+				setAllUsers(res.allUsers);
+				setActiveUsers(res.activeUsers);
+			});
+
+			// SOCKET ON USERS ON  DISCONNECTED
+			socketRef.current.on("usersOnDisconnection", (res) => {
+				console.log("usersOnDisconnection: ", res);
+
+				setAllUsers(res.allUsers);
+				setActiveUsers(res.activeUsers);
 			});
 
 			// SOCKET ON NEW ROOM
@@ -172,10 +182,10 @@ export const Home = () => {
 			// SOCKET ON NEW MESSAGE
 			socketRef.current.on("new_message", (response) => {
 				// console.log("new_message, response: ", response);
-	
+
 				setMessages((prevMessages) => [...prevMessages, response]);
 				setMsg("");
-	
+
 				emptyDivRef?.current?.scrollIntoView({ behavior: "smooth" });
 			});
 
@@ -186,7 +196,6 @@ export const Home = () => {
 
 	// useEffect(() => {
 	// 	// ON NEW MESSAGE
-	
 
 	// 	// cleaning function
 	// 	return () => {
@@ -224,6 +233,36 @@ export const Home = () => {
 		setCreateRoomSubmitted(!createRoomSubmitted);
 	};
 
+	const handleRoomDetailsClick = () => {
+		if (!display) {
+			setDisplay(true);
+			setDisplayRoomInfo(true);
+			setDisplayCreateRoom(false);
+		} else {
+			if (displayRoomInfo) {
+				setDisplay(false);
+			} else {
+				setDisplayRoomInfo(true);
+				setDisplayCreateRoom(false);
+			}
+		}
+	};
+
+	const handleCreateRoomClick = () => {
+		if (!display) {
+			setDisplay(true);
+			setDisplayCreateRoom(true);
+			setDisplayRoomInfo(false);
+		} else {
+			if (displayCreateRoom) {
+				setDisplay(false);
+			} else {
+				setDisplayRoomInfo(false);
+				setDisplayCreateRoom(true);
+			}
+		}
+	};
+
 	useEffect(() => {
 		let valid = currentRoom?.users?.some((u) => u._id === user._id);
 
@@ -237,12 +276,12 @@ export const Home = () => {
 	const roomSettingVariants = {
 		initial: {
 			opacity: 0,
-			width: "1rem",
+			width: "0rem",
 		},
 
 		animate: {
 			opacity: 1,
-			width: "14rem",
+			width: "15rem",
 			transition: {
 				duration: 0.5,
 				opacity: {
@@ -285,15 +324,16 @@ export const Home = () => {
 					<div className='createNewRoom_and_userAccount'>
 						<div
 							className='room_details'
-							onClick={() =>
-								setToggleCRDSection(!toggleCRDSection)
-							}
+							onClick={handleRoomDetailsClick}
 						>
 							<span>
 								<img src={info} />
 							</span>
 						</div>
-						<div className='create_new_room'>
+						<div
+							className='create_new_room'
+							onClick={handleCreateRoomClick}
+						>
 							<span>+</span>
 						</div>
 						<div className='userAccount'>
@@ -309,10 +349,14 @@ export const Home = () => {
 						className='currentRoomDetailsSection'
 						variants={roomSettingVariants}
 						initial='initial'
-						animate={toggleCRDSection ? "animate" : "exit"}
+						animate={display ? "animate" : "exit"}
 					>
-						{currentRoom.name && (
-							<RoomDetails currentRoom={currentRoom} />
+						{displayRoomInfo && currentRoom.name && (
+							<RoomDetails currentRoom={currentRoom} setDisplay={setDisplay} set />
+						)}
+
+						{displayCreateRoom &&  (
+							<CreateRoom user={user} setDisplay={setDisplay}/>
 						)}
 					</motion.section>
 				</AnimatePresence>
