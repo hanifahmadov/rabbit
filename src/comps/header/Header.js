@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 //: styles
@@ -8,15 +8,22 @@ import { HeaderContainer } from "./header.styled";
 //: images
 import userLogo from "../shared/logos/vvv.png";
 import { useRecoilValue } from "recoil";
-import { allUsersDefault } from "../shared/store/states";
+import { activeUsersDefault, allUsersDefault } from "../shared/store/states";
 import apiUrl from "../../apis/apiUrl";
 
 //: comps
 
 export const Header = () => {
 	const allUsers = useRecoilValue(allUsersDefault);
+	const activeUsers = useRecoilValue(activeUsersDefault);
 
-	console.log(allUsers);
+	const online = allUsers.map((user) => {
+		if (activeUsers.includes(user._id)) {
+			return user._id;
+		}
+	});
+
+	console.log("ONLINE", online);
 
 	return (
 		<HeaderContainer>
@@ -32,7 +39,9 @@ export const Header = () => {
 						return (
 							<div
 								key={index}
-								className={user.signedIn ? "active" : ''}
+								className={
+									online.includes(user._id) ? "active" : ""
+								}
 							>
 								<img src={apiUrl + "/" + user.avatar} />
 							</div>

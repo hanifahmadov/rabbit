@@ -87,3 +87,9 @@ export const allUsersDefault = atom({
 	key: "allUsersDefault",
 	default: []
 });
+
+export const activeUsersDefault = atom({
+	key: "activeUsersDefault",
+	default: []
+});
+
