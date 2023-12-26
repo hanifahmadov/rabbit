@@ -9,17 +9,9 @@ import { produce } from "immer";
 import { userState } from "../authStore/states";
 import { EMAIL_REGEX, PWD_REGEX } from "../authStore/regex";
 import { signInApi } from "../../../apis/apiCalls";
-import { SigninSection } from "./Signin.styled.js";
 
-// comps
-import { RememberMe } from "./RememberMe";
-import { Google } from "./Google";
-import { Button } from "../authShared/Button";
-import { Input } from "../authShared/Input";
-import { Footer } from "../authShared/Footer";
 
 // shared
-import { CustomToaster } from "../../shared/toast/CustomToaster";
 import { useNotify } from "../../shared/toast/useNotify";
 
 export const Signin = () => {
@@ -95,36 +87,11 @@ export const Signin = () => {
 	return (
 		<SigninSection className='register signin'>
 			<header>
-				<h3>SIGN IN</h3>
+				<h4>SIGN IN</h4>
 			</header>
 
-			<form onSubmit={handleSubmit}>
-				<Input
-					type={"email"}
-					ref={emailRef}
-					val={email}
-					setVal={setEmail}
-				/>
 
-				<Input type={"pwd"} ref={null} val={pwd} setVal={setPwd} />
-				{/* TODO: add reveal pwd for sign in */}
-
-				<RememberMe />
-
-				<Button disabled={enableSignin} val={"Login"} />
-			</form>
-
-			<section className='or'>
-				<span>OR</span>
-			</section>
-
-			<Google />
-
-			<Footer
-				footerContent={"Dont have an Account ?"}
-				footerLinkText={"Sign up."}
-				route={"/register/welcome"}
-			/>
+			
 		</SigninSection>
 	);
 };

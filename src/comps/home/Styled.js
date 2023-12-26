@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { clr, ff } from "../shared/store/design";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export const HomeContainer = styled.div`
 	display: flex;
@@ -137,6 +137,7 @@ export const LeftSection = styled.section`
 		height: 100%;
 
 		overflow: auto;
+		position: relative;
 
 		border: 4px solid black;
 		border-left: none;
@@ -265,13 +266,12 @@ export const RoomContainer = styled.div`
 
 
     .icon {
-        
         overflow: hidden;
-		
-
+		width: 100%;
 
         img {
-            width: 3.5rem;
+            width: 100%;
+			height: 50px;
          
             box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
             border-top-left-radius: 10%;
@@ -315,8 +315,6 @@ export const RoomDetailsContainer = styled(motion.div)`
 	align-items: center;
 	text-align: center;
 
-
-
 	margin: 0 10px;
 
 	.room_header {
@@ -332,43 +330,57 @@ export const RoomDetailsContainer = styled(motion.div)`
 		color: ${clr.white01};
 	}
 
+	.room_details {
+		width: 100%;
+
 		.room_icon {
 			img {
 				width: 100%;
-
+				border: 3px solid rgba(255, 255, 255, 0.1);
 			}
-			button {
-				width: 100%;
-				padding: 5px;
-				font-weight: 700;
-				font-size: 0.9rem;
-				font-family: system-ui;
-				border:none;
-				margin-top: 3px;
 
-				&:active {
-					background: rgba(255, 255, 255, 0.8);
+			form {
+				width: 100%;
+
+				button {
+					width: 100%;
+					padding: 5px 0px;
+					font-weight: 700;
+					font-size: 0.9rem;
+					font-family: system-ui;
+					margin-top: 5px;
+
+					background: rgba(255, 0, 0, 0.4);
+					color: white;
+					border: 3px solid rgba(255, 255, 255, 0.1);
+
+					&:active {
+						background: rgba(255, 0, 0, 0.3);
+					}
+
+					&:disabled,
+					&[disabled] {
+						opacity: 0.3;
+						pointer-events: none;
+					}
 				}
 			}
 		}
 
 		.room_detail_header {
-
 			width: 100%;
 			font-size: 1.2rem;
 			font-weight: 700;
 			text-align: center;
 			padding: 3px;
 			font-family: system-ui;
-	
-			border: 3px solid black;
-			margin: 5px 0px 5px 0px;
-			color: ${clr.white01};
 
+			border: 3px solid black;
+			margin: 20px 0px 5px 0px;
+			color: ${clr.white01};
 		}
 
-		.room_detail_content{
-
+		.room_detail_content {
 			border: 3px solid black;
 			padding: 10px 0px 0px 0px;
 
@@ -387,23 +399,19 @@ export const RoomDetailsContainer = styled(motion.div)`
 					font-style: italic;
 				}
 
-				.count, .owner_name, .format_time_ago {
-					font-size: .9rem;
+				.count,
+				.owner_name,
+				.format_time_ago {
+					font-size: 0.9rem;
 					font-weight: 700;
 				}
 			}
-
 		}
-
 	}
 
 	.room_users {
-
-		margin-top: .5rem;
+		margin-top: 0.5rem;
 		width: 100%;
-
-
-
 		.header {
 			font-size: 1.2rem;
 			font-weight: 700;
@@ -426,7 +434,7 @@ export const RoomDetailsContainer = styled(motion.div)`
 
 			border: 3px solid black;
 
-			background: rgba(0, 0, 0, .3);
+			background: rgba(0, 0, 0, 0.3);
 
 			span {
 				display: inline-block;
@@ -435,14 +443,13 @@ export const RoomDetailsContainer = styled(motion.div)`
 			}
 
 			.user_img {
-				border: 4px solid rgba(0, 0, 0, .3);
+				border: 4px solid rgba(0, 0, 0, 0.3);
 				border-radius: 50%;
 				img {
 					width: 2.75rem;
 					height: 2.75rem;
 					border-radius: 50%;
-					border: 3px solid rgba(255, 255, 255, .4);
-
+					border: 3px solid rgba(255, 255, 255, 0.4);
 				}
 			}
 
@@ -465,6 +472,36 @@ export const RoomDetailsContainer = styled(motion.div)`
 
 					color: rgba(255, 255, 255, 0.5);
 				}
+			}
+		}
+	}
+
+	.update_roomDetails {
+		width: 100%;
+		position: sticky;
+		bottom: -6px;
+
+		display: none;
+
+
+		button {
+			width: 100%;
+			padding: 2px 0px;
+			font-weight: 700;
+			font-size: 0.9rem;
+			font-family: system-ui;
+			margin-top: 5px;
+
+			background: rgb(0 42 130);
+			border: 3px solid rgba(255, 255, 255, 0.1);
+			color: white;
+			cursor: pointer;
+
+		
+
+			&:active {
+				background: rgb(2 45 145);
+				border-color: rgba(255, 255, 255, 0.13);
 			}
 		}
 	}
@@ -501,7 +538,6 @@ export const CreateRoomContainer = styled(motion.div)`
 	form {
 		width: 100%;
 
-
 		.selected_files {
 			width: 100%;
 			height: 12rem;
@@ -525,8 +561,7 @@ export const CreateRoomContainer = styled(motion.div)`
 			.filename {
 				position: absolute;
 
-
-				background: rgba(0, 0, 0, .8);
+				background: rgba(0, 0, 0, 0.8);
 				width: 100%;
 
 				color: rgba(255, 255, 255, 1);
@@ -538,103 +573,148 @@ export const CreateRoomContainer = styled(motion.div)`
 		}
 
 		.info_about_image {
-
 			margin: 10px 2px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			flex-direction: column;
 			color: white;
 
+			position: relative;
+
 			img {
-				width: 1.3rem;
-				height: 1.3rem;
+				width: 1rem;
+				height: 1rem;
+
+				position: absolute;
+				left: 3px;
+				top: 4px;
 			}
 
 			span {
-				margin: 0 0 0 5px;
 				width: 100%;
 				display: inline-block;
-				padding: 3px 10px ;
-				border-radius: 5px;
+				padding: 10px;
+				border-radius: 7px;
 				font-family: ${ff.roboto};
 				letter-spacing: 0px;
-				background:black;
+				background: black;
 				font-weight: 700;
 				text-align: left;
-				color: rgba(255, 255, 255, .8);
+				color: rgba(255, 255, 255, 0.9);
+				text-align: center;
 			}
 		}
 
 		.select_file {
 			width: 100%;
-			border: 3px solid rgba(255, 255, 255, .1);
+			border: 3px solid rgba(255, 255, 255, 0.1);
 			padding: 5px 10px;
 			border-radius: 5px;
 			color: white;
-			font-size: .9rem;
+			font-size: 0.9rem;
 			font-weight: 600;
 			cursor: pointer;
-			transition: all .1s ease-in-out;
+			transition: all 0.1s ease-in-out;
 
 			margin-bottom: 2rem;
 
-			background: rgba(4, 145, 255, .5);
+			background: rgba(4, 145, 255, 0.5);
 
 			&:hover {
-				border: 3px solid rgba(255, 255, 255, .2);
+				border: 3px solid rgba(255, 255, 255, 0.2);
 			}
 
 			&:active {
-				background: rgba(4, 145, 255, .6);
-				border-color: rgba(255, 255, 255, .1);
+				background: rgba(4, 145, 255, 0.6);
+				border-color: rgba(255, 255, 255, 0.1);
 			}
-
 		}
-
 
 		#newroomInput {
 			padding: 1.1rem;
 			width: 100%;
-	
+
 			height: 1rem;
 			background: ${clr.dark01};
 			color: white;
 			border-radius: 3px;
 			border: 2px solid rgba(255, 255, 255, 0.4);
 
-	
 			&::placeholder {
 				color: rgba(255, 255, 255, 0.2);
 				padding-left: 1px;
 			}
 		}
 
-
-
 		button {
 			width: 100%;
-			border: 3px solid rgba(255, 255, 255, .1);
+			border: 3px solid rgba(255, 255, 255, 0.1);
 			padding: 5px 10px;
 			border-radius: 5px;
 			color: white;
-			font-size: .9rem;
+			font-size: 0.9rem;
 			font-weight: 600;
 			cursor: pointer;
-			transition: all .1s ease-in-out;
+			transition: all 0.1s ease-in-out;
+			disabled: true;
 
 			margin-top: 5px;
 
-			background: rgba(4, 145, 255, .5);
-
-		
+			background: rgba(255, 0, 0, 0.4);
 
 			&:hover {
-				border: 3px solid rgba(255, 255, 255, .2);
+				background: rgba(255, 0, 0, 0.3);
 			}
 
 			&:active {
-				background: rgba(4, 145, 255, .6);
-				border-color: rgba(255, 255, 255, .1);
+				border-color: rgba(255, 255, 255, 0.2);
+			}
+
+			span {
+				display: inline-block;
+			}
+
+			&:disabled,
+			&[disabled] {
+				opacity: 0.3;
+				cursor: not-allowed;
+				pointer-events: none;
+			}
+		}
+
+		.newRoomName_label_wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			position: relative;
+
+			.info_label {
+				position: absolute;
+				top: 7px;
+				left: 6px;
+
+				img {
+					width: 1rem;
+					height: 1rem;
+				}
+			}
+
+			label {
+				width: 100%;
+				border: 3px solid rgba(255, 255, 255, 0.1);
+				border-radius: 10px;
+				color: white;
+				font-size: 0.9rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: all 0.1s ease-in-out;
+				margin: 5px 0px;
+				padding: 10px 10px;
+				background: black;
+				color: rgba(255, 255, 255, 0.9);
 			}
 		}
 	}

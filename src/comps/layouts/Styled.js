@@ -47,17 +47,19 @@ export const RegisterLayoutContainer = styled.div`
 	//: outlets
 	.outlets {
 
-		width: 30rem;
-		padding: 2.5rem 5rem 2.5rem 5rem;
+
+		height: 100%;
+		width: 100%;
+
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
 
-		background: rgba(255, 255, 255, 0.1);
+		background: transparent;
 		backdrop-filter: blur(50px);
-		border: 5px solid white;
+		border: 10px solid green;
 
 	}
 

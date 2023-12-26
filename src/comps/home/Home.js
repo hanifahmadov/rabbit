@@ -406,19 +406,4 @@ export const Home = () => {
 	);
 };
 
-{
-	/* <form
-						className='create_room'
-						onSubmit={handleCreateRoomForm}
-					>
-						<input
-							type='text'
-							value={createRoom}
-							placeholder='New Room...'
-							onChange={(e) => setCreateRoom(e.target.value)}
-						/>
-						<button disabled={!(createRoom.length >= 2)}>
-							create
-						</button>
-					</form> */
-}
+
