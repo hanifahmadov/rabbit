@@ -2,23 +2,23 @@
 import axios from "axios";
 import apiUrl from "./apiUrl";
 
-export const signUpApi = ({ email, password, passwordConfirmation }) => {
+export const signUpApi = (data) => {
 	return axios({
 		url: apiUrl + "/signup/",
 		method: "POST",
 		withCredentials: true,
 		credentials: "include",
-		data: {
-			credentials: {
-				email,
-				password,
-				passwordConfirmation,
-			},
+		data,
+
+		headers: {
+			accept: "application/json",
+			"Accept-Language": "en-US,en;q=0.8",
+			"Content-Type": `multipart/form-data; boundary=${data._boundary}`,
 		},
 	});
 };
 
-export const signInApi = ({ email, password }) => {
+export const signInApi = ({ email, password, remember }) => {
 	return axios({
 		url: apiUrl + "/signin/",
 		method: "POST",
@@ -28,6 +28,7 @@ export const signInApi = ({ email, password }) => {
 			credentials: {
 				email,
 				password,
+				remember,
 			},
 		},
 	});

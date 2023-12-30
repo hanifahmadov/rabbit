@@ -26,10 +26,10 @@ export const CreateRoom = ({ user, setDisplay }) => {
 	const handleCreateRoomSubmit = (e) => {
 		e.preventDefault();
 		let data = new FormData();
-		data.append("avatars", file);
+		data.append("icon", file);
 
 		axios
-			.post( apiUrl + "/new_room_avatars", data, {
+			.post( apiUrl + "/newroom_icon", data, {
 				headers: {
 					accept: "application/json",
 					"Accept-Language": "en-US,en;q=0.8",

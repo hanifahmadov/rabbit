@@ -8,6 +8,7 @@ import { userState } from "../auth/authStore/states";
 import { useRefreshAccessApi } from "../../apis/apiCalls";
 import { Outlet, useNavigate } from "react-router-dom";
 import { socketConnectionDefaults } from "../shared/store/states";
+import apiUrl from "../../apis/apiUrl";
 
 export const PersistentLayout = () => {
 
@@ -34,22 +35,19 @@ export const PersistentLayout = () => {
 					for not to use Refresh Token to retrieve user data
 				*/
 
-				let temp = res?.data?.user;
+				const { user: temp } = res?.data;
 				
 				const tempUser = produce(user, (draft) => {
-					draft._id = temp._id;
-					draft.avatar = temp.avatar;
-					draft.blocked = temp.blocked;
-					draft.email = temp.email;
-					draft.role = temp.role;
-					draft.accessToken = temp.accessToken;
+					draft = temp
+					draft.avatar = apiUrl+'/'+temp.avatar
+					return draft
 				});
 
 				setUser(tempUser);
 			} catch (err) {
 				console.log("Error from useverifyAccess");
 				console.log(err);
-				navigate("/register");
+				navigate("/welcome");
 			} finally {
 				mounted && setIsLoading(false);
 			}
@@ -68,13 +66,15 @@ export const PersistentLayout = () => {
 			{isLoading ? (
 				<p
 					style={{
-						color: "black",
+						color: "rgba(255, 255, 255, .2)",
 						fontSize: "5rem",
 						width: "100%",
 						height: "100%",
 						display: 'flex',
 						justifyContent: 'center',
-						alignItems: 'center'
+						alignItems: 'center',
+						fontWeight: '600',
+						letterSpacing: '2px'
 					}}
 				>
 					Loading...

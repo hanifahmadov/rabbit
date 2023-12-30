@@ -7,10 +7,11 @@ import { StyleSheetManager } from "styled-components";
 import { RecoilRoot } from "recoil";
 
 /**
+ *
  *  StyleSheetManager, CustomStyleSheetManager
- * 	are to avoid $value or $ while passing arg to styled-comps
+ * 	are to avoid $value or $ while passing arg to styled-components
+ *
  */
-
 const CustomStyleSheetManager = (props) => (
 	<StyleSheetManager shouldForwardProp={(prop) => prop !== "comp"}>
 		{props.children}
@@ -19,9 +20,9 @@ const CustomStyleSheetManager = (props) => (
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	// <CustomStyleSheetManager>
+	<CustomStyleSheetManager>
 		<RecoilRoot>
-				<App />
+			<App />
 		</RecoilRoot>
-	// </CustomStyleSheetManager>
+	</CustomStyleSheetManager>
 );

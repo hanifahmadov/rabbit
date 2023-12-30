@@ -12,5 +12,5 @@ export const RequireAuthLayout = () => {
 	// console.log(user)
 	const location = useLocation();
 
-	return user?.accessToken ? <Outlet /> : <Navigate to='/register' />;
+	return user?.accessToken ? <Outlet /> : <Navigate to='/welcome' />;
 };

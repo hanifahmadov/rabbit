@@ -38,9 +38,9 @@ import { RegisterLayout } from "./comps/layouts/RegisterLayout";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Fragment>
-			<Route path='/register' element={<RegisterLayout />}>
+			<Route path='welcome' element={<RegisterLayout />}>
 				<Route index element={<Signin />} />
-				<Route path='welcome' element={<Signup />} />
+				<Route path='register' element={<Signup />} />
 			</Route>
 
 			<Route element={<PersistentLayout />}>

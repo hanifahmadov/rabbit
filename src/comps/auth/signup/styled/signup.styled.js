@@ -1,9 +1,10 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { ff } from "../../../shared/store/design";
 
 export const SignupContainer = styled.section`
-	// border: 10px solid red;
+
 
 	display: flex;
 	align-items: center;
@@ -11,20 +12,30 @@ export const SignupContainer = styled.section`
 	flex-direction: column;
 
 	width: 35rem;
-	height: 100%;
+	// height: 100%;
+
+	border: 7px solid black;
+	border-radius: 10px;
+	overflow: hidden;
 
 	color: white;
-	padding: 2rem 0rem;
+
 
 	header {
-		border: 5px solid black;
+		border-bottom: 7px solid black;
 		width: 100%;
+		background: rgba(255, 0, 0, 0.2);
 
 		h3 {
 			text-align: center;
-			font-size: 1.8rem;
+			font-size: 1.7rem;
 			font-weight: 700;
-			padding: 15px;
+			padding: 12px;
+			margin: 0;
+			text-shadow: 2px 2px 2px black;
+			letter-spacing: 1px;
+			font-family: "system-ui";
+
 		}
 	}
 `;
@@ -32,8 +43,8 @@ export const SignupContainer = styled.section`
 export const SignupForm = styled.form`
 	width: 100%;
 
-	border: 5px solid black;
-	border-top: none;
+
+
 
 	padding: 2rem 0rem;
 
@@ -77,6 +88,13 @@ export const SignupForm = styled.form`
 			background: rgba(4, 145, 255, 0.6);
 			border-color: rgba(255, 255, 255, 0.1);
 		}
+
+		&:disabled, &[disabled] {
+			opacity: .5;
+			background: rgba(255, 255, 255, .2);
+			pointer-events: none;
+			cursor: not-allowed;
+		}
 	}
 `;
 
@@ -102,24 +120,26 @@ export const FormAvatar = styled.div`
 	.label_avatar {
 		width: 100%;
 		cursor: pointer;
-		background: rgba(5, 150, 255, 0.4);
+		background: rgb(0 93 160);
 		padding: 3px;
 		color: white;
 		font-weight: 700;
 		font-size: 0.8rem;
 		transition: all 0.2s ease-in-out;
+		text-shadow: 1px 1px 2px black;
+		border-top: 3px solid gray;
 
-
+		
 		position: absolute;
 		bottom: 0px;
 
 
 		&:hover {
-			background: rgba(5, 150, 255, 0.35);
+			background: rgb(0 81 139);
 		}
 
 		&:active {
-			background: rgba(5, 150, 255, 0.2);
+			background: rgb(0 93 160);
 		}
 	}
 
@@ -175,6 +195,8 @@ export const FormCredentials = styled.div`
 			padding: 8px 5px 8px 10px;
 			border: 1px solid rgba(0, 0, 0, 0.5);
 			text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+			background: rgba(255, 255, 255, .9);
+			
 			font-size: 0.95rem;
 			border-radius: 4px;
 			outline: none;
@@ -207,15 +229,16 @@ export const Information = styled(motion.div)`
 
 	width: 100%;
 
-	background: black;
+	background: transparent;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	border: 5px solid black;
-	border-top:none;
+	border-top: 7px solid black;
+
+
 
 	.title {
 		display: block;
@@ -223,10 +246,12 @@ export const Information = styled(motion.div)`
 		top: 0;
 		background: rgba(255, 0, 0, 0.2);
 		font-weight: 700;
-		font-size: 0.9rem;
+		font-size: 1rem;
 		text-align: center;
 		padding: 3px;
 		margin-bottom: 15px;
+
+		border-bottom: 7px solid black;
 	}
 
 	.content {
@@ -236,7 +261,7 @@ export const Information = styled(motion.div)`
 		color: rgba(255, 255, 255, 0.8);
 		margin-bottom: 10px;
 		padding: 0 5px;
-		height: 10rem;
+		height: 9rem;
 		width: 100%;
 
 		display: flex;
@@ -250,22 +275,50 @@ export const Information = styled(motion.div)`
 	}
 
 	.footer_signup {
+
+		width: 100%;
+		background: black;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		border-top: 7px solid black;
+
+		padding: 10px;
+
+	
+
 		p {
+			width: 100%;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
 			font-size: 0.95rem;
-			font-weight: 700;
+			font-weight: 600;
 			color: rgba(255, 255, 255, .9);
 			font-style: italic;
+			margin: 0;
 		}
 
 		.login {
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			
 			font-size: 1rem;
-			margin-left: 5px;
+			margin-left: 8px;
 			color: rgba(4, 145, 255);
 			background: rgba(255, 255, 255, 0.1);
-			padding: 5px 10px;
+			padding: 2px 8px;
 			border-radius: 5px;
 			cursor: pointer;
 			font-style: normal;
+			font-weight: 700;
+			text-shadow: 1px 1px 2px black;
 
 			&:hover {
 				background: rgba(255, 255, 255, 0.15);

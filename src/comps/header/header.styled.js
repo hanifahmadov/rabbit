@@ -45,7 +45,7 @@ export const HeaderContainer = styled.div`
 		flex: 1;
 
 		div {
-			border-radius: 10px;
+			border-radius: 5px;
 			border: 3px solid rgba(255, 255, 255, .5);
 			overflow: hidden;
 			cursor: pointer;
@@ -55,8 +55,8 @@ export const HeaderContainer = styled.div`
 			margin: 0 6px;
 
 			img{
-				width: 2.75rem;
-				height: 2.75rem;
+				width: 2rem;
+				height: 2rem;
 				filter: blur(0px);
 				border-radius: 5px;
 				z-index: -10;
@@ -68,8 +68,8 @@ export const HeaderContainer = styled.div`
 			border-color: #009aff;
 
 			img{
-				width: 2.75rem;
-				height: 2.75rem;
+				width: 2rem;
+				height: 2rem;
 				filter: blur(0px);
 				border-radius: 5px;
 				z-index: -10;

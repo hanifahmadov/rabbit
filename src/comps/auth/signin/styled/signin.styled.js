@@ -1,124 +1,81 @@
 /* eslint-disable */
 import styled from "styled-components";
-import { ff } from "../../shared/store/design";
 
-//# SIGN IN
 export const SigninSection = styled.section`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 
-	color: black;
+	width: 35rem;
 
-	width: 100%;
+	color: white;
+	border: 7px solid black;
+	border-radius: 10px;
+	overflow: hidden;
 
 	header {
+		border-bottom: 7px solid black;
+		width: 100%;
+		background: rgba(255, 0, 0, 0.2);
+
 		h3 {
-			font-size: 2rem;
+			text-align: center;
+			font-size: 1.7rem;
 			font-weight: 700;
-		}
-	}
-
-	form {
-		margin-top: 15px;
-		width: 100%;
-	}
-
-	//: or
-	.or {
-		width: 100%;
-		text-align: center;
-		margin: 1rem;
-
-		span {
-			font-weight: 500;
-			font-size: 0.9rem;
-
-			&::before {
-				content: "";
-				display: inline-block;
-				position: relative;
-				bottom: 4px;
-				width: 40%;
-				margin-right: 1rem;
-				border: 0.5px solid black;
-			}
-
-			&::after {
-				content: "";
-				display: inline-block;
-				position: relative;
-				bottom: 4px;
-				width: 40%;
-				margin-left: 1rem;
-				border: 0.5px solid black;
-			}
+			padding: 12px;
+			margin: 0;
+			text-shadow: 2px 2px 2px black;
+			letter-spacing: 1px;
+			font-family: "system-ui";
 		}
 	}
 `;
 
-export const RememberMeSection = styled.section`
-
-	display: flex;
-	flex-direction row;
-	margin-top: 15px;
-	margin-left: 1px;
-
-	color: black;
-
-
-	.rememberMe_input{
-		width: 15px;
-	}
-
-	.rememberMe_text {
-		font-weight: 600;
-		margin-left: 5px;
-		
-	}
-`;
-
-export const GoogleSection = styled.section`
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+export const SigninFooter = styled.div`
 	width: 100%;
-	background: rgba(255, 255, 255, 0.1);
-	transition: background 0.2s ease-in-out;
-	padding: 0.5rem 0.75rem;
-	border: 3px solid white;
-	border-radius: 5px;
-	cursor: pointer;
+	background: black;
 
-	color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-	.googleLogo {
-		width: auto;
+	padding: 10px;
+	
+	border-top: 7px solid black;
 
-		img {
-			width: 1.5rem;
-			border-radius: 50%;
-		}
+	p {
+		width: 100%;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: rgba(255, 255, 255, 0.9);
+		font-style: italic;
+		margin: 0;
 	}
 
-	.googleText {
-		display: inline-block;
-		padding: 0rem 1rem;
-		font-size: 0.9rem;
+	.login {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-		font-family: ${ff.opensans};
+		font-size: 1rem;
+		margin-left: 8px;
+		color: rgba(4, 145, 255);
+		background: rgba(255, 255, 255, 0.1);
+		padding: 2px 8px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-style: normal;
 		font-weight: 700;
+		text-shadow: 1px 1px 2px black;
 
-		width: 80%;
-		text-align: center;
-	}
-
-	&:hover {
-		background: rgba(255, 255, 255, 1);
-
-		.googleText {
-			color: rgba(0, 0, 0, 1);
+		&:hover {
+			background: rgba(255, 255, 255, 0.15);
 		}
 	}
 `;

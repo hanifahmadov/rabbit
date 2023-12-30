@@ -38,6 +38,7 @@ import { Room } from "./Room.js";
 import { RoomDetails } from "./RoomDetails.js";
 import { Account } from "../shared/account/Account.js";
 import { CreateRoom } from "./CreateRoom.js";
+import { Messages } from "./Messages.js";
 
 export const Home = () => {
 	const [socketConnection, setSocketConnection] = useRecoilState(
@@ -366,23 +367,10 @@ export const Home = () => {
 
 			<RightSection>
 				<MessagesSection>
-					{messages.map((val, i) => {
-						if (val.room === currentRoom._id) {
+					{messages.map((i, j) => {
+						if (i.room === currentRoom._id) {
 							return (
-								<div
-									key={i}
-									style={{
-										margin: "10px",
-										border: "1px solid white",
-										color: "white",
-										padding: "10px 20px",
-									}}
-									ref={(e) => (emptyDivRef.current = e)}
-								>
-									typed: {val.text}
-									<br />
-									owner: {val.owner.email}
-								</div>
+								<Messages key={j} message={i} user={user}/>
 							);
 						}
 					})}

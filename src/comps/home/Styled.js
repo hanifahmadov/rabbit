@@ -91,8 +91,6 @@ export const LeftSection = styled.section`
 
 				padding: 5px;
 
-				cursor: pointer;
-
 				// overflow: hidden;
 
 				span {
@@ -109,6 +107,7 @@ export const LeftSection = styled.section`
 					line-height: 0px;
 					font-wight: 700px;
 					padding-bottom: 3px;
+					cursor: pointer;
 				}
 
 				&:active {
@@ -170,6 +169,7 @@ export const MessagesSection = styled.div`
 	padding: 0px 10px 0rem 10px;
 
 	overflow-y: auto;
+	position: relative;
 
 	.spacer {
 		height: 10rem;

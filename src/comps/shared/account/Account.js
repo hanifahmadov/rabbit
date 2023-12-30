@@ -20,6 +20,7 @@ import {
 import { AccountContainer } from "./account.styled";
 import { signOutApi } from "../../../apis/apiCalls";
 import { userState } from "../../auth/authStore/states";
+import apiUrl from "../../../apis/apiUrl";
 
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);
@@ -81,7 +82,7 @@ export const Account = () => {
 				resetAllUsers()
 
 
-				navigate("/register");
+				navigate("/welcome");
 			})
 			.catch((err) => {
 				console.log("sign out err");
@@ -92,7 +93,7 @@ export const Account = () => {
 	return (
 		<AccountContainer className='account' $displayNavbarAccount={dis}>
 			<div className='account-img'>
-				<img src={logo} alt='logo' className='account-img' />
+				<img src={user.avatar} alt='logo' className='account-img' />
 			</div>
 
 			<OutsideClickHandler  onOutsideClick={handleOutsideClick} >
@@ -105,7 +106,11 @@ export const Account = () => {
 
 					<div className='account-dropdown-links'>
 						<span className='account-dropdown-links-img'>
-							<img src={logo} alt='logo' />
+							<img src={user.avatar} alt='logo'/>
+						</span>
+
+						<span className="username">
+							{user.username}
 						</span>
 						<div>
 							<NavLink to='#' onClick={handleLinksClick}>

@@ -1,5 +1,7 @@
 /* eslint-disable */
 import React, { useState, useRef, useEffect } from "react";
+import FormData from "form-data";
+import { useNavigate } from "react-router-dom";
 
 // styled | apis
 import {
@@ -17,7 +19,7 @@ import { useNotify } from "../../shared/toast/useNotify";
 import { AnimatePresence, motion } from "framer-motion";
 
 import info from "../../shared/logos/logos.png";
-import default_img from "../../shared/logos/vvv.png";
+import default_img from "../../shared/logos/external/default_room_img.png";
 
 export const Signup = () => {
 	const [email, setEmail] = useState("");
@@ -28,13 +30,13 @@ export const Signup = () => {
 	const [revealPwd, setRevealPwd] = useState(false);
 	const [revealConfirmPwd, setRevealConfirmPwd] = useState(false);
 	const [informant, setInformant] = useState("pwd");
-
 	const [avatar, setAvatar] = useState(undefined);
-	const avatarRef = useRef();
 
+	const avatarRef = useRef();
 	const emailRef = useRef();
 	const pwdRef = useRef();
 	const confirmPwdRef = useRef();
+	const navigate = useNavigate();
 
 	const { alert, dismiss } = useNotify();
 
@@ -42,18 +44,34 @@ export const Signup = () => {
 		email.length > 5 && pwd.length > 8 && confirmPwd.length > 8;
 
 	useEffect(() => {
-		// toastRef.current.dismiss();
 		dismiss();
 	}, [pwd, email, confirmPwd]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		let data = new FormData();
 
-		signUpApi({ email, password: pwd, passwordConfirmation: confirmPwd })
+		
+		data.append('email', email)
+		data.append('password', pwd)
+		data.append('passwordConfirmation', confirmPwd)
+		data.append("avatar", avatar);
+
+		signUpApi(data)
 			.then((response) => {
 				if (response?.data?.user._id) {
 					alert("Success", "Great, You have signed up successfully");
 				}
+
+				setEmail('')
+				setPwd('')
+				setConfirmPwd('')
+				setAvatar(undefined)
+
+				setTimeout(() => {
+					navigate("/welcome");
+				}, 1000);
+
 			})
 			.catch((err) => {
 				console.log("ERROR");
@@ -67,12 +85,15 @@ export const Signup = () => {
 			});
 	};
 
-	const handleAvatarChange = () => {};
+	const handleAvatarChange = () => {
+		const [file] = avatarRef.current?.files;
+		setAvatar(file);
+	};
 
 	return (
 		<SignupContainer className='register signup'>
 			<header>
-				<h3>Create New Account</h3>
+				<h3>REGISTER</h3>
 			</header>
 			<SignupForm onSubmit={handleSubmit}>
 				<FormAvatar>
@@ -91,11 +112,9 @@ export const Signup = () => {
 						onChange={handleAvatarChange}
 					/>
 					<label htmlFor='avatar' className='label_avatar'>
-						Upload  Avatar
+						Upload Avatar
 					</label>
 				</FormAvatar>
-
-
 
 				<FormCredentials>
 					<section className='section_email'>
@@ -116,7 +135,7 @@ export const Signup = () => {
 					<section className='section_password'>
 						<label htmlFor='password'>Password</label>
 						<input
-							type='password'
+							type='text'
 							id='password'
 							placeholder='Enter password'
 							autoComplete='true'
@@ -131,7 +150,7 @@ export const Signup = () => {
 							Confirm password
 						</label>
 						<input
-							type='password'
+							type='text'
 							id='confirmPassword'
 							placeholder='Re enter password'
 							autoComplete='true'
@@ -141,7 +160,7 @@ export const Signup = () => {
 							onBlur={() => setInformant("avatar")}
 						/>
 					</section>
-					<button>Submit</button>
+					<button disabled={!enableSignup}>Submit</button>
 				</FormCredentials>
 			</SignupForm>
 
@@ -194,7 +213,7 @@ export const Signup = () => {
 				<div className='footer_signup'>
 					<p>
 						Already have an account ?{" "}
-						<span className='login'>Login.</span>
+						<span className='login' onClick={() => navigate('/welcome')}>Login.</span>
 					</p>
 				</div>
 			</Information>

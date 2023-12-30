@@ -118,6 +118,20 @@ export const AccountContainer = styled.div`
                     }
 
                 }
+
+                .username {
+                    display: inline-block;
+                    background: black;
+                    font-weight: 700;
+                    width: 60%;
+                    padding: 5px;
+                    margin: 5px 0;
+                    text-align: center;
+                    border-radius: 5px;
+                    font-size: .8rem;
+                    font-family: ${ff.opensans};
+                    letter-spacing: .5px;
+                }
     
     
                 div {
@@ -138,6 +152,7 @@ export const AccountContainer = styled.div`
 
                         border: 2px solid black; 
                         border-radius: 5px;
+                        font-size: .8rem;
                     }
 
                     width: 60%;

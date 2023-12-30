@@ -10,25 +10,29 @@ import { userState } from "../authStore/states";
 import { EMAIL_REGEX, PWD_REGEX } from "../authStore/regex";
 import { signInApi } from "../../../apis/apiCalls";
 
-
 // shared
 import { useNotify } from "../../shared/toast/useNotify";
+import { SigninFooter, SigninSection } from "./styled/signin.styled";
+import {
+	Button,
+	SigninForm,
+	Input,
+	Label,
+} from "./styled/form.styled";
+import { Remember } from "./Remember";
+import apiUrl from "../../../apis/apiUrl";
+
+
 
 export const Signin = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const [email, setEmail] = useState("");
 	const [pwd, setPwd] = useState("");
+	const [remember, setRemember] = useState(false)
 
 	const navigate = useNavigate();
 	const emailRef = useRef();
 	const { alert, dismiss } = useNotify();
-
-	// when this component renders
-	// cursor automatically focu on email
-	// couse of the email ref using useRef()
-	useEffect(() => {
-		emailRef.current.focus();
-	}, []);
 
 	// clear error messages
 	// when toester is on but client trying to type
@@ -38,11 +42,12 @@ export const Signin = () => {
 		dismiss();
 	}, [email, pwd]);
 
-	// Toester for notifications errors also
-	// useEffect(() => {}, [alert]);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		console.log("handle submit");
+
+		console.log("remememmememe", remember)
 
 		// Now check the EMAIL and PWD REGEX here to make sure client has been added the
 		// correct type of the email address and password
@@ -51,7 +56,7 @@ export const Signin = () => {
 		let pwdCheck = PWD_REGEX.test(pwd);
 
 		if (!emailCheck && !pwdCheck) {
-			alert("Email & Password", "are incorrect.");
+			alert("Email & Password", "both are incorrect.");
 		} else if (!emailCheck) {
 			alert("Email address", "is incorrect.");
 		} else if (!pwdCheck) {
@@ -59,25 +64,24 @@ export const Signin = () => {
 		} else {
 			// in this stage means there is no error
 			// and ready to call sign in apis
-			signInApi({ email, password: pwd })
+			signInApi({ email, password: pwd, remember: remember })
 				.then((result) => {
-					let temp = result?.data?.user;
+					console.log("result", result);
 
-					const tempUser = produce(user, (draft) => {
-						draft._id = temp._id;
-						draft.avatar = temp.avatar;
-						draft.blocked = temp.blocked;
-						draft.email = temp.email;
-						draft.role = temp.role;
-						draft.accessToken = temp.accessToken;
+					const { user } = result.data
+
+					const updatedUser = produce(user, (draft) => {
+						draft = user;
+						draft.avatar = apiUrl+'/'+user.avatar;
+						return draft
 					});
 
-					setUser(tempUser);
+					setUser(updatedUser);
 					navigate("/");
 					return;
 				})
 				.catch((err) => {
-					alert("Error", err.message)
+					alert("Error", err.message);
 				});
 		}
 	};
@@ -87,11 +91,48 @@ export const Signin = () => {
 	return (
 		<SigninSection className='register signin'>
 			<header>
-				<h4>SIGN IN</h4>
+				<h3>LOGIN</h3>
 			</header>
 
+			<SigninForm onSubmit={handleSubmit}>
+				<section className='section_email'>
+					<Label htmlFor='email'>Email address</Label>
 
+					<Input
+						type='email'
+						id='email'
+						placeholder='Enter email address'
+						autoComplete='true'
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</section>
+
+				<section className='section_password'>
+					<Label htmlFor='password'>Password</Label>
+					<Input
+						type='text'
+						id='password'
+						placeholder='Enter password'
+						autoComplete='true'
+						value={pwd}
+						onChange={(e) => setPwd(e.target.value)}
+					/>
+				</section>
+
+				<Remember remember={remember} setRemember={setRemember}/>
 			
+				<Button type='submit' disabled={!enableSignin}>
+					Submit
+				</Button>
+			</SigninForm>
+
+			<SigninFooter>
+				<p>
+					Dont have an account ?{" "}
+					<span className='login' onClick={() => navigate('/welcome/register')}>Sign up.</span>
+				</p>
+			</SigninFooter>
 		</SigninSection>
 	);
 };
