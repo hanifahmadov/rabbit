@@ -2,7 +2,7 @@ import React from "react";
 import apiUrl from "../../apis/apiUrl";
 import { RoomContainer } from "./Styled";
 
-export const Room = ({ room, setCurrentRoom }) => {
+export const Room = ({ room, currentRoom, setCurrentRoom }) => {
 	// console.log(room)
 	return (
 		<RoomContainer

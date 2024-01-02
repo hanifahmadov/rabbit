@@ -52,34 +52,20 @@ export const AccountContainer = styled.div`
             position: absolute;
             left: 70px;
             bottom: -5px;
-
+            padding-bottom: 8px;
+            border: 4px solid black;
             border-radius: 5px;
             z-index: 1;
-
-            padding-bottom: 8px;
-
-            border: 4px solid black;
-
-            border-radius: 5px;
-            
-            
-            
-    
+        
             // background-color: ${clr.dark};
             // background: ${clr.rgba.wht02};
-
             // background: #112653;
-
             // background: #020816;
-
-            // background:rgba(0, 0, 0, 1);
+            
 
             color: ${clr.white02};
-
             background: ${clr.dark01};
 
-
-            
             .account-dropdown-links {
                 height: 100%;
                 display: flex;

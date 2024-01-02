@@ -13,31 +13,57 @@ import {
 export const Messages = ({ message, user }) => {
 	let tempa = message.owner._id === user._id ? 1 : 0;
 
-	console.log(message);
+	const customFormatDistanceToNow = (date) => {
+		let distance = formatDistanceToNowStrict(date);
+	  
+		if (distance.includes('minute')) {
+			let temp = distance.split(' ')
+			temp[1] = 'm ago'
+			return distance = temp.join('')
+		} else if (distance.includes('hour')) {
+			let temp = distance.split(' ')
+			temp[1] = 'h ago'
+			return distance = temp.join('')
+		} else if (distance.includes('second')){
+			let temp = distance.split(' ')
+			temp[1] = 's ago'
+			return distance = temp.join('')
+		} 
+	  
+	
+
+		return distance + ' ago'
+	  };
 
 	return (
 		<MessageContainer pos={tempa}>
-			<span className={"text"}>
-				<span className='avatar'>
-					<img
-						src={apiUrl + "/" + message.owner.avatar}
-						alt='user avatar'
-					/>
-					
-				</span>
+			<div className='main_wrapper'>
+				<div className="section_avatar">
+					<span className='avatar'>
+						<img
+							src={apiUrl + "/" + message.owner.avatar}
+							alt='user avatar'
+						/>
+					</span>
+				</div>
 
-				{message.text}
+				<div className='section_text_timeago'>
+					<span className='text'>{message.text}</span>
+					<span className='time_ago'>
+						{/* {formatDistanceToNowStrict(
+							subDays(new Date(message.createdAt), 0),
+							{
+								addSuffix: true,
+							}
+						)} */}
 
-
-				<span className='time_ago'>
-					{formatDistanceToNowStrict(
-						subDays(new Date(message.createdAt), 0),
-						{
-							addSuffix: true,
-						}
-					)}
-				</span>
-			</span>
+						{customFormatDistanceToNow(subDays(new Date(message.createdAt), 0),
+							{
+								addSuffix: true,
+							})}
+					</span>
+				</div>
+			</div>
 		</MessageContainer>
 	);
 };

@@ -23,14 +23,14 @@ export const Header = () => {
 		}
 	});
 
-	console.log("ONLINE", online);
+
 
 	return (
 		<HeaderContainer>
 			<div className='navbar-title'>
-				<NavLink to='/'>
-					<h3>CHAT RABBIT</h3>
-				</NavLink>
+				<span className="span_header">
+					USERS
+				</span>
 			</div>
 
 			<div className='active_users'>

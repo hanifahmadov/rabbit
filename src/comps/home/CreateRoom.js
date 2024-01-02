@@ -8,7 +8,7 @@ import axios from "axios";
 import { socketConnectionDefaults } from "../shared/store/states";
 
 // styled
-import { CreateRoomContainer } from "./Styled";
+import { CreateRoomSection } from "./styled/createRoomSection.styled";
 import default_img from "../shared/logos/external/default_room_img.png";
 import info_img from "../shared/logos/external/information_9195785.png";
 import apiUrl from "../../apis/apiUrl";
@@ -73,7 +73,7 @@ export const CreateRoom = ({ user, setDisplay }) => {
 		setFile(file);
 	};
 	return (
-		<CreateRoomContainer id='createRoomContainer'>
+		<CreateRoomSection id='createRoomContainer'>
 			<section className='header'>
 				<h5>Create New Room</h5>
 			</section>
@@ -131,6 +131,6 @@ export const CreateRoom = ({ user, setDisplay }) => {
 					Submit
 				</button>
 			</form>
-		</CreateRoomContainer>
+		</CreateRoomSection>
 	);
 };

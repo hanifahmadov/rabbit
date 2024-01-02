@@ -39,6 +39,8 @@ import { RoomDetails } from "./RoomDetails.js";
 import { Account } from "../shared/account/Account.js";
 import { CreateRoom } from "./CreateRoom.js";
 import { Messages } from "./Messages.js";
+import { JoinRoom } from "./JoinRoom.js";
+import { roomSettingVariants } from "./Helpers.js";
 
 export const Home = () => {
 	const [socketConnection, setSocketConnection] = useRecoilState(
@@ -62,17 +64,12 @@ export const Home = () => {
 	const [display, setDisplay] = useState(false);
 	const [displayRoomInfo, setDisplayRoomInfo] = useState(false);
 	const [displayCreateRoom, setDisplayCreateRoom] = useState(false);
+	const [backdrop, setBackdrop] = useState(true);
 
 	let socketRef = useRef();
 	let emptyDivRef = useRef();
 
 	useEffect(() => {
-		/**
-		 * 	if user connection or listeners double tripple
-		 * 	then try to add cleaner functions
-		 * 	or socketConnection, setSocketConnection(true) states
-		 */
-
 		if (!socketConnection) {
 			socketRef.current = io(apiUrl, {
 				// Disable autoConnect to have more control over headers
@@ -81,8 +78,6 @@ export const Home = () => {
 					Authorization: `Bearer ${user.accessToken}`,
 				},
 			});
-
-
 
 			socketRef.current.on("connect_error", (err) => {
 				console.log(chalk.red("connect_error"));
@@ -116,27 +111,8 @@ export const Home = () => {
 			socketRef.current.on("just_connected", (response) => {
 				let { justConnected, rooms } = response;
 
-				console.log("just connected: ", justConnected.email);
+				console.log("128: Home.js roomsss", rooms);
 
-				/**
-				 * 	# Setting up rooms
-				 *  when user connect, the server will create a general room
-				 * 	auto if its not exist, then will send the whole rooms
-				 * 	on the client side, rooms stats will get whole replacement
-				 * 	like romms = response.rooms
-				 */
-				let updated = produce(rooms, (draft) => {
-					draft = rooms;
-					return draft;
-				});
-
-				/**
-				 * 	# Setting up messages
-				 * 	when user connects, it get all rooms
-				 * 	with fully populated owner, users, messages
-				 * 	retrieve messages and make it set Msg for mapping
-				 *
-				 */
 
 				let updatedMessages = produce(messages, (draft) => {
 					for (let room of rooms) {
@@ -146,9 +122,9 @@ export const Home = () => {
 					}
 				});
 
+				setRooms(rooms);
 				setMessages(updatedMessages);
-				setRooms(updated);
-				setCurrentRoom(updated.find((room) => room.owner === null));
+				setCurrentRoom(rooms.find((room) => room.owner === null));
 			});
 
 			// SOCKET ON USERS ON CONNECTION
@@ -197,22 +173,29 @@ export const Home = () => {
 		}
 	}, []);
 
-	// useEffect(() => {
-	// 	// ON NEW MESSAGE
+	useEffect(() => {
+		let valid = currentRoom?.users?.some((u) => u._id === user._id);
 
-	// 	// cleaning function
-	// 	return () => {
-	// 		// before the component is destroyed
-	// 		// unbind all event handlers used in this component
-	// 		socketRef.current.removeAllListeners("new_message");
-	// 	};
-	// }, [msgSubmitted]);
+		if (!valid) {
+			setRoomAccessStrict(true);
+		} else {
+			setRoomAccessStrict(false);
+		}
+	}, [currentRoom]);
+
+
+	useEffect(() => {
+		const valid = currentRoom?.users?.some((u) => u._id == user._id);
+		// console.log('196: Home.js rooms', rooms)
+		const cr = rooms.find(room => room._id === currentRoom._id)
+
+		setBackdrop(valid);
+		setCurrentRoom(cr)
+	}, [rooms, currentRoom]);
 
 	// HANDLE MESSAGE FORM
 	const handleMessageForm = (e) => {
 		e.preventDefault();
-
-		// console.log(currentRoom);
 
 		socketRef.current.emit("send_message", {
 			roomName: currentRoom.name,
@@ -221,19 +204,6 @@ export const Home = () => {
 		});
 
 		setMsgSubmitted(!msgSubmitted);
-	};
-
-	// HANDLE CREATE ROOM FORM
-	const handleCreateRoomForm = (e) => {
-		e.preventDefault();
-
-		socketRef.current.emit("create_room", {
-			roomName: createRoom,
-			roomOwner: user._id,
-		});
-
-		setCreateRoom("");
-		setCreateRoomSubmitted(!createRoomSubmitted);
 	};
 
 	const handleRoomDetailsClick = () => {
@@ -266,53 +236,23 @@ export const Home = () => {
 		}
 	};
 
-	useEffect(() => {
-		let valid = currentRoom?.users?.some((u) => u._id === user._id);
-
-		if (!valid) {
-			setRoomAccessStrict(true);
-		} else {
-			setRoomAccessStrict(false);
-		}
-	}, [currentRoom]);
-
-	const roomSettingVariants = {
-		initial: {
-			opacity: 0,
-			width: "0rem",
-		},
-
-		animate: {
-			opacity: 1,
-			width: "15rem",
-			transition: {
-				duration: 0.5,
-				opacity: {
-					delay: 0.5,
-				},
-			},
-		},
-
-		exit: {
-			opacity: 0,
-			width: "0rem",
-			transition: {
-				width: {
-					delay: 0.1,
-					duration: 0.5,
-				},
-				opacity: {
-					duration: 0.3,
-				},
-			},
-		},
+	
+	const mapMessages = (messages) => {
+		return messages.map((i, j) => {
+			if (i.room === currentRoom._id) {
+				return <Messages key={j} message={i} user={user} />;
+			}
+		});
 	};
 
 	return (
 		<HomeContainer id='home'>
-			{/* {console.log(toggleCRDSection)} */}
+			{/* {console.log('300: home.js rooms', rooms)}
+			{console.log('301: home.js current room', currentRoom)}
+			{console.log('302: home.js backdrop', backdrop)} */}
 			<LeftSection>
 				<section className='side_navbar'>
+					<section className='section_rooms'>Rooms</section>
 					<div className='rooms'>
 						{rooms.map((room, index) => (
 							<Room
@@ -355,25 +295,31 @@ export const Home = () => {
 						animate={display ? "animate" : "exit"}
 					>
 						{displayRoomInfo && currentRoom.name && (
-							<RoomDetails currentRoom={currentRoom} setDisplay={setDisplay} set />
+							<RoomDetails
+								currentRoom={currentRoom}
+								setDisplay={setDisplay}
+								set
+							/>
 						)}
 
-						{displayCreateRoom &&  (
-							<CreateRoom user={user} setDisplay={setDisplay}/>
+						{displayCreateRoom && (
+							<CreateRoom user={user} setDisplay={setDisplay} />
 						)}
 					</motion.section>
 				</AnimatePresence>
 			</LeftSection>
 
 			<RightSection>
-				<MessagesSection>
-					{messages.map((i, j) => {
-						if (i.room === currentRoom._id) {
-							return (
-								<Messages key={j} message={i} user={user}/>
-							);
-						}
-					})}
+				<MessagesSection $backdrop={backdrop}>
+					<JoinRoom
+						rooms={rooms}
+						setRooms={setRooms}
+						currentRoom={currentRoom}
+						setCurrentRoom={setCurrentRoom}
+						user={user}
+						backdrop={backdrop}
+					/>
+					{mapMessages(messages)}
 					<div className='spacer' />
 				</MessagesSection>
 
@@ -393,5 +339,3 @@ export const Home = () => {
 		</HomeContainer>
 	);
 };
-
-

@@ -10,9 +10,9 @@ export const HeaderContainer = styled.div`
 
 	width: 100%;
 
-	padding: 0.25rem .5rem;
+	padding: 0.25rem 0.5rem;
 
-	height: 5rem; 
+	height: 5rem;
 	border: 4px solid black;
 
 	// background: rgba(0, 0, 0, .2);
@@ -21,16 +21,14 @@ export const HeaderContainer = styled.div`
 	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
 	.navbar-title {
-		a {
-			text-decoration: none;
-			padding: 0px;
+		background: black;
+		padding: 8px 20px;
+		border-radius: 5px;
 
-			h3 {
-				padding: 0px;
-				margin: 0px;
-				color: black;
-			}
-		}
+		color: white;
+		font-weight: 700;
+		font-size: 1.2rem;
+
 	}
 
 	.active_users {
@@ -40,13 +38,27 @@ export const HeaderContainer = styled.div`
 		align-items: center;
 
 
+		background: black;
+		border-radius: 5px;
+		margin-left: 5px;
+
+		.span_users {
+			background: black;
+			display: inline-block;
+			padding: 5px 10px;
+			border-radius: 5px;
+			font-size: 1.25rem;
+			color: white;
+			font-weight: 700;
+			margin-right: 10px;
+		}
 
 		padding: 0.25rem;
 		flex: 1;
 
 		div {
 			border-radius: 5px;
-			border: 3px solid rgba(255, 255, 255, .5);
+			border: 3px solid rgba(255, 255, 255, 0.5);
 			overflow: hidden;
 			cursor: pointer;
 
@@ -54,29 +66,25 @@ export const HeaderContainer = styled.div`
 
 			margin: 0 6px;
 
-			img{
+			img {
 				width: 2rem;
 				height: 2rem;
 				filter: blur(0px);
 				border-radius: 5px;
 				z-index: -10;
-
 			}
 		}
 
 		.active {
 			border-color: #009aff;
 
-			img{
+			img {
 				width: 2rem;
 				height: 2rem;
 				filter: blur(0px);
 				border-radius: 5px;
 				z-index: -10;
-
 			}
 		}
-
-
 	}
 `;

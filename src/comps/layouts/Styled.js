@@ -23,7 +23,7 @@ export const AppLayoutContent = styled.div`
 	flex-direction: column;
 
 	height: 100%;
-	width: 70rem;
+	width: 60rem;
 
 	// border: 5px solid yellow;
 
