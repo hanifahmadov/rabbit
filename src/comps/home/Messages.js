@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { MessageContainer } from "./styled/messageContainer.styled";
+import { MessageContainer } from "./styled/message.styled";
 import apiUrl from "../../apis/apiUrl";
 import {
 	format,

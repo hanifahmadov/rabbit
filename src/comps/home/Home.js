@@ -113,7 +113,6 @@ export const Home = () => {
 
 				console.log("128: Home.js roomsss", rooms);
 
-
 				let updatedMessages = produce(messages, (draft) => {
 					for (let room of rooms) {
 						for (let msg of room.messages) {
@@ -183,14 +182,13 @@ export const Home = () => {
 		}
 	}, [currentRoom]);
 
-
 	useEffect(() => {
 		const valid = currentRoom?.users?.some((u) => u._id == user._id);
 		// console.log('196: Home.js rooms', rooms)
-		const cr = rooms.find(room => room._id === currentRoom._id)
+		const cr = rooms.find((room) => room._id === currentRoom._id);
 
 		setBackdrop(valid);
-		setCurrentRoom(cr)
+		setCurrentRoom(cr);
 	}, [rooms, currentRoom]);
 
 	// HANDLE MESSAGE FORM
@@ -236,13 +234,30 @@ export const Home = () => {
 		}
 	};
 
-	
 	const mapMessages = (messages) => {
 		return messages.map((i, j) => {
 			if (i.room === currentRoom._id) {
 				return <Messages key={j} message={i} user={user} />;
 			}
 		});
+	};
+
+	const roomVariant = {
+		initial: {
+			opacity: 0,
+			transition: {
+				delay: 1,
+				duration: 5,
+			},
+		},
+
+		animate: {
+			opacity: 1,
+			transition: {
+				delay: 1,
+				duration: 5,
+			},
+		},
 	};
 
 	return (
@@ -287,30 +302,33 @@ export const Home = () => {
 
 				{/* <CreateRoom  user={user}/> */}
 
-				<AnimatePresence>
-					<motion.section
-						className='currentRoomDetailsSection'
-						variants={roomSettingVariants}
-						initial='initial'
-						animate={display ? "animate" : "exit"}
-					>
-						{displayRoomInfo && currentRoom.name && (
-							<RoomDetails
-								currentRoom={currentRoom}
-								setDisplay={setDisplay}
-								set
-							/>
-						)}
+				<motion.section
+					className='currentRoomDetailsSection'
+					variants={roomSettingVariants}
+					initial='initial'
+					animate={display ? "animate" : "exit"}
+				>
+					{displayRoomInfo && currentRoom.name && (
+						<RoomDetails
+							currentRoom={currentRoom}
+							setDisplay={setDisplay}
+							set
+						/>
+					)}
 
-						{displayCreateRoom && (
-							<CreateRoom user={user} setDisplay={setDisplay} />
-						)}
-					</motion.section>
-				</AnimatePresence>
+					{displayCreateRoom && (
+						<CreateRoom user={user} setDisplay={setDisplay} />
+					)}
+				</motion.section>
 			</LeftSection>
 
 			<RightSection>
-				<MessagesSection $backdrop={backdrop}>
+				<MessagesSection
+					$backdrop={backdrop}
+					variants={roomVariant}
+					initial='initial'
+					animate='animate'
+				>
 					<JoinRoom
 						rooms={rooms}
 						setRooms={setRooms}

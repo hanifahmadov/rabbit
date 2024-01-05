@@ -1,17 +1,17 @@
 import React from "react";
 import apiUrl from "../../apis/apiUrl";
-import { RoomContainer } from "./Styled";
+import { RoomSection } from "./styled/room.styled";
 
 export const Room = ({ room, currentRoom, setCurrentRoom }) => {
-	// console.log(room)
+	const active = room._id === currentRoom._id;
+
 	return (
-		<RoomContainer
-			onClick={() => {
-				setCurrentRoom(room);
-			}}
+		<RoomSection
+			$active={active}
+			onClick={() => setCurrentRoom(room)}
 		>
 			<section className='icon'>
-				<img src={apiUrl + "/" + room.icon} alt='' />
+				<img src={apiUrl + "/" + room.icon} alt='logo' />
 			</section>
 			<section className='name'>
 				<span>
@@ -22,7 +22,7 @@ export const Room = ({ room, currentRoom, setCurrentRoom }) => {
 						: room.name[0].toUpperCase() + room.name.slice(1)}
 				</span>
 			</section>
-		</RoomContainer>
+		</RoomSection>
 	);
 };
 

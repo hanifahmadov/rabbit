@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { JoinRoomSection } from "./styled/joinRoomSection.styled";
+import { JoinRoomSection } from "./styled/joinRoom.styled";
 import info from "../shared/logos/external/information_9195785.png";
 import { produce } from "immer";
 import { useRecoilState } from "recoil";

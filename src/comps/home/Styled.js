@@ -174,14 +174,14 @@ export const RightSection = styled.section`
 	padding: 0px 0px 0px 0px;
 `;
 
-export const MessagesSection = styled.div`
+export const MessagesSection = styled(motion.div)`
 	height: 100%;
 	width: 100%;
 
 	background: ${clr.dark02};
 	padding: 0px 10px 0rem 10px;
 
-	overflow-y:  ${({$backdrop}) => $backdrop ? 'auto' : 'hidden'};
+	overflow-y: ${({ $backdrop }) => ($backdrop ? "auto" : "hidden")};
 	position: relative;
 
 	.spacer {
@@ -194,7 +194,7 @@ export const MessagesSection = styled.div`
 		content: "";
 		width: 100%;
 		height: 100%;
-		display: ${({$backdrop}) => $backdrop ? 'none' : 'block'};
+		display: ${({ $backdrop }) => ($backdrop ? "none" : "block")};
 		background: rgba(0, 0, 0, 0.2);
 		backdrop-filter: blur(4px);
 		position: absolute;
@@ -266,75 +266,7 @@ export const MessagesForm = styled.form`
 	}
 `;
 
-export const RoomContainer = styled.div`
 
-
-	background: transparent;
-
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-	
-	padding: 0px;
-	margin: 5px 10px;
-	text-align: center;
-	cursor: pointer;
-	overflow: hidden;
-
-	
-	height: 4.5rem;
-	width: 4rem;
-
-
-
-
-    border-radius: 8px;
-	border: 3px solid rgba(255, 255, 255, .3);
-
-
-    .icon {
-        overflow: hidden;
-		width: 100%;
-
-        img {
-            width: 100%;
-			height: 50px;
-         
-            box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
-            border-top-left-radius: 10%;
-            border-top-right-radius: 10%;
-
-        }
-    }
-
-    .name{
-        margin-top: 2px;
-        font-family: ${ff.notosans}
-        display: inline-block;
-		justify-content: center;
-		align-items: center;
-		
-        font-size: .8rem;
-        font-weight: 700;
-		background: white;
-		width: 100%;
-		color: black;
-
-
-		text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-			0px -4px 10px rgba(255,255,255,0.3);
-
-
-
-		span {
-			display: block;
-			justify-content: center;
-			align-items: center;
-
-		}
-    }
-`;
 
 export const RoomDetailsContainer = styled(motion.div)`
 	display: flex;
@@ -531,4 +463,3 @@ export const RoomDetailsContainer = styled(motion.div)`
 		}
 	}
 `;
-

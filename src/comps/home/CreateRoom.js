@@ -8,7 +8,7 @@ import axios from "axios";
 import { socketConnectionDefaults } from "../shared/store/states";
 
 // styled
-import { CreateRoomSection } from "./styled/createRoomSection.styled";
+import { CreateRoomSection } from "./styled/createRoom.styled";
 import default_img from "../shared/logos/external/default_room_img.png";
 import info_img from "../shared/logos/external/information_9195785.png";
 import apiUrl from "../../apis/apiUrl";
