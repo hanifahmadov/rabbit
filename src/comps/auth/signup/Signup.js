@@ -51,7 +51,7 @@ export const Signup = () => {
 		e.preventDefault();
 		let data = new FormData();
 
-		
+		console.log("window hostname", window.location.hostname)
 		data.append('email', email)
 		data.append('password', pwd)
 		data.append('passwordConfirmation', confirmPwd)
