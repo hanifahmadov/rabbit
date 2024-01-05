@@ -45,9 +45,9 @@ export const Signin = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log("handle submit");
 
-		console.log("remememmememe", remember)
+		console.log("window hostname", window.location.hostname)
+		console.log("handle submit");
 
 		// Now check the EMAIL and PWD REGEX here to make sure client has been added the
 		// correct type of the email address and password
