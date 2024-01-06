@@ -52,6 +52,8 @@ export const Signup = () => {
 		let data = new FormData();
 
 		console.log("window hostname", window.location.hostname)
+		console.log('process', process.env.REACT_APP_SERVER_PRO)
+		
 		data.append('email', email)
 		data.append('password', pwd)
 		data.append('passwordConfirmation', confirmPwd)
