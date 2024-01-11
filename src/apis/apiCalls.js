@@ -3,9 +3,8 @@ import axios from "axios";
 import apiUrl from "./apiUrl";
 
 export const signUpApi = (data) => {
+	console.log("api URL", apiUrl);
 
-	console.log("api URL", apiUrl)
-	
 	return axios({
 		url: apiUrl + "/signup/",
 		method: "POST",

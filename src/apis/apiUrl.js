@@ -9,7 +9,7 @@ const apiUrls = {
   development: process.env.REACT_APP_SERVER_DEV
 }
 
-if (window.location.hostname === process.env.REACT_APP_WINDOW_HOSTNAME) {
+if (window.location.hostname === "localhost") {
   apiUrl = apiUrls.development
 } else {
   apiUrl = apiUrls.production
