@@ -43,7 +43,7 @@ export const SignupContainer = styled.section`
 			h3 {
 				font-size: 1.5rem;
 				font-weight: 600;
-				padding: 7px;
+				padding: 5px;
 			}
 		}
 	`}
@@ -242,7 +242,19 @@ export const FormCredentials = styled.div`
 	${({ theme }) =>
 		theme.device.mobile &&
 		`
+
 		width: 100%;
+
+		input { 
+
+			width: 100%;
+			font-weight: 500;
+			padding: 5px;
+			font-size: 0.85rem;
+
+		}
+
+
 
 	`}
 `;
@@ -343,11 +355,17 @@ export const Information = styled(motion.div)`
 	}
 
 	${({ theme }) =>
-	theme.device.mobile &&
-	`
+		theme.device.mobile &&
+		`
+
+		.title {
+			margin-bottom: 0px;
+		}
+
 		.content {
-			height: 7rem;
+			height: 6rem;
 			font-size: 0.85rem;
+			margin-bottom: 0px;
 		}
 
 	`}

@@ -187,7 +187,7 @@ export const Signup = () => {
 					{informant == "email" && (
 						<>
 							<div>
-								Email name can contains <pre>[ . _ % + - ]</pre>
+								Email name can contains [ . _ % + - ]
 							</div>
 							<div>Must be between 2 and 63 characters long.</div>
 							<div>Must contains @ sign.</div>
