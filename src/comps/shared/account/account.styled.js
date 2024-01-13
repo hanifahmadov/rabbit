@@ -32,8 +32,8 @@ export const AccountContainer = styled.div`
             
     
             img {
-                width: 3.25rem;
-                height: 3.25rem;
+                width: ${theme.device.mobile ? '2.75rem' : '3.25rem'};
+                height:  ${theme.device.mobile ? '2.75rem' : '3.25rem'};
                 border-radius: 10px;
                 cursor: pointer;
                 pointer-events: none;

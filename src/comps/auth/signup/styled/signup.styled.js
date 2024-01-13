@@ -4,22 +4,18 @@ import { motion } from "framer-motion";
 import { ff } from "../../../shared/store/design";
 
 export const SignupContainer = styled.section`
-
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 
 	width: 35rem;
-	// height: 100%;
 
 	border: 7px solid black;
 	border-radius: 10px;
 	overflow: hidden;
 
 	color: white;
-
 
 	header {
 		border-bottom: 7px solid black;
@@ -35,17 +31,27 @@ export const SignupContainer = styled.section`
 			text-shadow: 2px 2px 2px black;
 			letter-spacing: 1px;
 			font-family: "system-ui";
-
 		}
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+		width: 25rem;
+
+		header {
+
+			h3 {
+				font-size: 1.5rem;
+				font-weight: 600;
+				padding: 7px;
+			}
+		}
+	`}
 `;
 
 export const SignupForm = styled.form`
 	width: 100%;
-
-
-
-
 	padding: 2rem 0rem;
 
 	display: flex;
@@ -59,10 +65,8 @@ export const SignupForm = styled.form`
 		justify-content: center;
 		align-items: center;
 
-		// background: red;
-
 		width: 100%;
-		height: 20rem;
+		// height: 20rem;
 	}
 
 	button {
@@ -89,13 +93,22 @@ export const SignupForm = styled.form`
 			border-color: rgba(255, 255, 255, 0.1);
 		}
 
-		&:disabled, &[disabled] {
-			opacity: .5;
-			background: rgba(255, 255, 255, .2);
+		&:disabled,
+		&[disabled] {
+			opacity: 0.5;
+			background: rgba(255, 255, 255, 0.2);
 			pointer-events: none;
 			cursor: not-allowed;
 		}
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+			flex-direction: column;
+			padding: 0px 30px 15px 30px;
+
+		`}
 `;
 
 export const FormAvatar = styled.div`
@@ -116,7 +129,6 @@ export const FormAvatar = styled.div`
 
 	position: relative;
 
-
 	.label_avatar {
 		width: 100%;
 		cursor: pointer;
@@ -129,10 +141,8 @@ export const FormAvatar = styled.div`
 		text-shadow: 1px 1px 2px black;
 		border-top: 3px solid gray;
 
-		
 		position: absolute;
 		bottom: 0px;
-
 
 		&:hover {
 			background: rgb(0 81 139);
@@ -149,13 +159,18 @@ export const FormAvatar = styled.div`
 		position: absolute;
 		z-index: -10;
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+		margin-right: 0rem;
+		padding: 0;
+		margin-top: 10px;
+	`}
 `;
 
 export const FormCredentials = styled.div`
-	// background: green;
-
 	width: 50%;
-	height: 100%;
 
 	display: flex;
 	flex-direction: column;
@@ -195,8 +210,8 @@ export const FormCredentials = styled.div`
 			padding: 8px 5px 8px 10px;
 			border: 1px solid rgba(0, 0, 0, 0.5);
 			text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
-			background: rgba(255, 255, 255, .9);
-			
+			background: rgba(255, 255, 255, 0.9);
+
 			font-size: 0.95rem;
 			border-radius: 4px;
 			outline: none;
@@ -222,6 +237,13 @@ export const FormCredentials = styled.div`
 	.section_confirmPassword {
 		margin-top: 1rem;
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+		width: 100%;
+
+	`}
 `;
 
 export const Information = styled(motion.div)`
@@ -237,8 +259,6 @@ export const Information = styled(motion.div)`
 	align-items: center;
 
 	border-top: 7px solid black;
-
-
 
 	.title {
 		display: block;
@@ -275,7 +295,6 @@ export const Information = styled(motion.div)`
 	}
 
 	.footer_signup {
-
 		width: 100%;
 		background: black;
 
@@ -284,10 +303,7 @@ export const Information = styled(motion.div)`
 		align-items: center;
 
 		border-top: 7px solid black;
-
 		padding: 10px;
-
-	
 
 		p {
 			width: 100%;
@@ -298,17 +314,16 @@ export const Information = styled(motion.div)`
 
 			font-size: 0.95rem;
 			font-weight: 600;
-			color: rgba(255, 255, 255, .9);
+			color: rgba(255, 255, 255, 0.9);
 			font-style: italic;
 			margin: 0;
 		}
 
 		.login {
-
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			
+
 			font-size: 1rem;
 			margin-left: 8px;
 			color: rgba(4, 145, 255);
@@ -325,9 +340,16 @@ export const Information = styled(motion.div)`
 			}
 		}
 	}
+
+	${({ theme }) =>
+	theme.device.mobile &&
+	`
+		.content {
+			height: 7rem;
+		}
+
+	`}
 `;
-
-
 
 // export const RevealPasswordSpan = styled.span`
 // 	//: display

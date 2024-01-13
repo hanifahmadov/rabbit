@@ -11,7 +11,7 @@ export const RoomSection = styled(motion.div)`
     align-items: center;
 	
 	padding: 0px;
-	margin: 5px 10px;
+	margin: 5px 5px;
 	text-align: center;
 	cursor: pointer;
 	overflow: hidden;
@@ -19,6 +19,8 @@ export const RoomSection = styled(motion.div)`
 	
 	height: 4.5rem;
 	width: 4rem;
+
+
 
 	transition: all .2s ease-in-out;
     border-radius: 8px;
@@ -67,4 +69,26 @@ export const RoomSection = styled(motion.div)`
 
 		}
     }
+
+
+	${({theme}) => theme.device.mobile && `
+	
+		height: 4rem;
+		width: 3.5rem;
+
+		.icon {
+
+			img {
+
+				max-width:100%;
+				max-height:135%;
+			}
+		}
+
+		.name{			
+			font-size: .75rem;
+		}
+
+		
+	`}
 `;

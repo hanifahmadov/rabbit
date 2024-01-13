@@ -36,7 +36,7 @@ export const CreateRoomSection = styled(motion.div)`
 
 		.selected_files {
 			width: 100%;
-			height: 12rem;
+			height: 13rem;
 			border: 3px solid black;
 			margin: 5px 0px;
 
@@ -61,7 +61,7 @@ export const CreateRoomSection = styled(motion.div)`
 				width: 100%;
 
 				color: rgba(255, 255, 255, 1);
-				line-height: 140px;
+				line-height: 160px;
 
 				font-size: 1rem;
 				font-weight: 700;

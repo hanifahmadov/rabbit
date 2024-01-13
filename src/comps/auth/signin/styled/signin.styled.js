@@ -7,7 +7,7 @@ export const SigninSection = styled.section`
 	justify-content: center;
 	flex-direction: column;
 
-	width: 35rem;
+	width: ${({theme}) => theme.device.mobile ? ' 25rem' : ' 35rem'};
 
 	color: white;
 	border: 7px solid black;

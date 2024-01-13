@@ -9,12 +9,8 @@ export const AppLayoutContainer = styled.div`
 	height: 100%;
 	width: 100%;
 
-	// border: 5px solid yellow;
-
-	border: 4px solid black;
-
-	padding: 20px;
-
+	// border: 4px solid black;
+	padding: ${({theme}) => theme.device.mobile ? '5px' : '20px'};
 `;
 
 export const AppLayoutContent = styled.div`
@@ -59,7 +55,7 @@ export const RegisterLayoutContainer = styled.div`
 
 		background: transparent;
 		backdrop-filter: blur(50px);
-		border: 10px solid green;
+		// border: 10px solid green;
 
 	}
 

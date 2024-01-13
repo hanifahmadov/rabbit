@@ -40,7 +40,11 @@ import { Account } from "../shared/account/Account.js";
 import { CreateRoom } from "./CreateRoom.js";
 import { Messages } from "./Messages.js";
 import { JoinRoom } from "./JoinRoom.js";
-import { roomSettingVariants } from "./Helpers.js";
+import {
+	roomSettingDesktopVariants,
+	roomSettingMobileVariants,
+	roomVariant,
+} from "./helpers/variants.js";
 
 export const Home = () => {
 	const [socketConnection, setSocketConnection] = useRecoilState(
@@ -69,6 +73,12 @@ export const Home = () => {
 	let socketRef = useRef();
 	let emptyDivRef = useRef();
 
+	/** SET UP BASICS ON HE CONNECTION
+	 *  informs all when a new user joins
+	 *  creates the default room if no room available
+	 *  handle logouts and errors
+	 *  and etc. mentioned below
+	 */
 	useEffect(() => {
 		if (!socketConnection) {
 			socketRef.current = io(apiUrl, {
@@ -172,6 +182,12 @@ export const Home = () => {
 		}
 	}, []);
 
+	/** VALID USER ACCESS GRANTED
+	 *  users cant read/write to a room  by default
+	 *  must a member of the room
+	 *  by getting authorized from the room owner
+	 */
+
 	useEffect(() => {
 		let valid = currentRoom?.users?.some((u) => u._id === user._id);
 
@@ -182,6 +198,11 @@ export const Home = () => {
 		}
 	}, [currentRoom]);
 
+	/** USER AUTHORIZATION CHECKER
+	 *  users cant read/write to a room  by default
+	 *  must a member of the room
+	 *  by getting authorized from the room owner
+	 */
 	useEffect(() => {
 		const valid = currentRoom?.users?.some((u) => u._id == user._id);
 		// console.log('196: Home.js rooms', rooms)
@@ -242,24 +263,6 @@ export const Home = () => {
 		});
 	};
 
-	const roomVariant = {
-		initial: {
-			opacity: 0,
-			transition: {
-				delay: 1,
-				duration: 5,
-			},
-		},
-
-		animate: {
-			opacity: 1,
-			transition: {
-				delay: 1,
-				duration: 5,
-			},
-		},
-	};
-
 	return (
 		<HomeContainer id='home'>
 			{/* {console.log('300: home.js rooms', rooms)}
@@ -304,7 +307,11 @@ export const Home = () => {
 
 				<motion.section
 					className='currentRoomDetailsSection'
-					variants={roomSettingVariants}
+					variants={
+						display
+							? roomSettingMobileVariants
+							: roomSettingDesktopVariants
+					}
 					initial='initial'
 					animate={display ? "animate" : "exit"}
 				>
@@ -322,12 +329,11 @@ export const Home = () => {
 				</motion.section>
 			</LeftSection>
 
-			<RightSection>
+			<RightSection $display={display}>
+				{console.log("325 Home.js: current room", currentRoom)}
 				<MessagesSection
 					$backdrop={backdrop}
-					variants={roomVariant}
-					initial='initial'
-					animate='animate'
+					$currentRoomName={currentRoom?.name?.toUpperCase()}
 				>
 					<JoinRoom
 						rooms={rooms}
@@ -337,7 +343,9 @@ export const Home = () => {
 						user={user}
 						backdrop={backdrop}
 					/>
+
 					{mapMessages(messages)}
+
 					<div className='spacer' />
 				</MessagesSection>
 

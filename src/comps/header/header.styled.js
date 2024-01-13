@@ -9,25 +9,25 @@ export const HeaderContainer = styled.div`
 	flex-direction: row;
 
 	width: 100%;
-
-	padding: 0.25rem 0.5rem;
-
-	height: 5rem;
+	padding: 0rem;
 	border: 4px solid black;
 
-	// background: rgba(0, 0, 0, .2);
-	// backdrop-filter: blur(5px);
 
-	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
+
+
 
 	.navbar-title {
 		background: black;
-		padding: 8px 20px;
-		border-radius: 5px;
+		padding: 8px 10px;
 
 		color: white;
 		font-weight: 700;
 		font-size: 1.2rem;
+		width: 5rem;
+		text-align: center;
+
+		text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+		0px -4px 10px rgba(255,255,255,0.3);
 
 	}
 
@@ -39,8 +39,8 @@ export const HeaderContainer = styled.div`
 
 
 		background: black;
-		border-radius: 5px;
-		margin-left: 5px;
+
+		margin-left: 2px;
 
 		.span_users {
 			background: black;

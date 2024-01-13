@@ -27,6 +27,8 @@ export const LeftSection = styled.section`
 
 	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
+	position: relative;
+
 	.side_navbar {
 		display: flex;
 		flex-direction: column;
@@ -66,7 +68,7 @@ export const LeftSection = styled.section`
 			box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
 			width: 100%;
-			height: 14rem;
+			height: ${({theme}) => theme.device.mobile ? '13rem' : '14rem'};
 
 			border-top: 4px solid black;
 
@@ -155,6 +157,14 @@ export const LeftSection = styled.section`
 		border-left: none;
 
 		box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
+
+		${({theme}) => theme.device.mobile && `
+			position: absolute;
+			z-index: 15;
+			left: 5rem;
+			background: rgba(20, 20, 20, 1);
+		
+		`}
 	}
 `;
 
@@ -169,9 +179,24 @@ export const RightSection = styled.section`
 	width: 100%;
 
 	border: 4px solid black;
-	margin-left: 10px;
+	margin-left: ${({theme}) => theme.device.mobile ? '0px' : '10px'};
 
 	padding: 0px 0px 0px 0px;
+	transition: filter 1s ease-in-out;
+
+	${({$display}) => $display ? 
+		`
+			filter: brightness(50%) blur(4px);
+			pointer-events: none;
+		`
+		:
+
+		`
+			filter: brightness(100%) blur(0px);
+			pointer-events: auto;
+		`
+	}
+
 `;
 
 export const MessagesSection = styled(motion.div)`
@@ -204,6 +229,37 @@ export const MessagesSection = styled(motion.div)`
 		bottom: 0;
 		z-index: 10;
 	}
+
+
+
+	&::after {
+		content: "${({$currentRoomName}) => `ROOM  ` + $currentRoomName}";
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: ${({theme}) => theme.device.mobile ? '2rem' : '4rem'};
+
+
+		text-align: center;
+		font-weight: 800;
+		letter-spacing: 2px;
+		background: transparent;
+		position: sticky;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 10;
+		color: white;
+		opacity: 0.025;
+		
+	}
+
+
+
+
 `;
 
 export const MessagesForm = styled.form`

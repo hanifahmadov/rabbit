@@ -29,7 +29,7 @@ export const Header = () => {
 		<HeaderContainer>
 			<div className='navbar-title'>
 				<span className="span_header">
-					USERS
+					Users
 				</span>
 			</div>
 
