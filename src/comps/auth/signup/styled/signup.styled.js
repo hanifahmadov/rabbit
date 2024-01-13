@@ -37,8 +37,7 @@ export const SignupContainer = styled.section`
 	${({ theme }) =>
 		theme.device.mobile &&
 		`
-		width: 25rem;
-
+		width: 20rem;
 		header {
 
 			h3 {
@@ -163,6 +162,8 @@ export const FormAvatar = styled.div`
 	${({ theme }) =>
 		theme.device.mobile &&
 		`
+		width: 7.5rem;
+		height: 7.5rem;
 		margin-right: 0rem;
 		padding: 0;
 		margin-top: 10px;
@@ -346,6 +347,7 @@ export const Information = styled(motion.div)`
 	`
 		.content {
 			height: 7rem;
+			font-size: 0.85rem;
 		}
 
 	`}

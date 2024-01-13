@@ -7,7 +7,7 @@ export const SigninSection = styled.section`
 	justify-content: center;
 	flex-direction: column;
 
-	width: ${({theme}) => theme.device.mobile ? ' 25rem' : ' 35rem'};
+	width: 21rem;
 
 	color: white;
 	border: 7px solid black;
@@ -30,6 +30,19 @@ export const SigninSection = styled.section`
 			font-family: "system-ui";
 		}
 	}
+
+	${({theme}) => theme.device.mobile && `
+		width: 21rem;	
+
+		header {
+			
+			h3 {
+				font-size: 1.5rem;
+				font-weight: 600;
+				padding: 5px;
+			}
+		}
+	`}
 `;
 
 export const SigninFooter = styled.div`
