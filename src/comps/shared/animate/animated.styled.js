@@ -58,6 +58,7 @@ export const AnimatedFlasher = styled.span`
             animation: flickerAnimation ${timer}s forwards;
             animation-iteration-count: ${times};
             animation-delay: ${delay}s;
+
         }
 
 

@@ -34,6 +34,7 @@ import { PersistentLayout } from "./comps/layouts/PersistentLayout";
 import { AppLayout } from "./comps/layouts/AppLayout";
 import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 import { RegisterLayout } from "./comps/layouts/RegisterLayout";
+import { Error } from "./comps/shared/error/Error";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -50,6 +51,8 @@ const router = createBrowserRouter(
 					</Route>
 				</Route>
 			</Route>
+
+			<Route path='*' element={<Error/>}/>
 		</Fragment>
 	)
 );

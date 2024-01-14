@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import v4v from "../logos/vvv.png";
-import { clr } from "../store/design";
+import { clr, ff } from "../store/design";
 
 export const ErrorContainer = styled.div`
 	width: 100%;
@@ -40,12 +40,26 @@ export const ErrorContainer = styled.div`
 			width: fit-content;
 
 			a {
-				text-decoration: underline;
-				text-decoration-color: white;
-				text-decoration-thickness: 2px;
-				text-underline-offset: 5px;
-				color: white;
+				// text-decoration: underline;
+				// text-decoration-color: white;
+				// text-decoration-thickness: 2px;
+				// text-underline-offset: 5px;
+				text-decoration: none;
+				color: black;
 				font-weight: 700;
+				background: white;
+				padding: 2px 5px;
+				border-radius: 5px;
+				text-align: center;
+				font-family: ${ff.opensans};
+				font-size: 1.1rem;
+				letter-spacing: .5px;
+				transition: all .15s ease-in-out;
+
+				&:hover {
+					background: #c8c8c8;
+				}
+
 
 			}
 
@@ -54,8 +68,15 @@ export const ErrorContainer = styled.div`
 				display: inline-block;
 				padding-right: 5px;
 
+				font-size: 1.8rem;
+
+				position: relative;
+				bottom: -3px;
+				margin-right: 5px;
+
 				img {
 					filter: opacity(70%);
+					
 				}
 			}
 		}

@@ -10,7 +10,6 @@ export const SigninSection = styled.section`
 	flex-direction: column;
 
 	color: black;
-
 	width: 100%;
 
 	header {
