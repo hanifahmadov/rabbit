@@ -33,9 +33,10 @@ export const Error = () => {
 						delay='0'
 					>
 						<span className='animate-flicker'>
-							<img src='https://icongr.am/material/link-variant.svg?size=20&color=ffffff' />
+							{/* <img src='https://icongr.am/material/link-variant.svg?size=20&color=ffffff' /> */}
+							❖
 						</span>
-						<NavLink to='/'>app name here </NavLink>
+						<NavLink to='/welcome'>Login.</NavLink>
 					</AnimatedFlasher>
 				</div>
 			</div>

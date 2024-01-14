@@ -7,7 +7,7 @@ export const SigninSection = styled.section`
 	justify-content: center;
 	flex-direction: column;
 
-	width: 21rem;
+	width: 23rem;
 
 	color: white;
 	border: 7px solid black;
