@@ -11,9 +11,12 @@ import {
 } from "date-fns";
 
 export const RoomDetails = ({ currentRoom }) => {
+
+
+
 	// ROOM CREATED AT
-	const currentDate = new Date(currentRoom.createdAt);
-	const MonthsBefore = subMonths(currentDate, 40);
+	const currentDate = new Date(currentRoom?.createdAt.replace(/^(\d{4}-\d{2}-\d{2}).*/, "$1"));
+	const MonthsBefore = subMonths(currentDate, 0);
 	const formattedCreatedAt = format(MonthsBefore, "yyyy MMM dd");
 
 	const [filename, setFilename] = useState("");
@@ -121,10 +124,7 @@ export const RoomDetails = ({ currentRoom }) => {
 					<div className='created_at'>
 						<span className='text'>Created at</span>
 						<span className='format_time_ago'>
-							{format(
-								new Date(formattedCreatedAt),
-								"yyyy MMM dd"
-							)}
+							{formattedCreatedAt}
 						</span>
 					</div>
 				</div>

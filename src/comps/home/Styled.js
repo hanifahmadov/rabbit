@@ -182,7 +182,7 @@ export const RightSection = styled.section`
 	margin-left: ${({theme}) => theme.device.mobile ? '0px' : '10px'};
 
 	padding: 0px 0px 0px 0px;
-	transition: filter 1s ease-in-out;
+	transition: filter .5s ease-in-out;
 
 	${({$display}) => $display ? 
 		`
