@@ -37,7 +37,7 @@ export const SignupContainer = styled.section`
 	${({ theme }) =>
 		theme.device.mobile &&
 		`
-		width: 20rem;
+		width: 26rem;
 		header {
 
 			h3 {
@@ -104,8 +104,9 @@ export const SignupForm = styled.form`
 	${({ theme }) =>
 		theme.device.mobile &&
 		`
-			flex-direction: column;
-			padding: 0px 30px 15px 30px;
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 5px;
 
 		`}
 `;
@@ -243,7 +244,7 @@ export const FormCredentials = styled.div`
 		theme.device.mobile &&
 		`
 
-		width: 100%;
+		width: 65%;
 
 		input { 
 
