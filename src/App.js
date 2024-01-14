@@ -28,7 +28,6 @@ import { Home } from "./comps/home/Home";
 import { Signin } from "./comps/auth/signin/Signin";
 import { Signup } from "./comps/auth/signup/Signup";
 
-
 // layouts
 import { PersistentLayout } from "./comps/layouts/PersistentLayout";
 import { AppLayout } from "./comps/layouts/AppLayout";
@@ -38,10 +37,8 @@ import { RegisterLayout } from "./comps/layouts/RegisterLayout";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Fragment>
-			<Route path='welcome' element={<RegisterLayout />}>
-				<Route index element={<Signin />} />
-				<Route path='register' element={<Signup />} />
-			</Route>
+			<Route path='welcome' element={<Signin />} />
+			<Route path='register' element={<Signup />} />
 
 			<Route element={<PersistentLayout />}>
 				<Route element={<RequireAuthLayout />}>
