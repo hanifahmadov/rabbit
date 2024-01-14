@@ -14,4 +14,14 @@ export const GlobalStyled = createGlobalStyle`
         background: ${clr.dark02}
 
     }
+
+    .registerLayout {
+        display: flex;
+	    align-items: center;
+	    justify-content: center;
+
+	    height: 100%;
+	    width: 100%;
+
+    }
 `;

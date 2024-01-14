@@ -130,7 +130,7 @@ export const Signin = () => {
 			<SigninFooter>
 				<p>
 					Dont have an account ?{" "}
-					<span className='login' onClick={() => navigate('/welcome/register')}>Sign up.</span>
+					<span className='login' onClick={() => navigate('/register')}>Sign up.</span>
 				</p>
 			</SigninFooter>
 		</SigninSection>
