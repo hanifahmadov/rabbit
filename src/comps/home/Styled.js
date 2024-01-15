@@ -203,60 +203,43 @@ export const MessagesSection = styled(motion.div)`
 	height: 100%;
 	width: 100%;
 
-	background: ${clr.dark02};
+	background: transparent;
 	padding: 0px 10px 0rem 10px;
 
 	overflow-y: ${({ $backdrop }) => ($backdrop ? "auto" : "hidden")};
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 	position: relative;
 
-	.spacer {
-		height: 10rem;
+	.autoscrollRef {
+		height: 5rem;
 	}
 
-	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
+	.watermark {
 
-	&::before {
-		content: "";
-		width: 100%;
+	
+		background: transparent;
+		color: black;
+		font-size: 6rem;
+		font-weight: 700;
+		letter-spacing: 2px;
 		height: 100%;
-		display: ${({ $backdrop }) => ($backdrop ? "none" : "block")};
-		background: rgba(0, 0, 0, 0.2);
-		backdrop-filter: blur(4px);
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		z-index: 10;
-	}
-
-
-
-	&::after {
-		content: "${({$currentRoomName}) => `ROOM  ` + $currentRoomName}";
 		width: 100%;
-		height: 100%;
+		opacity: .2;
+		text-align: center;
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		font-size: ${({theme}) => theme.device.mobile ? '2rem' : '4rem'};
-
-
-		text-align: center;
-		font-weight: 800;
-		letter-spacing: 2px;
-		background: transparent;
-		position: sticky;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		z-index: 10;
-		color: white;
-		opacity: 0.025;
 		
+
+		position: fixed;
+		top: 0;
+		z-index: -100;
+
+
 	}
 
+	
 
 
 

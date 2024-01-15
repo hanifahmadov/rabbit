@@ -71,7 +71,7 @@ export const Home = () => {
 	const [backdrop, setBackdrop] = useState(true);
 
 	let socketRef = useRef();
-	let emptyDivRef = useRef();
+	let autoscrollRef = useRef();
 
 	/** SET UP BASICS ON HE CONNECTION
 	 *  informs all when a new user joins
@@ -174,7 +174,7 @@ export const Home = () => {
 				setMessages((prevMessages) => [...prevMessages, response]);
 				setMsg("");
 
-				emptyDivRef?.current?.scrollIntoView({ behavior: "smooth" });
+				autoscrollRef?.current?.scrollIntoView({ behavior: "smooth" });
 			});
 
 			window.socket = socketRef.current;
@@ -330,7 +330,7 @@ export const Home = () => {
 			</LeftSection>
 
 			<RightSection $display={display}>
-				{console.log("325 Home.js: current room", currentRoom)}
+				{/* {console.log("325 Home.js: current room", currentRoom)} */}
 				<MessagesSection
 					$backdrop={backdrop}
 					$currentRoomName={currentRoom?.name?.toUpperCase()}
@@ -346,7 +346,8 @@ export const Home = () => {
 
 					{mapMessages(messages)}
 
-					<div className='spacer' />
+					<div className="watermark">ROOM <br /> {currentRoom?.name?.toUpperCase()}</div>
+					<div className='autoscrollRef' ref={autoscrollRef} />
 				</MessagesSection>
 
 				<MessagesForm onSubmit={handleMessageForm}>
