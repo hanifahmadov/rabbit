@@ -68,7 +68,7 @@ export const LeftSection = styled.section`
 			box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
 			width: 100%;
-			height: ${({theme}) => theme.device.mobile ? '13rem' : '14rem'};
+			height: ${({ theme }) => (theme.device.mobile ? "13rem" : "14rem")};
 
 			border-top: 4px solid black;
 
@@ -158,7 +158,9 @@ export const LeftSection = styled.section`
 
 		box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.6) inset;
 
-		${({theme}) => theme.device.mobile && `
+		${({ theme }) =>
+			theme.device.mobile &&
+			`
 			position: absolute;
 			z-index: 15;
 			left: 5rem;
@@ -179,24 +181,21 @@ export const RightSection = styled.section`
 	width: 100%;
 
 	border: 4px solid black;
-	margin-left: ${({theme}) => theme.device.mobile ? '0px' : '10px'};
+	margin-left: ${({ theme }) => (theme.device.mobile ? "0px" : "10px")};
 
 	padding: 0px 0px 0px 0px;
-	transition: filter .5s ease-in-out;
+	transition: filter 0.5s ease-in-out;
 
-	${({$display}) => $display ? 
-		`
+	${({ $display }) =>
+		$display
+			? `
 			filter: brightness(50%) blur(4px);
 			pointer-events: none;
 		`
-		:
-
-		`
+			: `
 			filter: brightness(100%) blur(0px);
 			pointer-events: auto;
-		`
-	}
-
+		`}
 `;
 
 export const MessagesSection = styled(motion.div)`
@@ -211,12 +210,10 @@ export const MessagesSection = styled(motion.div)`
 	position: relative;
 
 	.autoscrollRef {
-		height: 5rem;
+		height: 7rem;
 	}
 
 	.watermark {
-
-	
 		background: transparent;
 		color: black;
 		font-size: 6rem;
@@ -224,25 +221,17 @@ export const MessagesSection = styled(motion.div)`
 		letter-spacing: 2px;
 		height: 100%;
 		width: 100%;
-		opacity: .2;
+		opacity: 0.2;
 		text-align: center;
 
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
 
 		position: fixed;
 		top: 0;
 		z-index: -100;
-
-
 	}
-
-	
-
-
-
 `;
 
 export const MessagesForm = styled.form`
@@ -303,9 +292,30 @@ export const MessagesForm = styled.form`
 			}
 		}
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+
+		input {
+			padding: .25rem;
+			padding-left: 1rem;
+			height: 3rem;
+
+			&::placeholder {
+				padding-left: 10px;
+				font-size: .8rem;
+				opacity: .5;
+			}
+		}
+	
+	
+		button {
+			display: none;
+		}
+	
+	`}
 `;
-
-
 
 export const RoomDetailsContainer = styled(motion.div)`
 	display: flex;
