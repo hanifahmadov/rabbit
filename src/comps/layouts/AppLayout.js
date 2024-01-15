@@ -19,10 +19,8 @@ export const AppLayout = () => {
 
 	return (
 		<AppLayoutContainer>
-			<AppLayoutContent>
 				<Header />
 				<Outlet />
-			</AppLayoutContent>
 		</AppLayoutContainer>
 	);
 };
