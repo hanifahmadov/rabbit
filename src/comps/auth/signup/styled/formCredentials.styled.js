@@ -107,7 +107,7 @@ export const FormCredentialsSection = styled.div`
 		theme.device.mobile &&
 		`
 
-		width: 75%;
+		width: 85%;
 
 		.section_email,
 		.section_password,
