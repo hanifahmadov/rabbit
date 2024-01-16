@@ -2,30 +2,25 @@
 import React, { useRef } from "react";
 import { ToasterContainer } from "./customtoast.styled";
 import logoError from "../logos/error.png";
-import logoSuccess from '../logos/success.png'
+import logoSuccess from "../logos/success.png";
 
-
-
-export const CustomToaster = ({ title, body }) => {
-
+export const CustomToaster = ({ title, body1, body2 = "" }) => {
 	const selectLogo = (title) => {
-		console.log("title");
-		console.log(title);
-	
 		let res = logoError;
-	
+
 		switch (title) {
-			case 'Success':
+			case "Success":
 				res = logoSuccess;
+				2;
 				break;
-			case 'Error':
+			case "Error":
 				res = logoError;
 				break;
 			default:
 				res = logoError;
 				break;
 		}
-	
+
 		return res;
 	};
 
@@ -33,7 +28,9 @@ export const CustomToaster = ({ title, body }) => {
 		<ToasterContainer>
 			<img src={selectLogo(title)} />
 			<p>
-				<span className='body'>{body}</span>
+				<span>{body1}</span>
+				<br />
+				<span>{body2}</span>
 			</p>
 		</ToasterContainer>
 	);

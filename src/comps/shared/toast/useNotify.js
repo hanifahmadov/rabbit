@@ -4,16 +4,15 @@ import { toast } from "react-toastify";
 import { CustomToaster } from "./CustomToaster";
 
 export const useNotify = () => {
-
-    const toastRef = useRef();
+	const toastRef = useRef();
 
 	// notify can be called & run inside any component
-	const notify = (title, body) => {
+	const notify = (title, body1, body2 = "") => {
 		return (toastRef.current = toast(
-			<CustomToaster title={title} body={body} />,
+			<CustomToaster title={title} body1={body1} body2={body2} />,
 			{
 				position: "top-right",
-				autoClose: 5000,
+				autoClose: 4000,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
@@ -24,7 +23,7 @@ export const useNotify = () => {
 		));
 	};
 
-    const dismiss = () =>  toast.dismiss(toastRef.current);
+	const dismiss = () => toast.dismiss(toastRef.current);
 
-	return { alert: notify, dismiss }
+	return { alert: notify, dismiss };
 };

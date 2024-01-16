@@ -23,10 +23,23 @@ export const ToasterContainer = styled.div`
 	p {
         padding-left: 10px;
         font-size: 1rem;
-        font-weight: 600;
-
-		.title {
-			
-		}
+        font-weight: 600;		
 	}
+
+	${({theme}) => theme.device.mobile && `
+	
+		img {
+			width: 1rem;
+		}
+
+		p {
+			padding-left: 10px;
+			font-size: .8rem;
+			font-weight: 600;	
+			letter-spacing: .25px;	
+		}
+	
+	`}
+
+
 `;
