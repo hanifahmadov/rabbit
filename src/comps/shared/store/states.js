@@ -61,7 +61,9 @@ export const roomsDefault = atom({
 
 export const currentRoomDefault = atom({
 	key: "currentRoomDefault",
-	default: {
+	default: null
+	
+	// {
 		//: current room properties
 		// id: 8080,
 		// name: 'general',
@@ -69,7 +71,7 @@ export const currentRoomDefault = atom({
 		// joinedusers: [],
 		// createdAt: new Date(),
 		// messages: [],
-	},
+	// },
 });
 
 export const messageDefault = atom({

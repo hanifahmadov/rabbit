@@ -33,7 +33,7 @@ import {
 } from "../shared/store/states";
 
 import { socketConnect } from "../../apis/socketConnect";
-import { userState } from "../auth/authStore/states";
+import { userState } from "../auth/authStore/states.js";
 import { Room } from "./Room.js";
 import { RoomDetails } from "./RoomDetails.js";
 import { Account } from "../shared/account/Account.js";
@@ -256,11 +256,18 @@ export const Home = () => {
 	};
 
 	const mapMessages = (messages) => {
-		return messages.map((i, j) => {
-			if (i.room === currentRoom._id) {
-				return <Messages key={j} message={i} user={user} />;
-			}
-		});
+		
+		if (messages.length && currentRoom) {
+
+			console.log(messages);
+		console.log("current room", currentRoom);
+
+			// return messages.map((i, j) => {
+			// 	if (i.room == currentRoom?._id) {
+			// 		return <Messages key={j} message={i} user={user} />;
+			// 	}
+			// });
+		}
 	};
 
 	return (
@@ -346,7 +353,9 @@ export const Home = () => {
 
 					{mapMessages(messages)}
 
-					<div className="watermark">ROOM <br /> {currentRoom?.name?.toUpperCase()}</div>
+					<div className='watermark'>
+						ROOM <br /> {currentRoom?.name?.toUpperCase()}
+					</div>
 					<div className='autoscrollRef' ref={autoscrollRef} />
 				</MessagesSection>
 

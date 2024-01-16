@@ -9,7 +9,7 @@ export const AppLayoutContainer = styled.div`
 	height: 100%;
 	width: 100%;
 
-	padding: 20px;
+
 
 	${({ theme }) =>
 		theme.device.mobile &&
@@ -19,14 +19,20 @@ export const AppLayoutContainer = styled.div`
 	`};
 `;
 
-// export const AppLayoutContent = styled.div`
-// 	display: flex;
-// 	justify-content: space-between;
-// 	flex-direction: column;
+export const AppLayoutContent = styled.div`
+	display: flex;
 
-// 	height: 100%;
-// 	width: 200rem;
-// `;
+	flex-direction: column;
+
+	height: 100%;
+	width: 50rem;
+
+
+	//: this is for modal in Auth Layout
+	position: relative;
+	background: ${clr.dark02};
+	backdrop-filter: blur(10px);
+`;
 
 export const RegisterLayoutContainer = styled.div`
 	display: flex;

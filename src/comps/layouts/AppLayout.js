@@ -9,9 +9,6 @@ import { AppLayoutContainer, AppLayoutContent } from "./Styled";
 import { Header } from "../header/Header";
 
 export const AppLayout = () => {
-	// let location = useLocation();
-	// console.log(location, 'localion::')
-
 	/**
 	 *  AppLayoutContainer has a 100 * 100 width and height
 	 *  then will make the content center width justify content
@@ -19,8 +16,10 @@ export const AppLayout = () => {
 
 	return (
 		<AppLayoutContainer>
+			<AppLayoutContent>
 				<Header />
 				<Outlet />
+			</AppLayoutContent>
 		</AppLayoutContainer>
 	);
 };
