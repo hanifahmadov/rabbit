@@ -114,14 +114,14 @@ export const InformantSection = styled(motion.div)`
 
         .footer_signup {
     
-            padding: 0px;
+            padding: 2px 4px;
     
             p {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
     
             .login {
-                font-size: .9rem;
+                font-size: .8rem;
             }
         }
 

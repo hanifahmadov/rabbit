@@ -9,7 +9,6 @@ export const Remember = ({remember, setRemember}) => {
 		setRemember(!remember)
 		
 	}
-	
 
 	return (
 		<RememberSection

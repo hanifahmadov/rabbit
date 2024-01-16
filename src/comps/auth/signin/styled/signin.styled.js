@@ -21,7 +21,7 @@ export const SigninSection = styled.section`
 
 		h3 {
 			text-align: center;
-			font-size: 1.7rem;
+			font-size: 1.5rem;
 			font-weight: 700;
 			padding: 12px;
 			margin: 0;
@@ -31,7 +31,9 @@ export const SigninSection = styled.section`
 		}
 	}
 
-	${({theme}) => theme.device.mobile && `
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
 		width: 21rem;	
 
 		header {
@@ -54,7 +56,7 @@ export const SigninFooter = styled.div`
 	align-items: center;
 
 	padding: 10px;
-	
+
 	border-top: 7px solid black;
 
 	p {
@@ -91,4 +93,21 @@ export const SigninFooter = styled.div`
 			background: rgba(255, 255, 255, 0.15);
 		}
 	}
+
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
+		padding: 2px;
+
+		p {
+			font-size: 0.8rem;
+			font-weight: 600;
+		}
+
+		.login {
+			font-size: .8rem;
+			padding: 2px 8px; 
+			font-weight: 600;
+		}
+`}
 `;

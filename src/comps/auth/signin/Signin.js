@@ -13,80 +13,71 @@ import { signInApi } from "../../../apis/apiCalls";
 // shared
 import { useNotify } from "../../shared/toast/useNotify";
 import { SigninFooter, SigninSection } from "./styled/signin.styled";
-import {
-	Button,
-	SigninForm,
-	Input,
-	Label,
-} from "./styled/form.styled";
-import { Remember } from "./Remember";
 import apiUrl from "../../../apis/apiUrl";
 
-
+import { FormCredentials } from "./FormCredentials";
+import { Form } from "./styled/form.styled";
 
 export const Signin = () => {
 	const [user, setUser] = useRecoilState(userState);
 	const [email, setEmail] = useState("");
 	const [pwd, setPwd] = useState("");
-	const [remember, setRemember] = useState(false)
+	const [remember, setRemember] = useState(false);
 
 	const navigate = useNavigate();
 	const emailRef = useRef();
 	const { alert, dismiss } = useNotify();
 
-	// clear error messages
-	// when toester is on but client trying to type
-	// then needed to clear the toester right away
 	useEffect(() => {
-		// toast.dismiss();
 		dismiss();
 	}, [email, pwd]);
+
+	const credentialsCheck = (email, pwd) => {
+		let em = EMAIL_REGEX.test(email);
+		let pw = PWD_REGEX.test(pwd);
+
+		if (!em && !pw) {
+			alert("Email & Password", ": typo error!");
+			return;
+		} else if (!em) {
+			alert("Email address", ": typo error!");
+			return;
+		} else if (!pw) {
+			alert("Password", ": typo error!");
+			return;
+		}
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-
-		console.log("window hostname", window.location.hostname)
-		console.log("handle submit");
-
 		// Now check the EMAIL and PWD REGEX here to make sure client has been added the
 		// correct type of the email address and password
 		// cause the the email & password has been used to create the account has been passed the REGEXES before
-		let emailCheck = EMAIL_REGEX.test(email);
-		let pwdCheck = PWD_REGEX.test(pwd);
+		credentialsCheck(email, pwd);
 
-		if (!emailCheck && !pwdCheck) {
-			alert("Email & Password", "both are incorrect.");
-		} else if (!emailCheck) {
-			alert("Email address", "is incorrect.");
-		} else if (!pwdCheck) {
-			alert("Password", "is incorrect.");
-		} else {
-			// in this stage means there is no error
-			// and ready to call sign in apis
-			signInApi({ email, password: pwd, remember: remember })
-				.then((result) => {
-					console.log("result", result);
+		// in this stage means there is no error
+		// and ready to call sign in apis
+		signInApi({ email, password: pwd, remember: remember })
+			.then((result) => {
+				console.log("result", result);
 
-					const { user } = result.data
+				const { user } = result.data;
 
-					const updatedUser = produce(user, (draft) => {
-						draft = user;
-						draft.avatar = apiUrl+'/'+user.avatar;
-						return draft
-					});
-
-					setUser(updatedUser);
-					navigate("/");
-					return;
-				})
-				.catch((err) => {
-					alert("Error", err.message);
+				const updatedUser = produce(user, (draft) => {
+					draft = user;
+					draft.avatar = apiUrl + "/" + user.avatar;
+					return draft;
 				});
-		}
-	};
 
-	const enableSignin = pwd.length > 8 && email.length > 5 ? true : false;
+				setUser(updatedUser);
+				navigate("/");
+				return;
+			})
+			.catch((err) => {
+				alert("Error", err.message);
+			});
+	};
 
 	return (
 		<SigninSection className='register signin'>
@@ -94,43 +85,26 @@ export const Signin = () => {
 				<h3>LOGIN</h3>
 			</header>
 
-			<SigninForm onSubmit={handleSubmit}>
-				<section className='section_email'>
-					<Label htmlFor='email'>Email address</Label>
-
-					<Input
-						type='email'
-						id='email'
-						placeholder='Enter email address'
-						autoComplete='true'
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</section>
-
-				<section className='section_password'>
-					<Label htmlFor='password'>Password</Label>
-					<Input
-						type='text'
-						id='password'
-						placeholder='Enter password'
-						autoComplete='true'
-						value={pwd}
-						onChange={(e) => setPwd(e.target.value)}
-					/>
-				</section>
-
-				<Remember remember={remember} setRemember={setRemember}/>
-			
-				<Button type='submit' disabled={!enableSignin}>
-					Submit
-				</Button>
-			</SigninForm>
+			<Form onSubmit={handleSubmit}>
+				<FormCredentials
+					email={email}
+					setEmail={setEmail}
+					pwd={pwd}
+					setPwd={setPwd}
+					remember={remember}
+					setRemember={setRemember}
+				/>
+			</Form>
 
 			<SigninFooter>
 				<p>
 					Dont have an account ?{" "}
-					<span className='login' onClick={() => navigate('/register')}>Sign up.</span>
+					<span
+						className='login'
+						onClick={() => navigate("/register")}
+					>
+						Sign up.
+					</span>
 				</p>
 			</SigninFooter>
 		</SigninSection>

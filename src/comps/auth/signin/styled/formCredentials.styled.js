@@ -1,8 +1,8 @@
 /* eslint-disable */
 import styled from "styled-components";
 
-export const FormCredentialsSection = styled.div`
-	width: 50%;
+export const FormCredentialsSection = styled.section`
+	width: 100%;
 
 	display: flex;
 	flex-direction: column;
@@ -10,8 +10,7 @@ export const FormCredentialsSection = styled.div`
 	align-items: center;
 
 	.section_email,
-	.section_password,
-	.section_confirmPassword {
+	.section_password {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
@@ -25,13 +24,12 @@ export const FormCredentialsSection = styled.div`
 			font-weight: 600;
 			font-size: 0.9rem;
 			text: center;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-top-right-radius: 3px;
-            border-top-left-radius: 3px;
-            border-bottom: none;
-            text-shadow: 2px 2px 2px black;
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			border-top-right-radius: 3px;
+			border-top-left-radius: 3px;
+			border-bottom: none;
+			text-shadow: 2px 2px 2px black;
 		}
-
 
 		input {
 			width: 100%;
@@ -46,7 +44,7 @@ export const FormCredentialsSection = styled.div`
 			outline: none;
 			transition: all 0.25s ease-in-out;
 			border-top-left-radius: 0px;
-            border-top-right-radius: 0px;
+			border-top-right-radius: 0px;
 
 			&::placeholder {
 				color: rgba(0, 0, 0, 0.4);
@@ -68,7 +66,7 @@ export const FormCredentialsSection = styled.div`
 		margin-top: 1rem;
 	}
 
-    button {
+	button {
 		width: 100%;
 		border: 3px solid rgba(255, 255, 255, 0.1);
 		padding: 5px 10px;
@@ -78,8 +76,7 @@ export const FormCredentialsSection = styled.div`
 		font-weight: 700;
 		cursor: pointer;
 		transition: all 0.1s ease-in-out;
-        text-shadow: 2px 2px 2px black;
-
+		text-shadow: 2px 2px 2px black;
 
 		margin-top: 15px;
 
@@ -123,7 +120,7 @@ export const FormCredentialsSection = styled.div`
             }
 
             input {
-				padding: 5px 5px 5px 7px;
+				padding: 5px 5px 5px 5px;
 				font-size: 0.8rem;
 			}
 		}

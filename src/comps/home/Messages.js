@@ -11,7 +11,7 @@ import {
 } from "date-fns";
 
 export const Messages = ({ message, user }) => {
-	let tempa = message.owner._id === user._id ? 1 : 0;
+	let tempa = message.owner?._id === user._id ? 1 : 0;
 
 	const customFormatDistanceToNow = (date) => {
 		let distance = formatDistanceToNowStrict(date);

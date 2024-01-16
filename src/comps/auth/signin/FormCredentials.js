@@ -1,18 +1,17 @@
 /* eslint-disable */
-import React, {} from "react";
+import React from "react";
 import { FormCredentialsSection } from "./styled/formCredentials.styled";
+import { Remember } from "./Remember";
 
 export const FormCredentials = ({
-	setInformant,
 	email,
 	setEmail,
 	pwd,
 	setPwd,
-	confirmPwd,
-	setConfirmPwd,
+	remember,
+	setRemember,
 }) => {
-	let enableSignup =
-		email.length > 5 && pwd.length > 8 && confirmPwd.length > 8;
+	const enableSignin = pwd.length > 8 && email.length > 5 ? true : false;
 
 	return (
 		<FormCredentialsSection>
@@ -26,8 +25,6 @@ export const FormCredentials = ({
 					autoComplete='true'
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					onFocus={() => setInformant("email")}
-					onBlur={() => setInformant("avatar")}
 				/>
 			</section>
 
@@ -40,24 +37,12 @@ export const FormCredentials = ({
 					autoComplete='true'
 					value={pwd}
 					onChange={(e) => setPwd(e.target.value)}
-					onFocus={() => setInformant("pwd")}
-					onBlur={() => setInformant("avatar")}
 				/>
 			</section>
-			<section className='section_confirmPassword'>
-				<label htmlFor='confirmPassword'>Confirm password</label>
-				<input
-					type='password'
-					id='confirmPassword'
-					placeholder='Re enter password'
-					autoComplete='true'
-					value={confirmPwd}
-					onChange={(e) => setConfirmPwd(e.target.value)}
-					onFocus={() => setInformant("conPwd")}
-					onBlur={() => setInformant("avatar")}
-				/>
-			</section>
-			<button disabled={!enableSignup}>Submit</button>
+
+			<Remember remember={remember} setRemember={setRemember} />
+
+			<button disabled={!enableSignin}>Submit</button>
 		</FormCredentialsSection>
 	);
 };
