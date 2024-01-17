@@ -256,12 +256,7 @@ export const Home = () => {
 	};
 
 	const mapMessages = (messages) => {
-		
 		if (messages.length && currentRoom) {
-
-			console.log("messages", messages);
-			console.log("current room", currentRoom);
-
 			return messages.map((i, j) => {
 				if (i.room == currentRoom?._id) {
 					return <Messages key={j} message={i} user={user} />;
