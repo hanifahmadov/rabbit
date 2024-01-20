@@ -1,53 +1,47 @@
 /* eslint-disable */
+
+/* NPM Packages */
 import React, { Fragment, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-
-//: styles
-import { HeaderContainer } from "./header.styled";
-
-//: images
-import userLogo from "../shared/logos/vvv.png";
 import { useRecoilValue } from "recoil";
-import { activeUsersDefault, allUsersDefault } from "../shared/store/states";
-import apiUrl from "../../apis/apiUrl";
 
-//: comps
+/* Styled & Apis & State */
+import apiUrl from "../../apis/apiUrl";
+import { HeaderContainer } from "./header.styled";
+import { usersState, activeUsersState } from "../home/homeStore/states";
+import { deviceState } from "../shared/store/states";
+
+/* Subs */
+import { DesktopHeader } from "./headerDesktop/DesktopHeader";
+import { MobileHeader } from "./headerMobile/MobileHeader";
 
 export const Header = () => {
-	const allUsers = useRecoilValue(allUsersDefault);
-	const activeUsers = useRecoilValue(activeUsersDefault);
+	const users = useRecoilValue(usersState);
+	const activeUsers = useRecoilValue(activeUsersState);
+	const device = useRecoilValue(deviceState);
 
-	const online = allUsers.map((user) => {
+	const online = users.map((user) => {
 		if (activeUsers.includes(user._id)) {
 			return user._id;
 		}
 	});
 
-
-
 	return (
 		<HeaderContainer>
-			<div className='navbar-title'>
-				<span className="span_header">
-					Users
-				</span>
-			</div>
-
-			<div className='active_users'>
-				{allUsers.length &&
-					allUsers.map((user, index) => {
-						return (
-							<div
-								key={index}
-								className={
-									online.includes(user._id) ? "active" : ""
-								}
-							>
-								<img src={apiUrl + "/" + user.avatar} />
-							</div>
-						);
-					})}
-			</div>
+			{device.mobile ? (
+				<MobileHeader
+					apiUrl={apiUrl}
+					users={users}
+					activeUsers={activeUsers}
+					online={online}
+				/>
+			) : (
+				<DesktopHeader
+					apiUrl={apiUrl}
+					users={users}
+					activeUsers={activeUsers}
+					online={online}
+				/>
+			)}
 		</HeaderContainer>
 	);
 };

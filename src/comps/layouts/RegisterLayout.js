@@ -4,8 +4,8 @@ import { Outlet } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import 'animate.css';
 
-//: styles
-import { RegisterLayoutContainer } from "./Styled";
+/* Styled */
+import { RegisterLayoutContainer } from "./styled/registerLayouts.styled";
 
 export const RegisterLayout = () => {
 	// let [modal, setModal] = useRecoilState(modalState);

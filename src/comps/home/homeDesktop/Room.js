@@ -1,14 +1,14 @@
 import React from "react";
-import apiUrl from "../../apis/apiUrl";
+import apiUrl from "../../../apis/apiUrl";
 import { RoomSection } from "./styled/room.styled";
 
-export const Room = ({ room, currentRoom, setCurrentRoom }) => {
-	const active = room._id === currentRoom._id;
+export const Room = ({ room, curRoom, setCurRoom }) => {
+	const active = room._id === curRoom._id;
 
 	return (
 		<RoomSection
 			$active={active}
-			onClick={() => setCurrentRoom(room)}
+			onClick={() => setCurRoom(room)}
 		>
 			<section className='icon'>
 				<img src={apiUrl + "/" + room.icon} alt='logo' />
@@ -26,4 +26,4 @@ export const Room = ({ room, currentRoom, setCurrentRoom }) => {
 	);
 };
 
-// (room.name[0].toUpperCase() + room.name.slice(1)).slice(0, 8)
+

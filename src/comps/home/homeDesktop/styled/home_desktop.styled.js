@@ -1,18 +1,15 @@
 /* eslint-disable */
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const HomeDesktopSection = styled.section`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
 
-	
+	height: 100%;
 	width: 100%;
-	padding: 0px;
-	margin: 0px;
 
-	background: black;
-	border-bottom: 3px solid white;
-
+	// background: red;
 `;
+

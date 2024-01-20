@@ -20,7 +20,6 @@ import { GlobalStyled } from "./styled";
 import {
 	darkmodeState,
 	deviceState,
-	displayNavbarAccountState,
 } from "./comps/shared/store/states";
 
 // comps
@@ -60,9 +59,7 @@ const router = createBrowserRouter(
 export const App = () => {
 	let [device, setDevice] = useRecoilState(deviceState);
 	let [darkmode, setDarkmode] = useRecoilState(darkmodeState);
-	let [displayNavbarAccount, setDisplayNavbarAccount] = useRecoilState(
-		displayNavbarAccountState
-	);
+
 
 	//: mobile
 	const mobile = useMediaQuery({

@@ -1,18 +1,15 @@
 /* eslint-disable */
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const MobileHeaderContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
 
-	
 	width: 100%;
-	padding: 0px;
-	margin: 0px;
+	padding: 0rem;
+	border: 4px solid black;
 
-	background: black;
-	border-bottom: 3px solid white;
 
 `;

@@ -1,76 +1,60 @@
 /* eslint-disable */
-import React, { useState, useRef, useEffect } from "react";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+// NPM Packages
+import { useState, useRef, useEffect } from "react";
+import { useRecoilState, useResetRecoilState, useRecoilValue } from "recoil";
 import { produce } from "immer";
 import { io } from "socket.io-client";
-import apiUrl from "../../apis/apiUrl";
 import chalk from "chalk";
-import { motion, AnimatePresence } from "framer-motion";
 
-import { formatDistanceToNow } from "date-fns";
+// STATES & STYLES
+import { deviceState } from "../shared/store/states";
+import {
+	socketConState,
+	curRoomState,
+	roomsState,
+	usersState,
+	activeUsersState,
+} from "./homeStore/states";
+import { userState } from "../auth/authStore/states";
+
+// LOCALS
+import apiUrl from "../../apis/apiUrl";
 import info from "../shared/logos/info1.png";
-
-// styled
-import {
-	MessagesForm,
-	HomeContainer,
-	UsersSection,
-	RoomsSection,
-	RightSection,
-	LeftSection,
-	MessagesSection,
-	Header,
-	Content,
-} from "./Styled.js";
-
-// states
-import {
-	roomsDefault,
-	socketConnectionDefaults,
-	currentRoomDefault,
-	allUsersDefault,
-	activeUsersDefault,
-} from "../shared/store/states";
-
-import { socketConnect } from "../../apis/socketConnect";
-import { userState } from "../auth/authStore/states.js";
-import { Room } from "./Room.js";
-import { RoomDetails } from "./RoomDetails.js";
-import { Account } from "../shared/account/Account.js";
-import { CreateRoom } from "./CreateRoom.js";
-import { Messages } from "./Messages.js";
-import { JoinRoom } from "./JoinRoom.js";
-import {
-	roomSettingDesktopVariants,
-	roomSettingMobileVariants,
-	roomVariant,
-} from "./helpers/variants.js";
+import { reset } from "./homeStore/helpers";
+import { HomeDesktop } from "./homeDesktop/HomeDesktop";
 
 export const Home = () => {
-	const [socketConnection, setSocketConnection] = useRecoilState(
-		socketConnectionDefaults
-	);
-
-	const [msg, setMsg] = useState("");
-	const [messages, setMessages] = useState([]);
-	const [msgSubmitted, setMsgSubmitted] = useState(false);
-	const [createRoomSubmitted, setCreateRoomSubmitted] = useState(false);
+	// default states
+	const device = useRecoilValue(deviceState);
+	const [socketCon, setSocketCon] = useRecoilState(socketConState);
+	const [curRoom, setCurRoom] = useRecoilState(curRoomState);
 	const [user, setUser] = useRecoilState(userState);
-	const [rooms, setRooms] = useRecoilState(roomsDefault);
-	const [currentRoom, setCurrentRoom] = useRecoilState(currentRoomDefault);
-	const resetRooms = useResetRecoilState(roomsDefault);
+	const [rooms, setRooms] = useRecoilState(roomsState);
+	const [users, setUsers] = useRecoilState(usersState);
+	const [activeUsers, setActiveUsers] = useRecoilState(activeUsersState);
+
+	// resets
+	const resetall = {
+		resetUser: useResetRecoilState(userState),
+		resetRooms: useResetRecoilState(roomsState),
+		resetCurRoom: useResetRecoilState(curRoomState),
+		resetUsers: useResetRecoilState(usersState),
+		resetActiveUsers: useResetRecoilState(activeUsersState),
+		resetSocketCon: useResetRecoilState(socketConState),
+	};
+
+	// current states
+	const [text, setText] = useState("");
+	const [roomMessages, setRoomMessages] = useState([]);
 	const [createRoom, setCreateRoom] = useState("");
-	const [roomAccessStrict, setRoomAccessStrict] = useState(false);
-
-	const [allUsers, setAllUsers] = useRecoilState(allUsersDefault);
-	const [activeUsers, setActiveUsers] = useRecoilState(activeUsersDefault);
-
-	const [display, setDisplay] = useState(false);
-	const [displayRoomInfo, setDisplayRoomInfo] = useState(false);
-	const [displayCreateRoom, setDisplayCreateRoom] = useState(false);
+	const [textSubmitted, setTextSubmitted] = useState(false);
+	const [createRoomSubmitted, setCreateRoomSubmitted] = useState(false);
+	const [roomAccessStrict, setRoomAccessStrict] = useState(false);	
 	const [backdrop, setBackdrop] = useState(true);
 
-	let socketRef = useRef();
+
+
+	// refs
 	let autoscrollRef = useRef();
 
 	/** SET UP BASICS ON HE CONNECTION
@@ -80,8 +64,8 @@ export const Home = () => {
 	 *  and etc. mentioned below
 	 */
 	useEffect(() => {
-		if (!socketConnection) {
-			socketRef.current = io(apiUrl, {
+		if (!socketCon) {
+			const socket = io(apiUrl, {
 				// Disable autoConnect to have more control over headers
 				reconnection: false,
 				extraHeaders: {
@@ -89,41 +73,50 @@ export const Home = () => {
 				},
 			});
 
-			socketRef.current.on("connect_error", (err) => {
-				console.log(chalk.red("connect_error"));
+			socket.on("connect_error", (err) => {
+				console.log(chalk.red("74: Home.js ~ connect_error"));
 				console.log(err);
 
-				console.log("resetRooms called");
-				resetRooms();
+				reset(resetall);
 			});
 
-			socketRef.current.on("connect_failed", (err) => {
-				console.log(chalk.red("connect_failed"));
+			socket.on("connect_failed", (err) => {
+				console.log(chalk.red("84: Home.js ~ connect_failed"));
 				console.log(err);
 
-				console.log("resetRooms called");
-				resetRooms();
+				reset(resetall);
 			});
 
-			socketRef.current.on("disconnect", (res) => {
-				console.log(chalk.red("84: Home.js ~ disconnect ~ res: ", res));
-
-				console.log("resetRooms called");
-				resetRooms();
-			});
-
-			socketRef.current.on("custom_error", (err) => {
-				console.log(chalk.red("custom_error"));
+			socket.on("custom_error", (err) => {
+				console.log(chalk.red("91: Home.js ~ custom_error"));
 				console.log(err);
+
+				// reset(resetall);
 			});
 
-			// SOCKET ON JUST CONNECTED
-			socketRef.current.on("just_connected", (response) => {
-				let { justConnected, rooms } = response;
+			socket.on("disconnection", (res) => {
+				console.log(
+					chalk.red("99: Home.js ~ disconnection ~ res: ", res)
+				);
 
-				console.log("128: Home.js roomsss", rooms);
+				reset(resetall);
+			});
 
-				let updatedMessages = produce(messages, (draft) => {
+			/* CUSTOMS */
+			// NEW CONNECTION
+			socket.on("new_connection", (response) => {
+				console.log(
+					"132: Home.js ~ socket: new_connection ~ response",
+					response
+				);
+
+				const { rooms } = response;
+
+				/**
+				 *  rooms are fully populated
+				 *  with owners, users, messages
+				 */
+				const updatedMessages = produce(roomMessages, (draft) => {
 					for (let room of rooms) {
 						for (let msg of room.messages) {
 							draft.push(msg);
@@ -132,28 +125,31 @@ export const Home = () => {
 				});
 
 				setRooms(rooms);
-				setMessages(updatedMessages);
-				setCurrentRoom(rooms.find((room) => room.owner === null));
+				setRoomMessages(updatedMessages);
+				setCurRoom(rooms.find((room) => room.owner === null));
 			});
 
-			// SOCKET ON USERS ON CONNECTION
-			socketRef.current.on("usersOnConnection", (res) => {
-				console.log("usersOnConnection: ", res);
+			/** SOCKET ON USERS ON CONNECTION */
+			socket.on("users_onConnection", (res) => {
+				console.log("155: Home.js ~ socket: users onConnection: ", res);
 
-				setAllUsers(res.allUsers);
+				setUsers(res.allUsers);
 				setActiveUsers(res.activeUsers);
 			});
 
-			// SOCKET ON USERS ON  DISCONNECTED
-			socketRef.current.on("usersOnDisconnection", (res) => {
-				console.log("usersOnDisconnection: ", res);
+			/** SOCKET ON USERS ON DISCONNECTED */
+			socket.on("users_onDisconnection", (res) => {
+				console.log(
+					"163: Home.js ~ socket: users onDisconnection: ",
+					res
+				);
 
-				setAllUsers(res.allUsers);
+				setUsers(res.allUsers);
 				setActiveUsers(res.activeUsers);
 			});
 
-			// SOCKET ON NEW ROOM
-			socketRef.current.on("new_room", (response) => {
+			/**  SOCKET ON NEW ROOM  */
+			socket.on("new_room", (response) => {
 				console.log("new_room ~ response: ", response);
 				const { room } = response;
 
@@ -167,206 +163,22 @@ export const Home = () => {
 				});
 			});
 
-			// SOCKET ON NEW MESSAGE
-			socketRef.current.on("new_message", (response) => {
+			/**  SOCKET ON NEW MESSAGE */
+			socket.on("new_message", (response) => {
 				// console.log("new_message, response: ", response);
 
-				setMessages((prevMessages) => [...prevMessages, response]);
-				setMsg("");
+				setRoomMessages((prevMessages) => [...prevMessages, response]);
+				setText("");
 
 				autoscrollRef?.current?.scrollIntoView({ behavior: "smooth" });
 			});
 
-			window.socket = socketRef.current;
-			setSocketConnection(true);
+			window.socket = socket;
+			setSocketCon(true);
 		}
 	}, []);
 
-	/** VALID USER ACCESS GRANTED
-	 *  users cant read/write to a room  by default
-	 *  must a member of the room
-	 *  by getting authorized from the room owner
-	 */
-
-	useEffect(() => {
-		let valid = currentRoom?.users?.some((u) => u._id === user._id);
-
-		if (!valid) {
-			setRoomAccessStrict(true);
-		} else {
-			setRoomAccessStrict(false);
-		}
-	}, [currentRoom]);
-
-	/** USER AUTHORIZATION CHECKER
-	 *  users cant read/write to a room  by default
-	 *  must a member of the room
-	 *  by getting authorized from the room owner
-	 */
-	useEffect(() => {
-		const valid = currentRoom?.users?.some((u) => u._id == user._id);
-		// console.log('196: Home.js rooms', rooms)
-		const cr = rooms.find((room) => room._id === currentRoom._id);
-
-		setBackdrop(valid);
-		setCurrentRoom(cr);
-	}, [rooms, currentRoom]);
-
-	// HANDLE MESSAGE FORM
-	const handleMessageForm = (e) => {
-		e.preventDefault();
-
-		socketRef.current.emit("send_message", {
-			roomName: currentRoom.name,
-			roomId: currentRoom._id,
-			msg,
-		});
-
-		setMsgSubmitted(!msgSubmitted);
-	};
-
-	const handleRoomDetailsClick = () => {
-		if (!display) {
-			setDisplay(true);
-			setDisplayRoomInfo(true);
-			setDisplayCreateRoom(false);
-		} else {
-			if (displayRoomInfo) {
-				setDisplay(false);
-			} else {
-				setDisplayRoomInfo(true);
-				setDisplayCreateRoom(false);
-			}
-		}
-	};
-
-	const handleCreateRoomClick = () => {
-		if (!display) {
-			setDisplay(true);
-			setDisplayCreateRoom(true);
-			setDisplayRoomInfo(false);
-		} else {
-			if (displayCreateRoom) {
-				setDisplay(false);
-			} else {
-				setDisplayRoomInfo(false);
-				setDisplayCreateRoom(true);
-			}
-		}
-	};
-
-	const mapMessages = (messages) => {
-		if (messages.length && currentRoom) {
-			return messages.map((i, j) => {
-				if (i.room == currentRoom?._id) {
-					return <Messages key={j} message={i} user={user} />;
-				}
-			});
-		}
-	};
-
-	return (
-		<HomeContainer id='home'>
-			{/* {console.log('300: home.js rooms', rooms)}
-			{console.log('301: home.js current room', currentRoom)}
-			{console.log('302: home.js backdrop', backdrop)} */}
-			<LeftSection>
-				<section className='side_navbar'>
-					<section className='section_rooms'>Rooms</section>
-					<div className='rooms'>
-						{rooms.map((room, index) => (
-							<Room
-								key={index}
-								room={room}
-								currentRoom={currentRoom}
-								setCurrentRoom={setCurrentRoom}
-							/>
-						))}
-					</div>
-
-					<div className='createNewRoom_and_userAccount'>
-						<div
-							className='room_details'
-							onClick={handleRoomDetailsClick}
-						>
-							<span>
-								<img src={info} />
-							</span>
-						</div>
-						<div
-							className='create_new_room'
-							onClick={handleCreateRoomClick}
-						>
-							<span>+</span>
-						</div>
-						<div className='userAccount'>
-							<Account />
-						</div>
-					</div>
-				</section>
-
-				{/* <CreateRoom  user={user}/> */}
-
-				<motion.section
-					className='currentRoomDetailsSection'
-					variants={
-						display
-							? roomSettingMobileVariants
-							: roomSettingDesktopVariants
-					}
-					initial='initial'
-					animate={display ? "animate" : "exit"}
-				>
-					{displayRoomInfo && currentRoom.name && (
-						<RoomDetails
-							currentRoom={currentRoom}
-							setDisplay={setDisplay}
-							set
-						/>
-					)}
-
-					{displayCreateRoom && (
-						<CreateRoom user={user} setDisplay={setDisplay} />
-					)}
-				</motion.section>
-			</LeftSection>
-
-			<RightSection $display={display}>
-				{/* {console.log("325 Home.js: current room", currentRoom)} */}
-				<MessagesSection
-					$backdrop={backdrop}
-					$currentRoomName={currentRoom?.name?.toUpperCase()}
-				>
-					<JoinRoom
-						rooms={rooms}
-						setRooms={setRooms}
-						currentRoom={currentRoom}
-						setCurrentRoom={setCurrentRoom}
-						user={user}
-						backdrop={backdrop}
-					/>
-
-					{mapMessages(messages)}
-
-					<div className='watermark'>
-						ROOM <br /> {currentRoom?.name?.toUpperCase()}
-					</div>
-					<div className='autoscrollRef' ref={autoscrollRef} />
-				</MessagesSection>
-
-				<MessagesForm onSubmit={handleMessageForm}>
-					<input
-						type='text'
-						value={msg}
-						placeholder={`You are typing into ~ ${currentRoom?.name?.toUpperCase()}`}
-						onChange={(e) => setMsg(e.target.value)}
-						disabled={roomAccessStrict}
-					/>
-					<button type='submit' disabled={roomAccessStrict}>
-						<span>➤</span>
-					</button>
-				</MessagesForm>
-			</RightSection>
-		</HomeContainer>
+	return device.mobile ? null : (
+		<HomeDesktop/>
 	);
 };

@@ -1,37 +1,44 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { animate, motion } from "framer-motion";
-import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
+import { motion } from "framer-motion";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { NavLink, useNavigate } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
 
 //: images
-import logo from "../logos/astr.png";
+import logo from "../../shared/logos/logos.png";
 
-//: state & apis & styled
+/* STATE & APIs & STYLED */
+import { userState } from "../../auth/authStore/states";
 import {
-	allUsersDefault,
-	currentRoomDefault,
-	displayNavbarAccountState,
-	roomsDefault,
-	socketConnectionDefaults,
-	socketStateDefaults,
-} from "../store/states";
+	roomsState,
+	curRoomState,
+	usersState,
+	activeUsersState,
+	socketConState,
+	displayAccountState
+} from "../homeStore/states";
 import { AccountContainer } from "./account.styled";
 import { signOutApi } from "../../../apis/apiCalls";
-import { userState } from "../../auth/authStore/states";
-import apiUrl from "../../../apis/apiUrl";
+
+
+/* SUBS */
+import { reset } from "../homeStore/helpers";
 
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);
-	const resetUser = useResetRecoilState(userState);
-	const resetRooms = useResetRecoilState(roomsDefault);
-	const resetCurrentRoom = useResetRecoilState(currentRoomDefault)
-	const resetSocketConnection = useResetRecoilState(socketConnectionDefaults)
-	const resetAllUsers = useResetRecoilState(allUsersDefault)
-	// const socket = useRecoilValue(socketStateDefaults);
 
-	const [dis, setDis] = useRecoilState(displayNavbarAccountState);
+	// resets
+	const resetall = {
+		resetUser: useResetRecoilState(userState),
+		resetRooms: useResetRecoilState(roomsState),
+		resetCurRoom: useResetRecoilState(curRoomState),
+		resetUsers: useResetRecoilState(usersState),
+		resetActiveUsers: useResetRecoilState(activeUsersState),
+		resetSocketCon: useResetRecoilState(socketConState),
+	};
+
+	const [dis, setDis] = useRecoilState(displayAccountState);
 	const navigate = useNavigate();
 
 	let dropDownVariant = {
@@ -70,22 +77,14 @@ export const Account = () => {
 				console.log("sign out result");
 				console.log(res);
 
+				window.socket.disconnect();
 
-				window.socket.disconnect()
-
-			
-				// console.log('disconnectedddddd')
-				resetUser();
-				resetRooms();
-				resetCurrentRoom()
-				resetSocketConnection()
-				resetAllUsers()
-
-
+				console.log('82: Account.js ~ signedOutApi ~ succeessful')
+				reset(resetall)
 				navigate("/welcome");
 			})
 			.catch((err) => {
-				console.log("sign out err");
+				console.log('87: Account.js ~ signedOutApi ~ failed')
 				console.log(err);
 			});
 	};
@@ -96,22 +95,19 @@ export const Account = () => {
 				<img src={user.avatar} alt='logo' className='account-img' />
 			</div>
 
-			<OutsideClickHandler  onOutsideClick={handleOutsideClick} >
+			<OutsideClickHandler onOutsideClick={handleOutsideClick}>
 				<motion.div
 					className='account-dropdown'
 					variants={dropDownVariant}
 					initial='defaults'
 					animate='anime'
 				>
-
 					<div className='account-dropdown-links'>
 						<span className='account-dropdown-links-img'>
-							<img src={user.avatar} alt='logo'/>
+							<img src={user.avatar} alt='logo' />
 						</span>
 
-						<span className="username">
-							{user.username}
-						</span>
+						<span className='username'>{user.username}</span>
 						<div>
 							<NavLink to='#' onClick={handleLinksClick}>
 								Change Logo
@@ -132,7 +128,6 @@ export const Account = () => {
 								Sign Out
 							</NavLink>
 						</div>
-
 					</div>
 				</motion.div>
 			</OutsideClickHandler>

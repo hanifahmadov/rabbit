@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
-import { clr, ff } from "../store/design";
+import { clr, ff } from "../../shared/store/design";
 
 //: ${(props) => console.log(props)}
 
@@ -11,50 +11,43 @@ export const AccountContainer = styled.div`
         position: relative;
     
         border: 3px solid ${
-			$displayNavbarAccount ? "rgba(255, 255, 255, .8)" : clr.rgba.wht02
+			$displayNavbarAccount ? "rgba(255, 255, 255, 1)" : clr.rgba.wht02
 		};
         
         transition: all 0.35s ease-in-out;
 
         border-radius: 10px;
+        padding: 2px;
 
         
-
+        transform: scale(0.9);
     
     
         .account-img {
-
-
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 5px;
             overflow: hidden;
-
-            
     
             img {
-                width: ${theme.device.mobile ? '2.75rem' : '3.25rem'};
-                height:  ${theme.device.mobile ? '2.75rem' : '3.25rem'};
-                border-radius: 10px;
+                width: 3rem;
+                height:  3rem;
+                border-radius: 5px;
                 cursor: pointer;
                 pointer-events: none;
-                
                 transition: all .25s ease-in-out;
-
-
             }
     
         }
     
-       
-    
         .account-dropdown {
             width: 10rem;
             position: absolute;
-            left: 70px;
+            left: 80px;
             bottom: -5px;
             padding-bottom: 8px;
-            border: 4px solid black;
-            border-radius: 5px;
+            border: 3px solid white;
+            border-radius: 10px;
+
             z-index: 1;
         
             // background-color: ${clr.dark};
@@ -63,8 +56,8 @@ export const AccountContainer = styled.div`
             // background: #020816;
             
 
-            color: ${clr.white02};
-            background: ${clr.dark01};
+            color: white;
+            background: black;
 
             .account-dropdown-links {
                 height: 100%;
@@ -97,6 +90,7 @@ export const AccountContainer = styled.div`
 
                     img {
                         width: 6rem;
+                        height: 6rem;
                         border-radius: 5px;
                         pointer-events: none;
                         display: inline-block;
@@ -107,13 +101,14 @@ export const AccountContainer = styled.div`
 
                 .username {
                     display: inline-block;
-                    background: black;
+                    background: rgba(255, 255, 255, .5);
+                    color: black;
                     font-weight: 700;
                     width: 60%;
                     padding: 5px;
                     margin: 5px 0;
                     text-align: center;
-                    border-radius: 5px;
+                    border-radius: 2px;
                     font-size: .8rem;
                     font-family: ${ff.opensans};
                     letter-spacing: .5px;
@@ -181,7 +176,7 @@ export const AccountContainer = styled.div`
                 height: 0;
                 border-style: solid;
                 border-width: 10px 10px 10px 10px;
-                border-color: transparent rgb(0, 0, 0) transparent transparent;
+                border-color: transparent white transparent transparent;
                 z-index:9998;
             }
 
@@ -194,7 +189,7 @@ export const AccountContainer = styled.div`
                 height: 0;
                 border-style: solid;
                 border-width: 10px 10px 10px 10px;
-                border-color: transparent ${clr.dark01} transparent transparent;
+                border-color: transparent black transparent transparent;
                 z-index:9998;
             }
         }

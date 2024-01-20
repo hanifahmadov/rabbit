@@ -10,3 +10,6 @@
 //     console.log(v)
 //     return false
 // })
+var binaryData = Buffer.from('abcd', 'utf-8');
+var binaryData2 = Buffer.from('abc', 'utf-8');
+console.log(binaryData.equals(binaryData2));  // <Buffer 61 62 63>

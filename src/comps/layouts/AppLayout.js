@@ -2,10 +2,13 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
-//:style
-import { AppLayoutContainer, AppLayoutContent } from "./Styled";
+/* Styled */
+import {
+	AppLayoutSection,
+	AppLayoutContentSection,
+} from "./styled/appLayouts.styled";
 
-//: comps
+/* Subs */
 import { Header } from "../header/Header";
 
 export const AppLayout = () => {
@@ -15,11 +18,11 @@ export const AppLayout = () => {
 	 */
 
 	return (
-		<AppLayoutContainer>
-			<AppLayoutContent>
+		<AppLayoutSection>
+			<AppLayoutContentSection>
 				<Header />
 				<Outlet />
-			</AppLayoutContent>
-		</AppLayoutContainer>
+			</AppLayoutContentSection>
+		</AppLayoutSection>
 	);
 };

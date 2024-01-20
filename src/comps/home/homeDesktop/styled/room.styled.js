@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { ff } from "../../shared/store/design";
+import { ff } from "../../../shared/store/design";
 
 export const RoomSection = styled(motion.div)`
 
@@ -11,7 +11,7 @@ export const RoomSection = styled(motion.div)`
     align-items: center;
 	
 	padding: 0px;
-	margin: 5px 5px;
+	margin: 2px 5px;
 	text-align: center;
 	cursor: pointer;
 	overflow: hidden;
@@ -20,13 +20,16 @@ export const RoomSection = styled(motion.div)`
 	height: 4.5rem;
 	width: 4rem;
 
+	padding: 2px;
+
 
 
 	transition: all .2s ease-in-out;
-    border-radius: 8px;
-	border: 3px solid ${({ $active }) =>
-        $active ? "rgba(255, 0, 0, .9)" : "rgba(255, 255, 255, .3)"};
+    border-radius: 7px;
+	border: 2px solid ${({ $active }) =>
+		$active ? "rgb(0 189 255)" : "rgba(255, 255, 255, .3)"};
 
+		// rgb(0 189 255)
 
     .icon {
         overflow: hidden;
@@ -34,12 +37,12 @@ export const RoomSection = styled(motion.div)`
 
         img {
             width: 100%;
-			height: 50px;
-         
+			height: 45px;
+			transition: all .2s ease-in-out;         
             box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 1);
-            border-top-left-radius: 10%;
-            border-top-right-radius: 10%;
-
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+			
         }
     }
 
@@ -56,6 +59,9 @@ export const RoomSection = styled(motion.div)`
 		width: 100%;
 		color: black;
 
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+
 
 		text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
 			0px -4px 10px rgba(255,255,255,0.3);
@@ -71,24 +77,5 @@ export const RoomSection = styled(motion.div)`
     }
 
 
-	${({theme}) => theme.device.mobile && `
-	
-		height: 4rem;
-		width: 3.5rem;
-
-		.icon {
-
-			img {
-
-				max-width:100%;
-				max-height:135%;
-			}
-		}
-
-		.name{			
-			font-size: .75rem;
-		}
-
-		
-	`}
+	${({$active}) => $active ? `transform: scale(1);` : `transform: scale(.95);`}
 `;

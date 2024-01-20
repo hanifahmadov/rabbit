@@ -1,11 +1,6 @@
 /* eslint-disable */
 import { atom } from "recoil";
 
-export const displayState = atom({
-	key: "displayState",
-	default: 0,
-});
-
 export const activeState = atom({
 	key: "activeState",
 	default: 0,
@@ -26,53 +21,30 @@ export const deviceState = atom({
 	},
 });
 
-export const displayNavbarAccountState = atom({
-	key: "displayNavbarAccountState",
-	default: false,
-});
+
 
 export const modalState = atom({
 	key: "modalState",
 	default: false,
 });
 
-//# SOCKET STATES
 
-// users state
-export const socketConnectionDefaults = atom({
-	key: "socketConnectionDefaults",
-	default: false,
-});
+// export const roomsDefault = atom({
+// 	key: "roomsDefault",
+// 	default: [
+// 	//: rooms properties
+// 	// 	{
+// 	// 		id: 8080,
+// 	// 		name: "general",
+// 	// 		owner: "system",
+// 	// 		joinedusers: [],
+// 	// 		createdAt: new Date(),
+// 	// 		messages: [],
+// 	// 	},
+// 	],
+// });
 
-export const roomsDefault = atom({
-	key: "roomsDefault",
-	default: [
-	//: rooms properties
-	// 	{
-	// 		id: 8080,
-	// 		name: "general",
-	// 		owner: "system",
-	// 		joinedusers: [],
-	// 		createdAt: new Date(),
-	// 		messages: [],
-	// 	},
-	],
-});
 
-export const currentRoomDefault = atom({
-	key: "currentRoomDefault",
-	default: null
-	
-	// {
-		//: current room properties
-		// id: 8080,
-		// name: 'general',
-		// owner: 'system',
-		// joinedusers: [],
-		// createdAt: new Date(),
-		// messages: [],
-	// },
-});
 
 export const messageDefault = atom({
 	key: "messageDefault",
@@ -85,13 +57,5 @@ export const messageDefault = atom({
 	},
 });
 
-export const allUsersDefault = atom({
-	key: "allUsersDefault",
-	default: []
-});
 
-export const activeUsersDefault = atom({
-	key: "activeUsersDefault",
-	default: []
-});
 
