@@ -12,13 +12,20 @@ import {
 } from "date-fns";
 
 /* STATES & STYLED & API  */
-import apiUrl from "../../../apis/apiUrl";
-import { RoomDetailsSection, AvatarUpdate, CurrentRoomDetails, CurrentRoomUsers } from "./styled/room_details.styled";
-import { curRoomState } from "../homeStore/states";
+import apiUrl from "../../../../apis/apiUrl";
+import {
+	RoomDetailsSection,
+	AvatarUpdate,
+	CurrentRoomDetails,
+	CurrentRoomUsers,
+} from "../styled/room_details.styled";
+import { curRoomState, displayState } from "../../homeStore/states";
+import { createRoomVariant } from "../../homeStore/variants";
 
 /* SUBS */
 
 export const RoomDetails = () => {
+	const [display, setDisplay] = useRecoilState(displayState);
 	const curRoom = useRecoilValue(curRoomState);
 	const [filename, setFilename] = useState(false);
 	const [file, setFile] = useState(undefined);
@@ -50,7 +57,11 @@ export const RoomDetails = () => {
 	};
 
 	return (
-		<RoomDetailsSection>
+		<RoomDetailsSection
+			variants={createRoomVariant}
+			initial='initial'
+			animate={display ? "animate" : "exit"}
+		>
 			<section className='rmDetailsHeader'>
 				{curRoom.name[0].toUpperCase() + curRoom.name.slice(1)}
 			</section>
@@ -100,9 +111,7 @@ export const RoomDetails = () => {
 					<div className='created_by'>
 						<span className='text'>Created by</span>
 						<span className='owner_name'>
-							{curRoom.owner
-								? curRoom.owner.email
-								: "System"}
+							{curRoom.owner ? curRoom.owner.email : "System"}
 						</span>
 					</div>
 
@@ -114,9 +123,36 @@ export const RoomDetails = () => {
 					</div>
 				</section>
 			</CurrentRoomDetails>
-            <CurrentRoomUsers>
-                
-            </CurrentRoomUsers>
+			<CurrentRoomUsers>
+				<section className='usersTitle'>Users</section>
+
+				<section className='usersContent'>
+					{curRoom.users.map((user) => (
+						<div key={user._id} className='user'>
+							<div className='user_img'>
+								<img
+									src={apiUrl + "/" + user.avatar}
+									alt='user_avatar'
+								/>
+							</div>
+							<div className='user_details'>
+								<span className='username'>
+									{user.email.split("@")[0]}
+								</span>
+								<span className='joined'>joined</span>
+								<span className='time_ago'>
+									{formatDistanceToNowStrict(
+										subDays(new Date(user.createdAt), 0),
+										{
+											addSuffix: true,
+										}
+									)}
+								</span>
+							</div>
+						</div>
+					))}
+				</section>
+			</CurrentRoomUsers>
 		</RoomDetailsSection>
 	);
 };

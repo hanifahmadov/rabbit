@@ -5,13 +5,16 @@ import { motion } from "framer-motion";
 export const CreateRoomSection = styled(motion.section)`
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
 
 	width: 100%;
+	height: 100%;
 
 	padding: 0px;
+
+
 
 	.createRoomTitle {
 		display: flex;
@@ -28,12 +31,12 @@ export const CreateRoomSection = styled(motion.section)`
 		padding: 5px 0px;
 		border-bottom: 3px solid white;
 
-		background: black;
+		background: #36495f;
 	}
 
 	form {
 		width: 100%;
-		height: 32rem;
+		// height: 32rem;
 		padding: 5px 10px;
 
 		display: flex;
@@ -41,6 +44,8 @@ export const CreateRoomSection = styled(motion.section)`
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+
+		
 	}
 `;
 

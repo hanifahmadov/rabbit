@@ -1,12 +1,13 @@
 import React from "react";
-import apiUrl from "../../../apis/apiUrl";
-import { RoomSection } from "./styled/room.styled";
+import apiUrl from "../../../../apis/apiUrl";
+import { RoomSection } from "../styled/room.styled";
 
 export const Room = ({ room, curRoom, setCurRoom }) => {
 	const active = room._id === curRoom._id;
 
 	return (
 		<RoomSection
+			className="slick"
 			$active={active}
 			onClick={() => setCurRoom(room)}
 		>

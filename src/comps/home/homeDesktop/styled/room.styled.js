@@ -7,7 +7,7 @@ export const RoomSection = styled(motion.div)`
 
 	display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 	
 	padding: 0px;
@@ -21,6 +21,10 @@ export const RoomSection = styled(motion.div)`
 	width: 4rem;
 
 	padding: 2px;
+
+	& * {
+		pointer-events: none
+	}
 
 
 

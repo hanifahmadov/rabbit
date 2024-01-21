@@ -28,7 +28,7 @@ import {
 } from "../shared/store/states.js";
 
 import { userState } from "../auth/authStore/states.js";
-import { Room } from "../home/homeDesktop/Room.js";
+import { Room } from "../home/homeDesktop/left/Room.js";
 import { RoomDetails } from "./RoomDetails.js";
 import { Account } from "../home/account/Account.js";
 import { CreateRoom } from "./CreateRoom.js";

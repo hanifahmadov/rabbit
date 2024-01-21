@@ -12,6 +12,8 @@ export const RoomDetailsSection = styled(motion.section)`
 	width: 100%;
 	padding: 0px;
 
+	overflow: auto;
+
 	.rmDetailsHeader {
 		display: flex;
 		justify-content: center;
@@ -27,7 +29,7 @@ export const RoomDetailsSection = styled(motion.section)`
 		padding: 5px 0px;
 		border-bottom: 3px solid white;
 
-		background: black;
+		background: #36495f;
 	}
 `;
 
@@ -36,11 +38,11 @@ export const AvatarUpdate = styled.section`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-    position: relative;
+	position: relative;
 
 	width: 100%;
 	padding: 8px 10px;
-    
+
 	img {
 		width: 100%;
 		height: 14rem;
@@ -48,22 +50,21 @@ export const AvatarUpdate = styled.section`
 		border: 2px solid rgba(255, 255, 255, 0.5);
 	}
 
-    .uploadedFileName {
-       
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        position: absolute;
-        height: 11rem;
-        background: rgba(0, 0, 0, .8);
-        top: 1rem;
-        left: 12px;
-        right: 12px;
-        color: white;
-        font-weight: 700;
-        transition: all 4s ease-in-out;
-    }
+	.uploadedFileName {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		position: absolute;
+		height: 11rem;
+		background: rgba(0, 0, 0, 0.8);
+		top: 1rem;
+		left: 12px;
+		right: 12px;
+		color: white;
+		font-weight: 700;
+		transition: all 4s ease-in-out;
+	}
 
 	form {
 		position: relative;
@@ -129,58 +130,131 @@ export const AvatarUpdate = styled.section`
 `;
 
 export const CurrentRoomDetails = styled.section`
-    color: white;
-    width: 100%;
-    border-bottom: 3px solid white;
+	color: white;
+	width: 100%;
 
+	.detailsTitle {
+		width: 100%;
+		font-size: 1.2rem;
+		font-weight: 700;
+		text-align: center;
+		padding: 3px;
+		font-family: system-ui;
 
-    .detailsTitle {
-        width: 100%;
-        font-size: 1.2rem;
-        font-weight: 700;
-        text-align: center;
-        padding: 3px;
-        font-family: system-ui;
+		border-top: 3px solid white;
+		border-bottom: 3px solid white;
+		margin: 10px 0px 5px 0px;
+		background: #36495f;
+	}
 
-        border-top: 3px solid white;
-        border-bottom: 3px solid white;
-        margin: 10px 0px 5px 0px;
-    }
+	.detailsContent {
+		padding: 10px 0px 0px 0px;
 
-    .detailsContent {
+		div {
+			line-height: 15px;
+			margin-bottom: 10px;
 
-        padding: 10px 0px 0px 0px;
+			span {
+				display: block;
+			}
 
-        div {
-            line-height: 15px;
-            margin-bottom: 10px;
+			.text {
+				font-size: 0.8rem;
+				font-style: italic;
+				color: rgba(255, 255, 255, 0.5);
+			}
 
-            span {
-                display: block;
-            }
-
-            .text {
-                font-size: 0.8rem;
-                font-style: italic;
-                color: rgba(255, 255, 255, .5);
-                
-            }
-
-            .count,
-            .owner_name,
-            .format_time_ago {
-                font-size: 0.9rem;
-                font-weight: 700;
-
-            }
-        }
-    }
-
-`
+			.count,
+			.owner_name,
+			.format_time_ago {
+				font-size: 0.9rem;
+				font-weight: 700;
+			}
+		}
+	}
+`;
 
 export const CurrentRoomUsers = styled.section`
+	color: white;
+	width: 100%;
+
+	
+
+	.usersTitle {
+		width: 100%;
+		font-size: 1.2rem;
+		font-weight: 700;
+		text-align: center;
+		padding: 3px;
+		font-family: system-ui;
+
+		border-top: 3px solid white;
+		border-bottom: 3px solid white;
+		margin: 10px 0px 5px 0px;
+		background: #36495f;
+	}
 
 
-`
+	.usersContent {
+		padding: 5px 10px;
+
+		width: 100%;
+	}
+
+	.user {
+		cursor: pointer;
+		border-radius: 7px;
+		margin: 5px 0px;
+		padding: 5px;
+		display: flex;
+		width: 100%;
+		align-items: center;
+
+		border: 1px solid white;
+		background: rgba(0, 0, 0, 0.3);
+
+		span {
+			display: inline;
+			font-size: 0.82rem;
+			font-weight: 600;
+		}
+
+		.user_img {
+			border: 3px solid rgba(0, 0, 0, 0.3);
+			border-radius: 50%;
+			img {
+				width: 2.75rem;
+				height: 2.75rem;
+				border-radius: 50%;
+				border: 3px solid rgba(255, 255, 255, .5);
+			}
+		}
+
+		.user_details {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			color: white;
+			width: 100%;
+			padding-right: 2rem;
 
 
+
+			.username {
+				font-size: 0.85rem;
+				font-weight: 600;
+			}
+
+			.joined {
+				font-size: 0.8rem;
+				font-weight: 400;
+				font-style: italic;
+
+				color: rgba(255, 255, 255, 0.5);
+			}
+		}
+	}
+
+
+`;

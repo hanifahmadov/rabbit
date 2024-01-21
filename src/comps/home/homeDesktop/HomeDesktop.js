@@ -5,8 +5,8 @@ import React from "react";
 import { HomeDesktopSection } from "./styled/home_desktop.styled";
 
 /* SUBS */
-import { Left } from "./Left";
-import { Right } from "./Right";
+import { Left } from "./left/Left";
+import { Right } from "./right/Right";
 
 export const HomeDesktop = ({}) => {
 	return (

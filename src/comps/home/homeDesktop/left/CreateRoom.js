@@ -13,19 +13,21 @@ import {
 	FilenameInput,
 	FilenameInstruction,
 	SubmitButton,
-} from "./styled/create_room.styled";
-import { userState } from "../../auth/authStore/states";
-import defaultLogo from "../homeStore/logo/default.png";
-import infoLogo from "../homeStore/logo/info.png";
-import { curRoomState, displayState } from "../homeStore/states";
-import { createRoomVariant } from "../homeStore/variants";
-import { createNewRoomApi } from "../../../apis/apiCalls";
+} from "../styled/create_room.styled";
+import { userState } from "../../../auth/authStore/states";
+import defaultLogo from "../../homeStore/logo/default.png";
+import infoLogo from "../../homeStore/logo/info.png";
+import { curRoomState, displayState } from "../../homeStore/states";
+import { createRoomVariant } from "../../homeStore/variants";
+import { createNewRoomApi } from "../../../../apis/apiCalls";
 
 /* SUBS */
 
 export const CreateRoom = () => {
 	const [display, setDisplay] = useRecoilState(displayState);
 	const user = useRecoilValue(userState);
+
+	const logo = defaultLogo
 
 
 	const newRoomNameRef = useRef();
@@ -86,14 +88,14 @@ export const CreateRoom = () => {
 			initial='initial'
 			animate={display ? "animate" : "exit"}
 		>
-			<section className='createRoomTitle'>Create New Room</section>
+			<section className='createRoomTitle'>Create Room</section>
 			<form
 				onSubmit={handleCreateRoomSubmit}
 				encType='multipart/form-data'
 			>
 				<FileOnDisplay>
 					<img
-						src={file ? URL.createObjectURL(file) : defaultLogo}
+						src={file ? URL.createObjectURL(file) : logo}
 						alt='logo'
 					/>
 

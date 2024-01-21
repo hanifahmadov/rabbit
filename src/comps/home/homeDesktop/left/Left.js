@@ -4,19 +4,19 @@ import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 
 /* STYLED & APIs & STATE */
-import info from "../../shared/logos/info1.png";
-import { LeftSection, CreateDetailsAccount } from "./styled/left.styled";
+import info from "../../homeStore/logo/info1.png";
+import { LeftSection, CreateDetailsAccount } from "../styled/left.styled";
 import {
 	curRoomState,
 	displayCreateRoomState,
 	displayRoomInfoState,
 	displayState,
 	roomsState,
-} from "../homeStore/states";
+} from "../../homeStore/states";
 
 /* SUBS */
 import { Room } from "./Room";
-import { Account } from "../account/Account";
+import { Account } from "../../account/Account";
 
 export const Left = ({}) => {
 	const [curRoom, setCurRoom] = useRecoilState(curRoomState);

@@ -5,17 +5,17 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import OutsideClickHandler from "react-outside-click-handler";
 
 /* STYLED & STATE & API & VARIANTS */
-import { CustomCanvasSection } from "./styled/custom_canvas.styled";
-import { desktopCanvasVariant } from "../homeStore/variants";
+import { CustomCanvasSection } from "../styled/custom_canvas.styled";
+import { desktopCanvasVariant } from "../../homeStore/variants";
 import {
 	displayCreateRoomState,
 	displayRoomInfoState,
 	displayState,
-} from "../homeStore/states";
+} from "../../homeStore/states";
 
 /* SUBS */
-import { CreateRoom } from "./CreateRoom";
-import { RoomDetails } from "./RoomDetails";
+import { CreateRoom } from "../left/CreateRoom";
+import { RoomDetails } from "../left/RoomDetails";
 
 export const CustomCanvas = () => {
 	const [display, setDisplay] = useRecoilState(displayState);
@@ -30,7 +30,8 @@ export const CustomCanvas = () => {
 			val !== "plus" &&
 			val !== "createRoom" &&
 			val !== "src" &&
-			val !== "roomDetails"
+			val !== "roomDetails" &&
+			!val.includes('slick')
 		) {
 			setDisplay(false);
 		}

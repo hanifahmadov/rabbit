@@ -16,7 +16,7 @@ export const desktopCanvasVariant = {
 		left: "0px",
 
 		transition: {
-			duration: 0.5,
+			duration: 0.4,
 		},
 	},
 
@@ -28,7 +28,7 @@ export const desktopCanvasVariant = {
 		left: "-3px",
 		transition: {
 			delay: 0.2,
-			duration: 0.5,
+			duration: 0.4,
 		},
 	},
 };
@@ -41,7 +41,7 @@ export const createRoomVariant = {
 	animate: {
 		opacity: 1,
 		transition: {
-			delay: 0.5,
+			delay: .3,
 		},
 	},
 
@@ -63,9 +63,9 @@ export const roomSettingMobileVariants = {
 		opacity: 1,
 		width: "16rem",
 		transition: {
-			duration: 0.5,
+			duration: 0.25,
 			opacity: {
-				delay: 0.3,
+				delay: 0.25,
 			},
 		},
 	},
@@ -75,12 +75,12 @@ export const roomSettingMobileVariants = {
 		width: "0rem",
 		transition: {
 			width: {
-				delay: 0.3,
-				duration: 0.5,
+				delay: 0.1,
+				duration: 0.25,
 			},
 			opacity: {
-				delay: 0.3,
-				duration: 0.5,
+				delay: 0.1,
+				duration: 0.25,
 			},
 		},
 	},
