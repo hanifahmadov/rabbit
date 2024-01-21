@@ -2,7 +2,7 @@
 // NPM Packages
 import { useState, useRef, useEffect } from "react";
 import { useRecoilState, useResetRecoilState, useRecoilValue } from "recoil";
-import { produce } from "immer";
+import { current, produce } from "immer";
 import { io } from "socket.io-client";
 import chalk from "chalk";
 
@@ -110,6 +110,7 @@ export const Home = () => {
 					response
 				);
 
+				
 				const { rooms } = response;
 
 				/**
@@ -163,15 +164,29 @@ export const Home = () => {
 				});
 			});
 
-			/**  SOCKET ON NEW MESSAGE */
-			socket.on("new_message", (response) => {
-				// console.log("new_message, response: ", response);
+			socket.on("newMessageUpdates", (response) => {
+				console.log(
+					"29: Board.js ~ socket.on newMessageUpdates, response: ",
+					response
+				);
 
-				setRoomMessages((prevMessages) => [...prevMessages, response]);
-				setText("");
+				setRooms(response.allRooms);
+				setCurRoom(response.curRoom);
 
-				autoscrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+				window.lastElement.scrollIntoView({ behavior: "smooth" });
 			});
+
+			// /**  SOCKET ON NEW MESSAGE */
+			// socket.on("newMessageUpdates", (response) => {
+			// 	console.log("168: Home.js ~ socket.on new_message, response: ", response);
+
+			// 	// setRooms(response)
+
+
+			// 	console.log("curRoom:", curRoom)
+			// 	// setCurRoom(response.find((room) => room.owner === null));
+			// 	// autoscrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+			// });
 
 			window.socket = socket;
 			setSocketCon(true);

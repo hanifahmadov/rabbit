@@ -16,6 +16,7 @@ export const Message = ({ message }) => {
 	const user = useRecoilValue(userState);
 	const owner = message.owner?._id === user._id ? 1 : 0;
 
+
 	return (
 		<MessageSection owner={owner}>
 			<div className='contentWrapper'>

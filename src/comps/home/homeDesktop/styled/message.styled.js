@@ -24,7 +24,7 @@ export const MessageSection = styled.section`
 
 		border-radius: 10px;
 		padding: ${({ owner }) =>
-			owner ? "4px 5px 4px 5px" : "4px 5px 4px 5px"};
+			owner ? "1px 5px 4px 5px" : "1px 5px 4px 5px"};
 
 		.avatarWrapper {
 			display: inline-block;
@@ -50,11 +50,14 @@ export const MessageSection = styled.section`
 		}
 
 		.textWrapper {
+			display: flex;
+			flex-direction: column;
 			word-wrap: break-word;
-			padding: 3px 30px 3px 30px;
+			padding: 3px 25px 3px 25px;
 			position: relative;
 
 			background: rgba(255, 255, 255, 0.05);
+			-webkit-backdrop-filter: blur(10px);
 			backdrop-filter: blur(5px);
 
 			height: 100%;
@@ -63,13 +66,14 @@ export const MessageSection = styled.section`
 
 			.text {
 				display: inline-block;
-				max-width: 10rem;
+				max-width: 15rem;
 				letter-spacing: .5px;
 				font-family: system-ui;
 			}
 
 			.time_ago {
 				display: block;
+				width: 3rem;
 				font-size: 0.65rem;
 				font-weight: 400;
 				font-style: italic;

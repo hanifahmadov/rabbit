@@ -11,7 +11,8 @@ export const CustomCanvasSection = styled(motion.section)`
 	border-right: 3px solid red;
 	z-index: 5;
 
-	background: rgba(255, 255, 255, .1);
+	background: rgba(255, 255, 255, .2);
+	-webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.5) inset;
 `;

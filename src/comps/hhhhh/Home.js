@@ -347,7 +347,7 @@ export const Home = () => {
 					<div className='autoscrollRef' ref={autoscrollRef} />
 				</MessagesSection>
 
-				<MessagesForm onSubmit={handleMessageForm}>
+				<MessagesForm onSubmit={handleMessageForm} >
 					<input
 						type='text'
 						value={msg}
