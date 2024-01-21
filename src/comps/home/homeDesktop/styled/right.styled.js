@@ -17,6 +17,7 @@ export const RightSection = styled(motion.section)`
     height: 100%;
 
 
+
     // border: 5px solid red;
     // background: blue;
 

@@ -4,7 +4,7 @@ export const desktopCanvasVariant = {
 		opacity: 1,
 		width: "0rem",
 		borderRight: " 3px solid white",
-		backgroundColor: "rgb(32 32 32)",
+		// backgroundColor: "rgb(32 32 32)",
 		left: "-3px",
 	},
 
@@ -12,7 +12,7 @@ export const desktopCanvasVariant = {
 		opacity: 1,
 		width: "15rem",
 		borderRight: " 3px solid white",
-		backgroundColor: "rgb(32 32 32)",
+		// backgroundColor: "rgb(32 32 32)",
 		left: "0px",
 
 		transition: {
@@ -24,7 +24,7 @@ export const desktopCanvasVariant = {
 		opacity: 1,
 		width: "0rem",
 		borderRight: " 3px solid white",
-		backgroundColor: "rgb(32 32 32)",
+		// backgroundColor: "rgb(32 32 32)",
 		left: "-3px",
 		transition: {
 			delay: 0.2,

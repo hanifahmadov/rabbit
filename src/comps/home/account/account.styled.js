@@ -48,7 +48,7 @@ export const AccountContainer = styled.div`
             border: 3px solid white;
             border-radius: 10px;
 
-            z-index: 1;
+            z-index: 1000;
         
             // background-color: ${clr.dark};
             // background: ${clr.rgba.wht02};

@@ -22,9 +22,9 @@ export const RoomSection = styled(motion.div)`
 
 	padding: 2px;
 
-	& * {
-		pointer-events: none
-	}
+	// & * {
+	// 	pointer-events: none
+	// }
 
 
 

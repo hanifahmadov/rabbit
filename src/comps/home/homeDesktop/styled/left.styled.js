@@ -7,6 +7,7 @@ export const LeftSection = styled.section`
 	align-items: center;
 	flex-direction: column;
 	position: relative;
+	z-index: 100;
 
 	height: 100%;
 	width: 6rem;

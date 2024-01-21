@@ -6,12 +6,12 @@ export const CustomCanvasSection = styled(motion.section)`
 	height: 100%;
 	overflow: hidden;
 	position: absolute;
-    left: -3px;
+	left: -3px;
 
 	border-right: 3px solid red;
-    background: rgb(32 32 32);
-    // backdrop-filer: blur(5px);
+	z-index: 5;
 
-	// box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5) inset;
-
+	background: rgba(255, 255, 255, .1);
+	backdrop-filter: blur(10px);
+	box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.5) inset;
 `;

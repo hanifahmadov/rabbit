@@ -1,4 +1,12 @@
-/* reset argumens */
+/* eslint-disable*/
+
+import {
+	format,
+	formatDistanceToNow,
+	formatDistanceToNowStrict,
+	subDays,
+	subMonths,
+} from "date-fns";
 
 /** 
  *  Reset Objects for resetting all states to defaults
@@ -9,4 +17,24 @@ export const reset = (resetall) => {
         resetall[val]()
     }
 }
+
+export const customFormatDistanceToNow = (date) => {
+    let distance = formatDistanceToNowStrict(date);
+
+    if (distance.includes("minute")) {
+        let temp = distance.split(" ");
+        temp[1] = "m ago";
+        return (distance = temp.join(""));
+    } else if (distance.includes("hour")) {
+        let temp = distance.split(" ");
+        temp[1] = "h ago";
+        return (distance = temp.join(""));
+    } else if (distance.includes("second")) {
+        let temp = distance.split(" ");
+        temp[1] = "s ago";
+        return (distance = temp.join(""));
+    }
+
+    return distance + " ago";
+};
 

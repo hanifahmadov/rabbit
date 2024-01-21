@@ -188,19 +188,22 @@ export const FilenameInstruction = styled.section`
 `;
 
 export const FilenameInput = styled.input`
-	padding: 1.1rem;
+	padding: 1.5rem 1.5rem 1.5rem 1rem;
 	width: 100%;
 
 	height: 1.5rem;
-	background: rgba(255, 255, 255, 0.1);
+	background: rgba(0, 0, 0, 1);
 	color: white;
 	font-weight: 600;
 	border-radius: 5px;
-	border: 3px solid rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	letter-spacing: .5px;
+	text-transform: capitalize;
 
 	&::placeholder {
-		color: rgba(255, 255, 255, 0.2);
+		color: rgba(255, 255, 255, 0.3);
 		padding-left: 1px;
+		font-size: .9rem;
 	}
 `;
 
