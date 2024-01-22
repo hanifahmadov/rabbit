@@ -3,8 +3,8 @@ import { io } from "socket.io-client";
 import apiUrl from "./apiUrl";
 import chalk from "chalk";
 
-export const socketConnect = (user, resetRooms) => {
-	const socket = io(apiUrl, {
+export const socketUrl = (user, resetRooms, socket) => {
+	socket = io(apiUrl, {
 		// Disable autoConnect to have more control over headers
 		extraHeaders: {
 			Authorization: `Bearer ${user.accessToken}`,

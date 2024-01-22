@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useRef } from "react";
 import { ToasterContainer } from "./customtoast.styled";
-import logoError from "../logos/error.png";
+import logoError from "../logos/external/error.png";
 import logoSuccess from "../logos/success.png";
 
 export const CustomToaster = ({ title, body1, body2 = "" }) => {

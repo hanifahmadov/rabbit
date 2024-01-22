@@ -19,7 +19,6 @@ import { userState } from "../auth/authStore/states";
 
 // LOCALS
 import apiUrl from "../../apis/apiUrl";
-import info from "../shared/logos/info1.png";
 import { reset } from "./homeStore/helpers";
 import { HomeDesktop } from "./homeDesktop/HomeDesktop";
 
@@ -94,7 +93,7 @@ export const Home = () => {
 				// reset(resetall);
 			});
 
-			socket.on("disconnection", (res) => {
+			socket.on("disconnect", (res) => {
 				console.log(
 					chalk.red("99: Home.js ~ disconnection ~ res: ", res)
 				);
@@ -141,7 +140,7 @@ export const Home = () => {
 			/** SOCKET ON USERS ON DISCONNECTED */
 			socket.on("users_onDisconnection", (res) => {
 				console.log(
-					"163: Home.js ~ socket: users onDisconnection: ",
+					"143: Home.js ~ socket: users onDisconnection: ",
 					res
 				);
 
@@ -176,22 +175,12 @@ export const Home = () => {
 				window.lastElement.scrollIntoView({ behavior: "smooth" });
 			});
 
-			// /**  SOCKET ON NEW MESSAGE */
-			// socket.on("newMessageUpdates", (response) => {
-			// 	console.log("168: Home.js ~ socket.on new_message, response: ", response);
-
-			// 	// setRooms(response)
-
-
-			// 	console.log("curRoom:", curRoom)
-			// 	// setCurRoom(response.find((room) => room.owner === null));
-			// 	// autoscrollRef?.current?.scrollIntoView({ behavior: "smooth" });
-			// });
-
 			window.socket = socket;
 			setSocketCon(true);
 		}
 	}, []);
+
+	console.log("users", users)
 
 	return device.mobile ? null : (
 		<HomeDesktop/>

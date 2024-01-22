@@ -20,13 +20,5 @@ export const RegisterLayoutContainer = styled.div`
 		width: 100%;
 
 		background: transparent;
-
-		${({ theme }) =>
-			theme.device.mobile &&
-			`
-			justify-content: flex-start;
-			padding: .5rem 0rem;
-		
-		`};
 	}
 `;

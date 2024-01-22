@@ -5,8 +5,6 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { NavLink, useNavigate } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
 
-//: images
-import logo from "../../shared/logos/logos.png";
 
 /* STATE & APIs & STYLED */
 import { userState } from "../../auth/authStore/states";

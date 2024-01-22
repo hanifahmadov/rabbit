@@ -10,6 +10,21 @@
 //     console.log(v)
 //     return false
 // })
-var binaryData = Buffer.from('abcd', 'utf-8');
-var binaryData2 = Buffer.from('abc', 'utf-8');
-console.log(binaryData.equals(binaryData2));  // <Buffer 61 62 63>
+// var binaryData = Buffer.from('abcd', 'utf-8');
+// var binaryData2 = Buffer.from('abc', 'utf-8');
+// console.log(binaryData.equals(binaryData2));  
+// <Buffer 61 62 63>
+
+
+let obj = {
+    one: 10,
+    two: 20,
+}
+
+function exchange (a){
+    a.one = 50000;
+}
+
+exchange(obj)
+
+console.log(obj)

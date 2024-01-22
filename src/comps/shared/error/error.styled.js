@@ -1,6 +1,5 @@
 /* eslint-disable */
 import styled from "styled-components";
-import v4v from "../logos/vvv.png";
 import { clr, ff } from "../store/design";
 
 export const ErrorContainer = styled.div`
