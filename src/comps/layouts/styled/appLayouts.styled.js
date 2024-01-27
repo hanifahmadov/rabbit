@@ -14,21 +14,24 @@ export const AppLayoutContentSection = styled.section`
 	display: flex;
 	flex-direction: column;
 
-	height: 100vh;
-	width: 50rem;
+	height: 100%;
 
-	border: 3px solid white;
+	border: 15px solid white;
 	background: black;
 
 	//: For Modal in Auth-Layout
 	position: fixed;
 	backdrop-filter: blur(10px);
 
-	${({ theme }) => theme.device.tablet && `
+	${({ theme }) =>
+		theme.device.tablet &&
+		`
 		width: 100%;
 	`}
 
-	${({ theme }) => theme.device.mobile && `
+	${({ theme }) =>
+		theme.device.mobile &&
+		`
 	width: 100%;
 `}
 `;
