@@ -6,7 +6,9 @@ import { current, produce } from "immer";
 import { io } from "socket.io-client";
 import chalk from "chalk";
 
-// STATES & STYLES
+// STATES & STYLES & APIs & HELPERS
+import apiUrl from "../../apis/apiUrl";
+import { reset } from "./homeStore/helpers";
 import { deviceState } from "../shared/store/states";
 import {
 	socketConState,
@@ -18,9 +20,8 @@ import {
 import { userState } from "../auth/authStore/states";
 
 // LOCALS
-import apiUrl from "../../apis/apiUrl";
-import { reset } from "./homeStore/helpers";
-import { HomeDesktop } from "./homeDesktop/HomeDesktop";
+import { HomeDesktop } from "../desktop/home_d/HomeDesktop";
+import { HomeMobile } from "../mobile/home_m/HomeMobile";
 
 export const Home = () => {
 	// default states
@@ -48,10 +49,8 @@ export const Home = () => {
 	const [createRoom, setCreateRoom] = useState("");
 	const [textSubmitted, setTextSubmitted] = useState(false);
 	const [createRoomSubmitted, setCreateRoomSubmitted] = useState(false);
-	const [roomAccessStrict, setRoomAccessStrict] = useState(false);	
+	const [roomAccessStrict, setRoomAccessStrict] = useState(false);
 	const [backdrop, setBackdrop] = useState(true);
-
-
 
 	// refs
 	let autoscrollRef = useRef();
@@ -109,7 +108,6 @@ export const Home = () => {
 					response
 				);
 
-				
 				const { rooms } = response;
 
 				/**
@@ -180,9 +178,7 @@ export const Home = () => {
 		}
 	}, []);
 
-	console.log("users", users)
+	console.log("users", users);
 
-	return device.mobile ? null : (
-		<HomeDesktop/>
-	);
+	return device.mobile ? <HomeMobile /> : <HomeDesktop />;
 };

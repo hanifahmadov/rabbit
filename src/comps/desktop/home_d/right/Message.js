@@ -10,7 +10,7 @@ import { MessageSection } from "../styled/message.styled";
 import apiUrl from "../../../../apis/apiUrl";
 
 /* SUBS & HELPERS */
-import { customFormatDistanceToNow } from "../../homeStore/helpers";
+import { customFormatDistanceToNow } from "../../../home/homeStore/helpers";
 
 export const Message = ({ message }) => {
 	const user = useRecoilValue(userState);

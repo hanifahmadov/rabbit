@@ -15,10 +15,10 @@ import {
 	SubmitButton,
 } from "../styled/create_room.styled";
 import { userState } from "../../../auth/authStore/states";
-import defaultLogo from "../../homeStore/logo/default.png";
-import infoLogo from "../../homeStore/logo/info.png";
-import { curRoomState, displayState } from "../../homeStore/states";
-import { createRoomVariant } from "../../homeStore/variants";
+import defaultLogo from "../../../home/homeStore/logo/default.png";
+import infoLogo from "../../../home/homeStore/logo/info.png";
+import { curRoomState, displayState } from "../../../home/homeStore/states";
+import { createRoomVariant } from "../../../home/homeStore/variants";
 import { createNewRoomApi } from "../../../../apis/apiCalls";
 
 /* SUBS */

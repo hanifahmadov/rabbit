@@ -18,7 +18,7 @@ export const AppLayout = () => {
 	 */
 
 	return (
-		<AppLayoutSection>
+		<AppLayoutSection className='__applayout__'>
 			<AppLayoutContentSection>
 				<Header />
 				<Outlet />

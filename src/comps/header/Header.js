@@ -11,8 +11,8 @@ import { usersState, activeUsersState } from "../home/homeStore/states";
 import { deviceState } from "../shared/store/states";
 
 /* Subs */
-import { DesktopHeader } from "./headerDesktop/DesktopHeader";
-import { MobileHeader } from "./headerMobile/MobileHeader";
+import { HeaderDesktop } from "../desktop/header_d/HeaderDesktop";
+import { HeaderMobile } from "../mobile/header_m/HeaderMobile";
 
 export const Header = () => {
 	const users = useRecoilValue(usersState);
@@ -26,16 +26,16 @@ export const Header = () => {
 	});
 
 	return (
-		<HeaderContainer>
+		<HeaderContainer className="__header__">
 			{device.mobile ? (
-				<MobileHeader
+				<HeaderMobile
 					apiUrl={apiUrl}
 					users={users}
 					activeUsers={activeUsers}
 					online={online}
 				/>
 			) : (
-				<DesktopHeader
+				<HeaderDesktop
 					apiUrl={apiUrl}
 					users={users}
 					activeUsers={activeUsers}

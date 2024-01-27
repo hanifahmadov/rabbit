@@ -12,7 +12,7 @@ import {
 
 /* STATE & STYLED & APIS */
 import { BoardForm, BoardSection } from "../styled/board.styled";
-import { curRoomState, roomsState } from "../../homeStore/states";
+import { curRoomState, roomsState } from "../../../home/homeStore/states";
 
 /* SUBS */
 import { Message } from "./Message";

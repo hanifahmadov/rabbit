@@ -6,12 +6,12 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 /* STYLED & STATE & API & VARIANTS */
 import { CustomCanvasSection } from "../styled/custom_canvas.styled";
-import { desktopCanvasVariant } from "../../homeStore/variants";
+import { desktopCanvasVariant } from "../../../home/homeStore/variants";
 import {
 	displayCreateRoomState,
 	displayRoomInfoState,
 	displayState,
-} from "../../homeStore/states";
+} from "../../../home/homeStore/states";
 
 /* SUBS */
 import { CreateRoom } from "../left/CreateRoom";

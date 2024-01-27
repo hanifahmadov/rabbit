@@ -19,8 +19,8 @@ import {
 	CurrentRoomDetails,
 	CurrentRoomUsers,
 } from "../styled/room_details.styled";
-import { curRoomState, displayState } from "../../homeStore/states";
-import { createRoomVariant } from "../../homeStore/variants";
+import { curRoomState, displayState } from "../../../home/homeStore/states";
+import { createRoomVariant } from "../../../home/homeStore/variants";
 
 /* SUBS */
 

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 
-export const DesktopHeaderContainer = styled.div`
+export const HeaderDesktopSection = styled.div`
 	display: flex;
 
 	width: 100%;

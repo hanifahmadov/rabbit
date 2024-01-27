@@ -7,7 +7,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 
 /* STATE & APIs & STYLED */
-import { userState } from "../../auth/authStore/states";
+import { userState } from "../authStore/states";
 import {
 	roomsState,
 	curRoomState,
@@ -15,13 +15,13 @@ import {
 	activeUsersState,
 	socketConState,
 	displayAccountState
-} from "../homeStore/states";
+} from "../../home/homeStore/states";
 import { AccountContainer } from "./account.styled";
 import { signOutApi } from "../../../apis/apiCalls";
 
 
 /* SUBS */
-import { reset } from "../homeStore/helpers";
+import { reset } from "../../home/homeStore/helpers";
 
 export const Account = () => {
 	const [user, setUser] = useRecoilState(userState);

@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from "react";
 
-import { MobileHeaderContainer } from "./mobileHeader.styled";
+import { HeaderDesktopSection } from "./header_desktop.styled";
 
-export const MobileHeader = ({apiUrl, users, activeUsers, online}) => {
+export const HeaderDesktop = ({apiUrl, users, activeUsers, online}) => {
 	return (
-		<MobileHeaderContainer>
-			<div className='navbar-title'>
-				<span className='span_header'>Users</span>
+		<HeaderDesktopSection className="__headerdesktop__">
+			<div className='headerTitle'>
+				Users
 			</div>
 
 			<div className='active_users'>
@@ -25,6 +25,6 @@ export const MobileHeader = ({apiUrl, users, activeUsers, online}) => {
 						);
 					})}
 			</div>
-		</MobileHeaderContainer>
+		</HeaderDesktopSection>
 	);
 };

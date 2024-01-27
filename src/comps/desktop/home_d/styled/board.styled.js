@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import bg from "../../homeStore/logo/bg/bg06.jpeg";
+import bg from "../../../home/homeStore/logo/bg/bg06.jpeg";
 
 export const BoardSection = styled.section`
 	display: flex;

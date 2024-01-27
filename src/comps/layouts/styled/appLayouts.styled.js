@@ -27,4 +27,8 @@ export const AppLayoutContentSection = styled.section`
 	${({ theme }) => theme.device.tablet && `
 		width: 100%;
 	`}
+
+	${({ theme }) => theme.device.mobile && `
+	width: 100%;
+`}
 `;
