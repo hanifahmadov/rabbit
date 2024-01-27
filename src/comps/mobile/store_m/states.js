@@ -17,4 +17,20 @@ export const callsState = atom({
 	default: false,
 });
 
+export const homeDisplayState = atom({
+	key: "homeDisplayState",
+	default: true,
+});
+
+export const curRoomDisplayState = atom({
+	key: "curRoomDisplayState",
+	default: false,
+});
+
+
+
+
+
+
+
 

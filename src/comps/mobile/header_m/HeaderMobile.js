@@ -4,7 +4,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 
 /* STATES & STYLED & API & HELPERS */
-import { callsState, chatsState, settingsState } from "../store_m/states";
+import { callsState, chatsState, homeDisplayState, settingsState } from "../store_m/states";
 import { HeaderMobileSection } from "./header_mobile.styled";
 
 /* SUBS */
@@ -12,16 +12,22 @@ import { Chats } from "./subs/Chats";
 import { Calls } from "./subs/Calls";
 import { Settings } from "./subs/Settings";
 
-export const HeaderMobile = ({ apiUrl, users, activeUsers, online }) => {
+export const HeaderMobile = () => {
 	const calls = useRecoilValue(callsState);
 	const chats = useRecoilValue(chatsState);
 	const settings = useRecoilValue(settingsState);
 
+	const homeDisplay = useRecoilValue(homeDisplayState);
+
 	return (
 		<HeaderMobileSection className='__headermobile__'>
-			{calls && <Calls />}
-			{chats && <Chats />}
-			{settings && <Settings />}
+			{homeDisplay && (
+				<>
+					{calls && <Calls />}
+					{chats && <Chats />}
+					{settings && <Settings />}
+				</>
+			)}
 		</HeaderMobileSection>
 	);
 };

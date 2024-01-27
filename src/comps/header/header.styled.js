@@ -7,7 +7,6 @@ export const HeaderContainer = styled.div`
 	align-items: center;
 	flex-direction: row;
 
-	
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
@@ -15,4 +14,5 @@ export const HeaderContainer = styled.div`
 	background: black;
 	border-bottom: 3px solid white;
 
+	${({ theme }) => theme.device.mobile && "border-bottom: none;"};
 `;

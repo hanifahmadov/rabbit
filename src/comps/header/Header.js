@@ -26,22 +26,8 @@ export const Header = () => {
 	});
 
 	return (
-		<HeaderContainer className="__header__">
-			{device.mobile ? (
-				<HeaderMobile
-					apiUrl={apiUrl}
-					users={users}
-					activeUsers={activeUsers}
-					online={online}
-				/>
-			) : (
-				<HeaderDesktop
-					apiUrl={apiUrl}
-					users={users}
-					activeUsers={activeUsers}
-					online={online}
-				/>
-			)}
+		<HeaderContainer className='__header__'>
+			{device.mobile ? <HeaderMobile /> : <HeaderDesktop apiUrl={apiUrl} users={users} activeUsers={activeUsers} online={online} />}
 		</HeaderContainer>
 	);
 };

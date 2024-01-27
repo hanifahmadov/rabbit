@@ -15,8 +15,9 @@ export const AppLayoutContentSection = styled.section`
 	flex-direction: column;
 
 	height: 100%;
+	width: 50rem;
 
-	border: 0px solid white;
+	border: 3px solid white;
 	background: black;
 
 	//: For Modal in Auth-Layout
