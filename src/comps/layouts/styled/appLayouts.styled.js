@@ -16,7 +16,7 @@ export const AppLayoutContentSection = styled.section`
 
 	height: 100%;
 
-	border: 15px solid white;
+	border: 0px solid white;
 	background: black;
 
 	//: For Modal in Auth-Layout

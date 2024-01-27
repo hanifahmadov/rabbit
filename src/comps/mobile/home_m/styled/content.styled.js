@@ -7,7 +7,7 @@ export const ContentSection = styled.section`
 
     width: 100%;
     flex: 1;
-    border: 3px solid red;
+    // border: 3px solid white;
     // background: #cad1dc;
     // background: white;
     background: #f8feff;
