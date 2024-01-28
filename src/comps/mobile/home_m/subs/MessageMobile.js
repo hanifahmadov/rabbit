@@ -36,6 +36,7 @@ export const MessageMobile = ({ message }) => {
 
 				<div className='textWrapper'>
 					<span className='text'>{message.text}</span>
+					<span className='text'>{message.text}</span>
 					<span className='time_ago'>
 						{customFormatDistanceToNow(
 							subDays(new Date(message.createdAt), 0),
