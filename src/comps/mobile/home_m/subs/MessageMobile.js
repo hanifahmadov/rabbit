@@ -19,6 +19,8 @@ export const MessageMobile = ({ message }) => {
 	const user = useRecoilValue(userState);
 	const owner = message.owner?._id === user._id ? 1 : 0;
 
+	console.log(apiUrl + "/" + message.owner.avatar)
+
 
 	return (
 		<MessageMobileSection owner={owner}>
