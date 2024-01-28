@@ -24,35 +24,35 @@ export const CurRoomDisplaySection = styled.section`
 		align-items: center;
 		flex-direction: row;
 
-        position: relative;
+		position: relative;
 
-        .backArrow {
-
-            margin-left: .75rem;
-        }
+		.backArrow {
+			margin-left: 0.75rem;
+			padding: 5px;
+			border-radius: 50%;
+		}
 
 		.roomIcon {
-            margin-left: 1rem;
+			margin-left: 1rem;
 			img {
 				width: 3rem;
 				height: 3rem;
 				border-radius: 50%;
-                border: 2px solid #0055ff90;
+				border: 2px solid #0055ff90;
 			}
 		}
 
-        .roomName {
-            margin-left: 1rem;
-            font-size: 1.75rem;
-            font-weight: 700;
-            font-family: ${ff.opensans};
+		.roomName {
+			margin-left: 1rem;
+			font-size: 1.75rem;
+			font-weight: 700;
+			font-family: ${ff.opensans};
+		}
 
-        }
-
-        .defaultChatIcon {
-            position: absolute;
-            right: 20px;
-        }
+		.defaultChatIcon {
+			position: absolute;
+			right: 20px;
+		}
 	}
 
 	.curRoomBody {
@@ -61,15 +61,66 @@ export const CurRoomDisplaySection = styled.section`
 
 		flex-grow: 1;
 
-        background-image: url(${bg});
+		background-image: url(${bg});
 		box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1) inset;
 
-        padding: 20px 5px;
+		padding: 20px 5px;
 	}
 
+
+
 	.curRoomFooter {
-		height: 5rem;
+
 		width: 100%;
-		background: yellow;
+        height: auto;
+        background: rgba(255, 255, 255, .2);
+        backdrop-filter: blur(10px);
+        bottom: 0;
+        position: absolute;
+        padding: 0px 10px;
+
+        display: flex;
+		justify-content: space-between;
+		align-items: center;
+		// flex-direction: row;
+
+
+
+		.input{
+            
+            display: block;
+            width: 100%;
+            max-width: 100%;   
+            max-height: 6rem;
+            margin: 10px 0px;
+            padding: 7px 12px 7px 15px;
+            overflow: auto;
+            border: 3px solid rgba(255, 255, 255, .5);
+            border-radius: 20px;
+            line-height: 18px;
+
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box; 
+
+            font-size: 1rem;
+            font-family: ${ff.opensans};
+            font-weight: 600;
+            color: white;
+           
+        }
+
+        .send{
+			margin-left: 10px;
+			margin-right: 5px;
+
+            span {
+
+				right: 10px;
+				bottom: -19px;
+
+            }
+
+        }
 	}
 `;

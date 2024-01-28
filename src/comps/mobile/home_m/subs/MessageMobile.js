@@ -19,9 +19,6 @@ export const MessageMobile = ({ message }) => {
 	const user = useRecoilValue(userState);
 	const owner = message.owner?._id === user._id ? 1 : 0;
 
-	console.log("message owner avatar: ", apiUrl + "/" + message.owner.avatar)
-
-
 	return (
 		<MessageMobileSection owner={owner}>
 			<div className='contentWrapper'>
@@ -35,7 +32,6 @@ export const MessageMobile = ({ message }) => {
 				</div>
 
 				<div className='textWrapper'>
-					<span className='text'>{message.text}</span>
 					<span className='text'>{message.text}</span>
 					<span className='time_ago'>
 						{customFormatDistanceToNow(
