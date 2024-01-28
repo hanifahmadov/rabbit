@@ -1,18 +1,9 @@
 /* eslint-disable */
-import React, {} from "react";
+import React from "react";
 import { FormCredentialsSection } from "./styled/formCredentials.styled";
 
-export const FormCredentials = ({
-	setInformant,
-	email,
-	setEmail,
-	pwd,
-	setPwd,
-	confirmPwd,
-	setConfirmPwd,
-}) => {
-	let enableSignup =
-		email.length > 5 && pwd.length > 8 && confirmPwd.length > 8;
+export const FormCredentials = ({ setInformant, email, setEmail, pwd, setPwd, confirmPwd, setConfirmPwd }) => {
+	let enableSignup = email.length >= 5 && pwd.length >= 5 && confirmPwd.length >= 5;
 
 	return (
 		<FormCredentialsSection>

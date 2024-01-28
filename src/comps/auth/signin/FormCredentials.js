@@ -11,7 +11,7 @@ export const FormCredentials = ({
 	remember,
 	setRemember,
 }) => {
-	const enableSignin = pwd.length > 8 && email.length > 5 ? true : false;
+	const enableSignin = pwd.length >= 5 && email.length >=5  ? true : false;
 
 	return (
 		<FormCredentialsSection>

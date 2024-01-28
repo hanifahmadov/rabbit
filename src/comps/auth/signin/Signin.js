@@ -36,16 +36,21 @@ export const Signin = () => {
 		let em = EMAIL_REGEX.test(email);
 		let pw = PWD_REGEX.test(pwd);
 
-		if (!em && !pw) {
-			alert("Email & Password", ": typo error!");
+		// if (!em && !pw) {
+		// 	alert("Email & Password", ": typo error!");
+		// 	return;
+		// } else if (!em) {
+		// 	alert("Email address", ": typo error!");
+		// 	return;
+		// } else if (!pw) {
+		// 	alert("Password", ": typo error!");
+		// 	return;
+		// }
+
+		if (email.length < 5 || pwd.length < 5 ) {
+			alert("Email or Password", ": typo error!");
 			return;
-		} else if (!em) {
-			alert("Email address", ": typo error!");
-			return;
-		} else if (!pw) {
-			alert("Password", ": typo error!");
-			return;
-		}
+		} 
 	};
 
 	const handleSubmit = async (e) => {
@@ -86,23 +91,13 @@ export const Signin = () => {
 			</header>
 
 			<Form onSubmit={handleSubmit}>
-				<FormCredentials
-					email={email}
-					setEmail={setEmail}
-					pwd={pwd}
-					setPwd={setPwd}
-					remember={remember}
-					setRemember={setRemember}
-				/>
+				<FormCredentials email={email} setEmail={setEmail} pwd={pwd} setPwd={setPwd} remember={remember} setRemember={setRemember} />
 			</Form>
 
 			<SigninFooter>
 				<p>
 					Dont have an account ?{" "}
-					<span
-						className='login'
-						onClick={() => navigate("/register")}
-					>
+					<span className='login' onClick={() => navigate("/register")}>
 						Sign up.
 					</span>
 				</p>
