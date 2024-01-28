@@ -10,13 +10,7 @@ import chalk from "chalk";
 import apiUrl from "../../apis/apiUrl";
 import { reset } from "./homeStore/helpers";
 import { deviceState } from "../shared/store/states";
-import {
-	socketConState,
-	curRoomState,
-	roomsState,
-	usersState,
-	activeUsersState,
-} from "./homeStore/states";
+import { socketConState, curRoomState, roomsState, usersState, activeUsersState } from "./homeStore/states";
 import { userState } from "../auth/authStore/states";
 
 // LOCALS
@@ -93,9 +87,7 @@ export const Home = () => {
 			});
 
 			socket.on("disconnect", (res) => {
-				console.log(
-					chalk.red("99: Home.js ~ disconnection ~ res: ", res)
-				);
+				console.log(chalk.red("99: Home.js ~ disconnection ~ res: ", res));
 
 				reset(resetall);
 			});
@@ -103,10 +95,7 @@ export const Home = () => {
 			/* CUSTOMS */
 			// NEW CONNECTION
 			socket.on("new_connection", (response) => {
-				console.log(
-					"132: Home.js ~ socket: new_connection ~ response",
-					response
-				);
+				console.log("132: Home.js ~ socket: new_connection ~ response", response);
 
 				const { rooms } = response;
 
@@ -137,10 +126,7 @@ export const Home = () => {
 
 			/** SOCKET ON USERS ON DISCONNECTED */
 			socket.on("users_onDisconnection", (res) => {
-				console.log(
-					"143: Home.js ~ socket: users onDisconnection: ",
-					res
-				);
+				console.log("143: Home.js ~ socket: users onDisconnection: ", res);
 
 				setUsers(res.allUsers);
 				setActiveUsers(res.activeUsers);
@@ -162,10 +148,7 @@ export const Home = () => {
 			});
 
 			socket.on("newMessageUpdates", (response) => {
-				console.log(
-					"29: Board.js ~ socket.on newMessageUpdates, response: ",
-					response
-				);
+				console.log("29: Board.js ~ socket.on newMessageUpdates, response: ", response);
 
 				setRooms(response.allRooms);
 				setCurRoom(response.curRoom);

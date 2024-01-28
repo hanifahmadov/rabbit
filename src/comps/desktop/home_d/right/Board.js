@@ -21,14 +21,14 @@ export const Board = ({}) => {
 	const [curRoom, setCurRoom] = useRecoilState(curRoomState);
 	const [text, setText] = useState("");
 	const lastElementRef = useRef();
-
-
+	
 
 	/* HANDLE BOARD FORM */
 	const handleBoardForm = (e) => {
 		e.preventDefault();
+		
 		window.lastElement = lastElementRef.current;
-
+		
 		window.socket.emit("send_message", {
 			roomName: curRoom.name,
 			roomId: curRoom._id,

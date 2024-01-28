@@ -56,7 +56,6 @@ export const CurRoomDisplaySection = styled.section`
 	}
 
 	.curRoomBody {
-		height: 100%;
 		width: 100%;
 
 		flex-grow: 1;
@@ -64,7 +63,17 @@ export const CurRoomDisplaySection = styled.section`
 		background-image: url(${bg});
 		box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 1) inset;
 
-		padding: 20px 5px;
+		// padding: 20px 5px;
+
+		overflow: scroll;
+
+
+		.lastElementMobile{
+			display: inline-block;
+			height: 10rem;
+			width: 100%;
+			// background: red;
+		}		
 	}
 
 
@@ -75,6 +84,8 @@ export const CurRoomDisplaySection = styled.section`
         height: auto;
         background: rgba(255, 255, 255, .2);
         backdrop-filter: blur(10px);
+		-webkit-background: rgba(255, 255, 255, .2);
+		-webkit-backdrop-filter: blur(10px);
         bottom: 0;
         position: absolute;
         padding: 0px 10px;
@@ -84,10 +95,11 @@ export const CurRoomDisplaySection = styled.section`
 		align-items: center;
 		// flex-direction: row;
 
+	
+
 
 
 		.input{
-            
             display: block;
             width: 100%;
             max-width: 100%;   
@@ -98,6 +110,7 @@ export const CurRoomDisplaySection = styled.section`
             border: 3px solid rgba(255, 255, 255, .5);
             border-radius: 20px;
             line-height: 18px;
+			letter-spacing: .5px;
 
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -114,11 +127,25 @@ export const CurRoomDisplaySection = styled.section`
 			margin-left: 10px;
 			margin-right: 5px;
 
+			position: relative;
+			transition: all .2s ease-in-out;
+			opacity: ${({text}) => text ? '1' : '.5'};
+
             span {
 
-				right: 10px;
-				bottom: -19px;
 
+
+				display: inline-block;
+				background: white;
+				position: absolute;
+				height: 1.5rem;
+				width: 1.5rem;
+				right: 9px;
+				bottom: 9px;
+				z-index: -1;
+				transition: all .2s ease-in-out;
+
+				opacity: ${({text}) => text ? '1' : '.5'};
             }
 
         }

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 /* STYLED & APIs & IMG */
@@ -16,19 +16,44 @@ export const CurRoomDisplay = () => {
 	const [curRoomDisplay, setCurRoomDisplay] = useRecoilState(curRoomDisplayState);
 	const [homeDisplay, setHomeDisplay] = useRecoilState(homeDisplayState);
 	const [text, setText] = useState("");
+	const [submit, setSubmit] = useState(false)
 	const inputRef = useRef();
 
 	const curRoom = useRecoilValue(curRoomState);
 	const roomName_withCapitilized = curRoom.name.charAt(0).toUpperCase() + curRoom.name.slice(1);
-	const lastElementRef = useRef();
+	const lastElementMobileRef = useRef();
 
-    if(inputRef.current){
-        inputRef.current.scrollTop = inputRef.current.scrollHeight;
-    }
+	if (inputRef.current) {
+		inputRef.current.scrollTop = inputRef.current.scrollHeight;
+	}
+
+	useEffect(() => {
+		inputRef.current.focus();
+	}, []);
+
+	useEffect(() => {
+		lastElementMobileRef.current.scrollIntoView({ behavior: "smooth" });
+	}, [submit]);
+
 
 	const handleBackArrow = () => {
 		setCurRoomDisplay(false);
 		setHomeDisplay(true);
+	};
+
+	const handleSend = (e) => {
+		window.lastElement = lastElementMobileRef.current;
+		window.socket.emit("send_message", {
+			roomName: curRoom.name,
+			roomId: curRoom._id,
+			text,
+		});
+
+		
+		inputRef.current.innerText = "";
+		inputRef.current.focus();
+		setSubmit(!submit)
+		setText("");
 	};
 
 	const CurrentRoomHeader = () => (
@@ -50,8 +75,8 @@ export const CurRoomDisplay = () => {
 		<section className='curRoomBody'>
 			<section className='messages'>
 				{curRoom && curRoom.messages.map((msg, index) => <MessageMobile key={index} message={msg} />)}
-				<span className='lastElement' ref={lastElementRef} />
 			</section>
+			<span className='lastElementMobile' ref={lastElementMobileRef} />
 		</section>
 	);
 
@@ -66,18 +91,16 @@ export const CurRoomDisplay = () => {
 					onInput={(e) => setText(e.currentTarget.textContent)}
 				></div>
 
-                <div className="send">
-                    <span>
-                        <img src={send} alt={"➤"} />
-                    </span>
-                </div>
+				<div className='send' onClick={handleSend}>
+					<img src={send} alt={"➤"} />
+					<span className='whiteBG' />
+				</div>
 			</section>
 		);
 	};
 
 	return (
-		<CurRoomDisplaySection>
-			{console.log("first")}
+		<CurRoomDisplaySection text={text.length}>
 			{CurrentRoomHeader()}
 			{CurrentRoomBody()}
 			{CurrentRoomFooter()}
