@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 /* STYLED & APIs & IMG */
 import { ContentSection } from "../styled/content.styled";
 import { roomsState } from "../../../home/homeStore/states";
-import RoomDisplay from "./RoomDisplay";
+import { Chat } from "./Chat";
 
 
 /* SUBS */
@@ -18,7 +18,7 @@ export const Content = () => {
   return (
     <ContentSection>
        {rooms.map((room, index) => (
-          <RoomDisplay key={index} room={room} />
+          <Chat key={index} room={room} />
        ))}
         
     </ContentSection>

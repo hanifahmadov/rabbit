@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { ff } from "../../../shared/store/design";
 
-export const RoomDisplaySection = styled.section`
+export const ChatSection = styled.section`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -27,7 +27,7 @@ export const RoomDisplaySection = styled.section`
 	}
 `;
 
-export const RoomDisplayInfo = styled.section`
+export const ChatInfo = styled.section`
 	width: 100%;
 	height: 4.5rem;
 	border-radius: 5px;

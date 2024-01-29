@@ -34,6 +34,8 @@ export const ChatsSection = styled.div`
 		margin: 5px 0px;
 		transition: all 0.1s ease-in-out;
 
+
+
 		span {
 			display: flex;
 			align-items: center;

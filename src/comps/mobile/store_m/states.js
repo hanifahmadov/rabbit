@@ -27,6 +27,11 @@ export const curRoomDisplayState = atom({
 	default: false,
 });
 
+export const createNewRoomState = atom({
+	key: "createNewRoomState",
+	default: false,
+});
+
 
 
 

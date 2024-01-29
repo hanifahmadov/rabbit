@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 /* STYLED & APIs & IMG */
 import apiUrl from "../../../../apis/apiUrl";
-import { CurRoomDisplaySection } from "../styled/curRoom_display.styled";
+import { ChatDisplaySection } from "../styled/chat_display.styled";
 import { curRoomState } from "../../../home/homeStore/states";
 import { backArrow, chatsIcon2, send } from "../../store_m/helpers";
 import { curRoomDisplayState, homeDisplayState } from "../../store_m/states";
@@ -12,7 +12,7 @@ import { curRoomDisplayState, homeDisplayState } from "../../store_m/states";
 /* SUBS */
 import { MessageMobile } from "./MessageMobile";
 
-export const CurRoomDisplay = () => {
+export const ChatDisplay = () => {
 	const [curRoomDisplay, setCurRoomDisplay] = useRecoilState(curRoomDisplayState);
 	const [homeDisplay, setHomeDisplay] = useRecoilState(homeDisplayState);
 	const [text, setText] = useState("");
@@ -28,10 +28,6 @@ export const CurRoomDisplay = () => {
 	}
 
 	useEffect(() => {
-		inputRef.current.focus();
-	}, []);
-
-	useEffect(() => {
 		lastElementMobileRef.current.scrollIntoView({ behavior: "smooth" });
 	}, [submit]);
 
@@ -42,6 +38,7 @@ export const CurRoomDisplay = () => {
 	};
 
 	const handleSend = (e) => {
+		if(!text.length) return;
 		window.lastElement = lastElementMobileRef.current;
 		window.socket.emit("send_message", {
 			roomName: curRoom.name,
@@ -100,10 +97,10 @@ export const CurRoomDisplay = () => {
 	};
 
 	return (
-		<CurRoomDisplaySection text={text.length}>
+		<ChatDisplaySection text={text.length}>
 			{CurrentRoomHeader()}
 			{CurrentRoomBody()}
 			{CurrentRoomFooter()}
-		</CurRoomDisplaySection>
+		</ChatDisplaySection>
 	);
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { clr, ff } from "../../../shared/store/design";
 import bg from "../../../home/homeStore/logo/bg/bg06.jpeg";
 
-export const CurRoomDisplaySection = styled.section`
+export const ChatDisplaySection = styled.section`
 	height: 100%;
 	width: 100%;
 
@@ -70,7 +70,7 @@ export const CurRoomDisplaySection = styled.section`
 
 		.lastElementMobile{
 			display: inline-block;
-			height: 10rem;
+			height: 8rem;
 			width: 100%;
 			// background: red;
 		}		
@@ -144,6 +144,7 @@ export const CurRoomDisplaySection = styled.section`
 				bottom: 9px;
 				z-index: -1;
 				transition: all .2s ease-in-out;
+				border-radius: 50%;
 
 				opacity: ${({text}) => text ? '1' : '.5'};
             }
